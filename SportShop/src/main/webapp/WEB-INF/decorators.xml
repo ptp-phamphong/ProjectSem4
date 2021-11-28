@@ -3,6 +3,6 @@
 		<pattern>/</pattern>
 	</decorator>
 	<decorator name="user" page="user_main.jsp">
-		<pattern>/category</pattern>
+		<pattern>/*</pattern>
 	</decorator>
 </decorators>
