@@ -12,4 +12,9 @@ public class HomeController {
 	public String index() {
 		return ("user/index");
 	}
+	
+	@RequestMapping(value= {"/category"}, method =RequestMethod.GET )
+	public String product() {
+		return ("user/category");
+	}
 }

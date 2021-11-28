@@ -1108,7 +1108,7 @@ body.touch #wrapper {
   position: relative;
   left: -15px;
   top: -14px;
-  width: 17px;
+  width: 15px;
   height: 17px;
   margin-right: -20px;
   padding: 0;
@@ -1269,7 +1269,7 @@ body.touch #wrapper {
     box-shadow: 0 5px 5px -5px rgba(0, 0, 0, 0.4);
   }
 }
-@media screen and (min-width: 992px) and screen and (max-width: 1399px) {
+@media screen and (min-width: 992px) and (screen) and (max-width: 1399px) {
   .header-logo {
     margin-right: 15px;
   }
@@ -12704,7 +12704,7 @@ h2.blog-title a:hover {
     margin-bottom: 15px;
   }
 }
-@media screen and (min-width: 992px) and screen and (max-width: 991px) {
+@media screen and (min-width: 992px) and (screen) and (max-width: 991px) {
   .newsletter.variant1 {
     margin-bottom: 30px;
   }
