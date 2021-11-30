@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.aptech.Dao.CustomerDao;
 import com.aptech.Model.Customer;
@@ -16,8 +18,10 @@ import com.aptech.MyClass.HashPassword;
 public class CustomerController {
 
 	@RequestMapping(value = { "/register" }, method = RequestMethod.GET)
-	public String register() {
-		return ("user/register");
+	public ModelAndView showViewRegister(Model model) {
+		model.addAttribute("customer", new Customer());
+		ModelAndView mv = new ModelAndView("user/register");
+		return mv;
 	}
 
 	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
@@ -28,7 +32,7 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value= {"/loginHandelling"}, method = RequestMethod.POST)
-	public ModelAndView loginHandelling(@ModelAttribute("customer") Customer item, ModelMap modelMap, Model model) {
+	public RedirectView loginHandelling(@ModelAttribute("customer") Customer item, RedirectAttributes redir) {
 		CustomerDao customerDao = new CustomerDao();
 		Customer customer = new Customer();
 		
@@ -37,18 +41,29 @@ public class CustomerController {
 		String passMD5 = HashPassword.getPassInMD5(item.getPassword());
 		
 		customer = customerDao.getAccountLogin(item.getEmail(), passMD5);
-		ModelAndView mv = new ModelAndView();
+		
 		if(customer == null) {
-			model.addAttribute("customer", new Customer());
-			model.addAttribute("Error","Wrong username or password, please try again");
-			mv.setViewName("user/login");
-			return mv;
+			RedirectView redirectView = new RedirectView("/login", true); //Muốn redirect đi đâu thì truyền vào đây
+			//Dùng redirect view để tránh tên controller hiện trên thanh URL 
+			//Lý do làm kiểu cũ index bị lỗi:
+				//Để ý trên thanh URL sễ có SportShop/loginHandelling . Đây là địa chỉ hiển thị vị trí của CONTROLLER.
+				//vì vị trí của controller nó nằm khác chỗ của views, nên CSS bị link sai hết
+				//với lại mình có 2 layout, trong decorator set / với /* . 
+				//  SportShop/loginHandelling -> /* 
+				//  SportShop/ -> /
+			
+			redir.addFlashAttribute("customer", new Customer());//redirect ko truyền object theo kiểu kia, phải dùng kiểu này
+			//Tương lai dùng session nên ko cần truyền theo kiểu này. Nhưng các nghiệp vụ khác phải theo kiểu này
+			
+			redir.addFlashAttribute("Error","Wrong username or password, please try again");
+//			mv.setViewName("user/login");
+			return redirectView;
 		}
-		
-		
-		mv.setViewName("user/index");
-		mv.addObject("currentCustomer", customer);
-		return mv;
+		RedirectView redirectView = new RedirectView("/category", true);//Nếu muốn truyền về index thì chỉ ghi "/". Thử test đi là biết nguyên lý
+//		mv.setViewName("user/category");
+		redir.addFlashAttribute("currentCustomer", customer);
+//		mv.addObject("currentCustomer", customer);
+		return redirectView;
 	}
 	
 }

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 
 			<!-- Header -->
 			<header class="page-header variant-2 fullboxed sticky smart">
@@ -103,31 +105,40 @@
 						<!-- Header Links -->
 						<div class="header-links">
 							<!-- Header Account -->
-							<div class="header-link dropdown-link header-account">
-								<a href='<c:url value="/login"></c:url>'><i class="icon icon-user"></i></a>
-								<div class="dropdown-container right">
-									<div class="title">Registered Customers</div>
-									<div class="top-text">If you have an account with us, please log in.</div>
-									
-									<!-- form login  -->
-									<form:form method="post" class="account-create" action="loginHandelling" modelAttribute="customer">
-									
-										
-										<label>E-mail<span class="required">*</span></label>
-										<form:input path="email" type="email" class="form-control input-lg" required="required"/>
-										
-										<label>Password<span class="required">*</span></label>
-										<form:input path="password" type="password" class="form-control input-lg" required="required"/>
-										
-										<div>
-											<button class="btn btn-lg" type="submit">Login</button><span class="required-text">* Required Fields</span></div>
-										<div class="back"><a href="#">Forgot Your Password?</a></div>
-									</form:form>
-									
-									<div class="title">OR</div>
-									<div class="bottom-text">Create a <a href='<c:url value="/register"></c:url>'>New Account</a></div>
-								</div>
-							</div>
+							<c:choose>
+								<c:when test="${not empty currentCustomer}">
+									<div class="header-link header-account">${currentCustomer.getFullName()}</div>
+								</c:when>
+								<c:otherwise>
+									<div class="header-link dropdown-link header-account">
+										<a href='<c:url value="/login"></c:url>'><i class="icon icon-user"></i></a>
+										<div class="dropdown-container right">
+											<div class="title">Registered Customers</div>
+											<div class="top-text">If you have an account with us, please log in.</div>
+											
+											<!-- form login  -->
+											<form:form method="post" class="account-create" action="loginHandelling" modelAttribute="customer">
+											
+												
+												<label>E-mail<span class="required">*</span></label>
+												<form:input path="email" type="email" class="form-control input-lg" required="required"/>
+												
+												<label>Password<span class="required">*</span></label>
+												<form:input path="password" type="password" class="form-control input-lg" required="required"/>
+												
+												<div>
+													<button class="btn btn-lg" type="submit">Login</button><span class="required-text">* Required Fields</span></div>
+												<div class="back"><a href="#">Forgot Your Password?</a></div>
+											</form:form>
+											
+											<div class="title">OR</div>
+											<div class="bottom-text">Create a <a href='<c:url value="/register"></c:url>'>New Account</a></div>
+										</div>
+									</div>
+								</c:otherwise>
+							</c:choose>
+							
+							
 							<!-- /Header Account -->
 						</div>
 						<!-- /Header Links -->
@@ -157,7 +168,7 @@
 							<div class="mobilemenu-content">
 								<ul class="nav">
 									<li><a href="index.html">HOME</a><span class="arrow"></span></li>
-									<li><a href="category.html">Men</a></li>
+									<li><a href='<c:url value = "category"></c:url>'>Men</a></li>
 									<li><a href="category.html">Women</a></li>
 									<li><a href="category.html">Accessories</a></li>
 								</ul>
@@ -169,7 +180,7 @@
 							<ul class="nav">
 								<li><a href="index.html">HOME</a></li>
 								<li class="mega-dropdown">
-									<a href="category.html">Men<span class="menu-label">-15%</span></a>
+									<a href='<c:url value = "category"></c:url>'>Men<span class="menu-label">-15%</span></a>
 									<div class="sub-menu">
 										<div class="container">
 											<div class="megamenu-categories column-4">
