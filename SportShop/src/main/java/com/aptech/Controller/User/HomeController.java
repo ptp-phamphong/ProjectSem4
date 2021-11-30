@@ -11,19 +11,29 @@ import com.aptech.Dao.ProductDao;
 @Controller
 public class HomeController {
 
-	@RequestMapping(value= {"/"}, method =RequestMethod.GET )
+	@RequestMapping(value = { "/" }, method = RequestMethod.GET)
 	public String index() {
 		return ("user/index");
 	}
-	
-	@RequestMapping(value= {"/category"}, method =RequestMethod.GET )
+
+	@RequestMapping(value = { "/register" }, method = RequestMethod.GET)
+	public String register() {
+		return ("user/register");
+	}
+
+	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
+	public String login() {
+		return ("user/login");
+	}
+
+	@RequestMapping(value = { "/category" }, method = RequestMethod.GET)
 	public ModelAndView product() {
 		ProductDao productDao = new ProductDao();
 		int a = productDao.getAll().size();
-		
+
 		ModelAndView mv = new ModelAndView("user/category");
-		mv.addObject("list",productDao.getAll());
-		
+		mv.addObject("list", productDao.getAll());
+
 		return mv;
 	}
 }

@@ -25,15 +25,15 @@ public class ProductDao {
             ResultSet rs = stm.executeQuery(query);
             while (rs.next()) {
             	Product item = new Product();
+            	item.setId(rs.getInt("id"));
             	item.setName(rs.getString("name"));
-            	
-
+            
                 list.add(item);
             }
             return list;
         } catch (Exception ex) {
         	System.out.print("abc");
         }
-        return null;
+        return list;
 	}
 }
