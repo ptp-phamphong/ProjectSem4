@@ -36,8 +36,6 @@ public class Customer implements Serializable {
 	@Column(name="Status")
 	private boolean status;
 
-	@Column(name="Username")
-	private String username;
 
 	//bi-directional many-to-one association to Invoice
 	@OneToMany(mappedBy="customer")
@@ -102,13 +100,6 @@ public class Customer implements Serializable {
 		this.status = status;
 	}
 
-	public String getUsername() {
-		return this.username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
 
 	public List<Invoice> getInvoices() {
 		return this.invoices;

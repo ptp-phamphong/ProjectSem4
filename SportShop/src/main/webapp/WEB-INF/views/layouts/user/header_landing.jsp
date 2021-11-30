@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!-- Menu Toggle -->
 		<a href="#" class="toggleHeader"><span class="close-icon"><i class="icon icon-close"></i></span><span class="open-icon"><i class="icon icon-menu"></i></span></a>
 		<!-- /Menu Toggle -->
@@ -336,13 +337,23 @@
 							<div class="dropdown-container right">
 								<div class="title">Registered Customers</div>
 								<div class="top-text">If you have an account with us, please log in.</div>
-								<!-- form -->
-								<form action="#">
-									<input type="email" class="form-control" placeholder="E-mail*" required>
-									<input type="password" class="form-control" placeholder="Password*" required>
-									<button type="submit" class="btn">Sign in</button>
-								</form>
-								<!-- /form -->
+								
+								<!-- form login  -->
+									<h3 class="text-danger">${Error}</h3>
+									<form:form method="post" class="account-create" action="loginHandelling" modelAttribute="customer">
+									
+										
+										<label>E-mail<span class="required">*</span></label>
+										<form:input path="email" type="email" class="form-control input-lg" required="required"/>
+										
+										<label>Password<span class="required">*</span></label>
+										<form:input path="password" type="password" class="form-control input-lg" required="required"/>
+										
+										<div>
+											<button class="btn btn-lg" type="submit">Login</button><span class="required-text">* Required Fields</span></div>
+										<div class="back"><a href="#">Forgot Your Password?</a></div>
+									</form:form>
+									
 								<div class="title">OR</div>
 								<div class="bottom-text">Create a <a href='<c:url value="/register"></c:url>'>New Account</a></div>
 							</div>

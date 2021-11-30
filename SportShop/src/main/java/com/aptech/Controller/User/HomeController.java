@@ -16,15 +16,7 @@ public class HomeController {
 		return ("user/index");
 	}
 
-	@RequestMapping(value = { "/register" }, method = RequestMethod.GET)
-	public String register() {
-		return ("user/register");
-	}
-
-	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
-	public String login() {
-		return ("user/login");
-	}
+	
 
 	@RequestMapping(value = { "/category" }, method = RequestMethod.GET)
 	public ModelAndView product() {

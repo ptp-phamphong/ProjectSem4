@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
     <!-- Page Content -->
+    <h1>${currentCustomer}</h1>
 			<main class="page-main">
 				<div class="block">
 					<div class="container">
@@ -27,16 +29,20 @@
 									<p>If you have an account with us, please log in.</p>
 									
 									<!-- form login  -->
+									<h3 class="text-danger">${Error}</h3>
+									<form:form method="post" class="account-create" action="loginHandelling" modelAttribute="customer">
 									
-									<form class="account-create" action="#">
+										
 										<label>E-mail<span class="required">*</span></label>
-										<input type="email" class="form-control input-lg" required>
+										<form:input path="email" type="email" class="form-control input-lg" required="required"/>
+										
 										<label>Password<span class="required">*</span></label>
-										<input type="password" class="form-control input-lg" required>
+										<form:input path="password" type="password" class="form-control input-lg" required="required"/>
+										
 										<div>
-											<button class="btn btn-lg">Login</button><span class="required-text">* Required Fields</span></div>
+											<button class="btn btn-lg" type="submit">Login</button><span class="required-text">* Required Fields</span></div>
 										<div class="back"><a href="#">Forgot Your Password?</a></div>
-									</form>
+									</form:form>
 									
 									
 									
