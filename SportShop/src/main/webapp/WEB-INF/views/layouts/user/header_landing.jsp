@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!-- Menu Toggle -->
 		<a href="#" class="toggleHeader"><span class="close-icon"><i class="icon icon-close"></i></span><span class="open-icon"><i class="icon icon-menu"></i></span></a>
@@ -22,8 +22,8 @@
 						</div>
 						<div class="mobilemenu-content">
 							<ul class="nav">
-								<li><a href="index.html">HOME</a><span class="arrow"></span></li>													
-								<li><a href="category.html">Men</a></li>
+								<li><a href="#">HOME</a><span class="arrow"></span></li>													
+								<li><a href='<c:url value="/category"></c:url>'>Men</a></li>
 								<li><a href="category.html">Women</a></li>
 								<li><a href="category.html">Electronics</a></li>
 							</ul>
@@ -34,10 +34,10 @@
 					<div class="megamenu fadein blackout">
 						<ul class="nav">
 							<li class="simple-dropdown">
-								<a href="index.html">HOME</a>
+								<a href="#">HOME</a>
 							</li>		
 							<li class="mega-dropdown">
-								<a href="category.html">Men<span class="menu-label">-15%</span></a>
+								<a href='<c:url value="/category"></c:url>'>Men<span class="menu-label">-15%</span></a>
 								<div class="sub-menu">
 									<div class="container">
 										<div class="megamenu-categories column-4">

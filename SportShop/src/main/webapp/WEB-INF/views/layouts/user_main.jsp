@@ -56,6 +56,8 @@
 
 <body class="boxed">
 
+
+
 	<!-- Loader -->
 	<div id="loader-wrapper">
 		<div class="cube-wrapper">

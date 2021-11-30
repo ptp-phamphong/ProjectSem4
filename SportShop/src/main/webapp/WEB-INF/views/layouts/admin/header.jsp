@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!-- Menu Toggle -->
 		<a href="#" class="toggleHeader"><span class="close-icon"><i class="icon icon-close"></i></span><span class="open-icon"><i class="icon icon-menu"></i></span></a>
@@ -231,7 +231,7 @@
 									</div>
 								</div>
 							</li>
-							<li><a href="category.html">Sale</a></li>
+							<li><a href="<c:url value= "/category"></c:url>">Sale</a></li>
 						</ul>
 					</div>
 					<!-- /Mega Menu -->

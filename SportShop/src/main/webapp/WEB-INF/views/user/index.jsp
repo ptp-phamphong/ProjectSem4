@@ -2,8 +2,6 @@
 	pageEncoding="UTF-8"%>
 	<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-
-
 	<!-- Loader -->
 	<div id="loader-wrapper">
 		<div class="cube-wrapper">

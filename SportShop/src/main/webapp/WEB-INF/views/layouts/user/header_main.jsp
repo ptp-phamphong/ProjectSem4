@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+
 			<!-- Header -->
 			<header class="page-header variant-2 fullboxed sticky smart">
 				<div class="navbar">
