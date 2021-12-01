@@ -17,27 +17,32 @@
 <meta name="author" content="BigSteps">
 <meta name="viewport"
 	content="width=device-width, minimum-scale=1, maximum-scale=1">
-<link rel="shortcut icon" href='<c:url value = "/assets/user/images/favicon.ico"></c:url>'>
+<link rel="shortcut icon" href="assets/user/images/favicon.ico">
 
 <!-- Vendor -->
-
-<link href='<c:url value = "/assets/user/js/vendor/bootstrap/bootstrap.min.css"></c:url>' rel="stylesheet">
-<link href='<c:url value = "/assets/user/js/vendor/slick/slick.css"></c:url>' rel="stylesheet">
-<link href='<c:url value = "/assets/user/js/vendor/swiper/swiper.min.css"></c:url>' rel="stylesheet">
-<link href='<c:url value = "/assets/user/js/vendor/magnificpopup/dist/magnific-popup.css"></c:url>' rel="stylesheet">
-<link href='<c:url value = "/assets/user/js/vendor/nouislider/nouislider.css"></c:url>' rel="stylesheet">
-<link href='<c:url value = "/assets/user/js/vendor/darktooltip/dist/darktooltip.css"></c:url>' rel="stylesheet">
-<link href='<c:url value = "/assets/user/css/animate.css"></c:url>'  rel="stylesheet">
+<link href="./assets/user/js/vendor/bootstrap/bootstrap.min.css"
+	rel="stylesheet">
+<link href="./assets/user/js/vendor/slick/slick.css" rel="stylesheet">
+<link href="./assets/user/js/vendor/swiper/swiper.min.css"
+	rel="stylesheet">
+<link
+	href="./assets/user/js/vendor/magnificpopup/dist/magnific-popup.css"
+	rel="stylesheet">
+<link href="./assets/user/js/vendor/nouislider/nouislider.css"
+	rel="stylesheet">
+<link href="./assets/user/js/vendor/darktooltip/dist/darktooltip.css"
+	rel="stylesheet">
+<link href="./assets/user/css/animate.css" rel="stylesheet">
 
 <!-- Custom -->
-<link href='<c:url value = "/assets/user/css/style.css"></c:url>' rel="stylesheet" />
-<link href='<c:url value = "/assets/user/css/megamenu.css"></c:url>' rel="stylesheet">
+<link href="./assets/user/css/style.css" rel="stylesheet" />
+<link href="./assets/user/css/megamenu.css" rel="stylesheet">
 
 <!-- Color Schemes -->
 <!-- your style-color.css here  -->
 
 <!-- Icon Font -->
-<link href='<c:url value = "/assets/user/fonts/icomoon-reg/style.css"></c:url>'  rel="stylesheet">
+<link href="./assets/user/fonts/icomoon-reg/style.css" rel="stylesheet">
 
 <!-- Google Font -->
 <link
@@ -90,7 +95,7 @@
 			<div class="products-list-wrapper">
 				<ul class="products-list">
 					<li>
-						<a href="product.html" title="Product Name Long Name"><img class="product-image-photo" src='<c:url value = "/assets/user/images/products/product-10.jpg"></c:url>' alt=""></a> <span class="item-qty">3</span>
+						<a href="product.html" title="Product Name Long Name"><img class="product-image-photo" src="assets/user/images/products/product-10.jpg" alt=""></a> <span class="item-qty">3</span>
 						<div class="actions"> <a href="#" class="action edit" title="Edit item"><i class="icon icon-pencil"></i></a> <a class="action delete" href="#" title="Delete item"><i class="icon icon-trash-alt"></i></a>
 							<div class="edit-qty">
 								<input type="number" value="3">
@@ -100,7 +105,7 @@
 					</li>
 					
 					<li>
-						<a href="product.html" title="Product Name Long Name"><img class="product-image-photo" src='<c:url value = "/assets/user/images/products/product-14.jpg"></c:url>' alt=""></a> <span class="item-qty">3</span>
+						<a href="product.html" title="Product Name Long Name"><img class="product-image-photo" src="assets/user/images/products/product-14.jpg" alt=""></a> <span class="item-qty">3</span>
 						<div class="actions"> <a class="action edit" href="#" title="Edit item"><i class="icon icon-pencil"></i></a> <a class="action delete" href="#" title="Delete item"><i class="icon icon-trash-alt"></i></a>
 							<div class="edit-qty">
 								<input type="number" value="3">
@@ -144,24 +149,29 @@
 
 
 <!-- jQuery Scripts  -->
-<script src='<c:url value = "/assets/user/js/vendor/jquery/jquery.js"></c:url>' ></script>
-<script src='<c:url value = "/assets/user/js/vendor/bootstrap/bootstrap.min.js"></c:url>' ></script>
-<script src='<c:url value = "/assets/user/js/vendor/swiper/swiper.min.js"></c:url>' ></script>
-<script src='<c:url value = "/assets/user/js/vendor/slick/slick.min.js"></c:url>' ></script>
-<script src='<c:url value = "/assets/user/js/vendor/parallax/parallax.js"></c:url>' ></script>
-<script src='<c:url value = "/assets/user/js/vendor/isotope/isotope.pkgd.min.js"></c:url>' ></script>
-<script src='<c:url value = "/assets/user/js/vendor/magnificpopup/dist/jquery.magnific-popup.js"></c:url>' ></script>
-<script src='<c:url value = "/assets/user/js/vendor/countdown/jquery.countdown.min.js"></c:url>' ></script>
-<script src='<c:url value = "/assets/user/js/vendor/nouislider/nouislider.min.js"></c:url>' ></script>
-<script src='<c:url value = "/assets/user/js/vendor/ez-plus/jquery.ez-plus.js"></c:url>' ></script>
-<script src='<c:url value = "/assets/user/js/vendor/tocca/tocca.min.js"></c:url>' ></script>
-<script src='<c:url value = "/assets/user/js/vendor/bootstrap-tabcollapse/bootstrap-tabcollapse.js"></c:url>' ></script>
-<script src='<c:url value = "/assets/user/js/vendor/scrollLock/jquery-scrollLock.min.js"></c:url>' ></script>
-<script src='<c:url value = "/assets/user/js/vendor/darktooltip/dist/jquery.darktooltip.js"></c:url>' ></script>
-<script src='<c:url value = "/assets/user/js/vendor/imagesloaded/imagesloaded.pkgd.min.js"></c:url>' ></script>
-<script src='<c:url value = "/assets/user/js/vendor/instafeed/instafeed.min.js"></c:url>' ></script>
-<script src='<c:url value = "/assets/user/js/megamenu.min.js"></c:url>' ></script>
-<script src='<c:url value = "/assets/user/js/app.js"></c:url>' ></script>
+<script src="./assets/user/js/vendor/jquery/jquery.js"></script>
+<script src="./assets/user/js/vendor/bootstrap/bootstrap.min.js"></script>
+<script src="./assets/user/js/vendor/swiper/swiper.min.js"></script>
+<script src="./assets/user/js/vendor/slick/slick.min.js"></script>
+<script src="./assets/user/js/vendor/parallax/parallax.js"></script>
+<script src="./assets/user/js/vendor/isotope/isotope.pkgd.min.js"></script>
+<script
+	src="./assets/user/js/vendor/magnificpopup/dist/jquery.magnific-popup.js"></script>
+<script src="./assets/user/js/vendor/countdown/jquery.countdown.min.js"></script>
+<script src="./assets/user/js/vendor/nouislider/nouislider.min.js"></script>
+<script src="./assets/user/js/vendor/ez-plus/jquery.ez-plus.js"></script>
+<script src="./assets/user/js/vendor/tocca/tocca.min.js"></script>
+<script
+	src="./assets/user/js/vendor/bootstrap-tabcollapse/bootstrap-tabcollapse.js"></script>
+<script
+	src="./assets/user/js/vendor/scrollLock/jquery-scrollLock.min.js"></script>
+<script
+	src="./assets/user/js/vendor/darktooltip/dist/jquery.darktooltip.js"></script>
+<script
+	src="./assets/user/js/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+<script src="./assets/user/js/vendor/instafeed/instafeed.min.js"></script>
+<script src="./assets/user/js/megamenu.min.js"></script>
+<script src="./assets/user/js/app.js"></script>
 </html>
 
 

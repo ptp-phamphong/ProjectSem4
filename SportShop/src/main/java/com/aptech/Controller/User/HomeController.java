@@ -19,15 +19,4 @@ public class HomeController {
 		return mv;
 	}
 	
-
-	@RequestMapping(value = { "/category" }, method = RequestMethod.GET)
-	public ModelAndView product(Model model) {
-		ProductDao productDao = new ProductDao();
-		int a = productDao.getAll().size();
-		model.addAttribute("customer", new Customer());	
-		ModelAndView mv = new ModelAndView("user/category");
-		mv.addObject("list", productDao.getAll());
-
-		return mv;
-	}
 }

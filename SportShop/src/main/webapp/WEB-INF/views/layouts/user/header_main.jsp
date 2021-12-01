@@ -31,7 +31,7 @@
 															<a class="product-item-photo" href="#" title="Long sleeve overall">
 																<span class="product-image-container">
 																<span class="product-image-wrapper">
-																<img class="product-image-photo" src="assets/user/images/products/product-16-c1.jpg" alt="Long sleeve overall">
+																<img class="product-image-photo" src='<c:url value = "/assets/user/images/products/product-16-c1.jpg"></c:url>' alt="Long sleeve overall">
 																</span>
 																</span>
 															</a>
@@ -156,7 +156,7 @@
 						<!-- /Header Search -->
 						<!-- Logo -->
 						<div class="header-logo">
-							<a href="index.html" title="Logo"><img src="assets/user/images/logo.png" alt="Logo" /></a>
+							<a href="index.html" title="Logo"><img src='<c:url value = "/assets/user/images/logo.png"></c:url>' alt="Logo" /></a>
 						</div>
 						<!-- /Logo -->
 						<!-- Mobile Menu -->
@@ -168,9 +168,9 @@
 							<div class="mobilemenu-content">
 								<ul class="nav">
 									<li><a href="index.html">HOME</a><span class="arrow"></span></li>
-									<li><a href='<c:url value = "category"></c:url>'>Men</a></li>
-									<li><a href="category.html">Women</a></li>
-									<li><a href="category.html">Accessories</a></li>
+									<li><a href='<c:url value = "/category"></c:url>'>Men</a></li>
+									<li><a href="/category.html">Women</a></li>
+									<li><a href="/category.html">Accessories</a></li>
 								</ul>
 							</div>
 						</div>
@@ -178,15 +178,15 @@
 						<!-- Mega Menu -->
 						<div class="megamenu fadein blackout">
 							<ul class="nav">
-								<li><a href="index.html">HOME</a></li>
+								<li><a href='<c:url value = "/"></c:url>'>HOME</a></li>
 								<li class="mega-dropdown">
-									<a href='<c:url value = "category"></c:url>'>Men<span class="menu-label">-15%</span></a>
+									<a href='<c:url value = "/category"></c:url>'>Men<span class="menu-label">-15%</span></a>
 									<div class="sub-menu">
 										<div class="container">
 											<div class="megamenu-categories column-4">
 												<!-- megamenu column -->
 												<div class="col">
-													<a class="category-image" href="#"><img src="assets/user/images/category/megamenu-category-03.jpg" alt /></a>
+													<a class="category-image" href="#"><img src='<c:url value = "/assets/user/images/category/megamenu-category-03.jpg"></c:url>' alt /></a>
 													<div class="category-title"><a href="#">Only New</a></div>
 													<ul class="category-links">
 														<li><a href="#">New In Clothing</a></li>
@@ -197,7 +197,7 @@
 												<!-- /megamenu column -->
 												<!-- megamenu column -->
 												<div class="col">
-													<a class="category-image" href="#"><img src="assets/user/images/category/megamenu-category-04.jpg" alt /></a>
+													<a class="category-image" href="#"><img src='<c:url value = "/assets/user/images/category/megamenu-category-04.jpg"></c:url>' alt /></a>
 													<div class="category-title"><a href="#">Only Sale</a></div>
 													<ul class="category-links">
 														<li><a href="#">Sale Clothing</a></li>
@@ -208,7 +208,7 @@
 												<!-- /megamenu column -->
 												<!-- megamenu column -->
 												<div class="col">
-													<a class="category-image" href="#"><img src="assets/user/images/category/megamenu-category-05.jpg" alt /></a>
+													<a class="category-image" href="#"><img src='<c:url value = "/assets/user/images/category/megamenu-category-05.jpg"></c:url>' alt /></a>
 													<div class="category-title"><a href="#">Top</a><span class="menu-label-alt">NEW</span></div>
 													<ul class="category-links">
 														<li><a href="#">T-Shirts & Vests</a></li>
@@ -219,7 +219,7 @@
 												<!-- /megamenu column -->
 												<!-- megamenu column -->
 												<div class="col">
-													<a class="category-image" href="#"><img src="assets/user/images/category/megamenu-category-06.jpg" alt /></a>
+													<a class="category-image" href="#"><img src='<c:url value = "/assets/user/images/category/megamenu-category-06.jpg"></c:url>' alt /></a>
 													<div class="category-title"><a href="#">Bottom</a></div>
 													<ul class="category-links">
 														<li><a href="#">Shorts</a></li>
@@ -233,12 +233,12 @@
 									</div>
 								</li>
 								<li class="mega-dropdown">
-									<a href="category.html">Women<span class="menu-label-alt">NEW</span></a>
+									<a href='<c:url value = "/category"></c:url>'>Women<span class="menu-label-alt">NEW</span></a>
 									<div class="sub-menu">
 										<div class="container">
 											<div class="megamenu-right width-25">
 												<div class="banner style-1 autosize-text" data-fontratio="4.2">
-													<img src="assets/user/images/banners/banner-1.jpg" alt="Banner">
+													<img src='<c:url value = "/assets/user/images/banners/banner-1.jpg"></c:url>' alt="Banner">
 													<div class="banner-caption vertb">
 														<div class="vert-wrapper">
 															<div class="vert">
@@ -257,8 +257,8 @@
 											<div class="megamenu-categories column-2">
 												<!-- megamenu column 1 -->
 												<div class="col">
-													<a class="category-image" href="#"><img src="assets/user/images/category/megamenu-category-01.jpg" alt /></a>
-													<div class="category-title title-border"><a href="#">ACCESSORIES<span class="menu-label">HOT</span></a></div>
+													<a class="category-image" href="#"><img src='<c:url value = "/assets/user/images/category/megamenu-category-01.jpg"></c:url>' alt /></a>
+													<div class="category-title title-border"><a href='<c:url value = "/category"></c:url>'>ACCESSORIES<span class="menu-label">HOT</span></a></div>
 													<ul class="category-links column-count-2">
 														<li><a href="#">New In</a></li>
 														<li><a href="#">Belt Buckles</a></li>
@@ -279,7 +279,7 @@
 												<!-- /megamenu column 1 -->
 												<!-- megamenu column 2 -->
 												<div class="col">
-													<a class="category-image" href="#"><img src="assets/user/images/category/megamenu-category-02.jpg" alt /></a>
+													<a class="category-image" href="#"><img src='<c:url value = "/assets/user/images/category/megamenu-category-02.jpg"></c:url>' alt /></a>
 													<div class="category-title title-border"><a href="#">CLOTHING<span class="menu-label-alt">NEW</span></a></div>
 													<ul class="category-links column-count-2">
 														<li><a href="#">New In</a></li>
@@ -301,7 +301,7 @@
 												<!-- /megamenu column 2 -->
                                                 <!-- megamenu bottom -->
                                            		<div class="megamenu-bottom">
-                                               		<a href="#"><img class="img-responsive" src="assets/user/images/banners/banner-megamenu.jpg" alt="megamenu banner"></a>
+                                               		<a href="#"><img class="img-responsive" src='<c:url value = "/assets/user/images/banners/banner-megamenu.jpg"></c:url>' alt="megamenu banner"></a>
                                                	</div>
                                                	<!-- /megamenu bottom -->
 											</div>
@@ -309,13 +309,13 @@
 									</div>
 								</li>
 								<li class="mega-dropdown">
-									<a href="category.html">Electronics</a>
+									<a href='<c:url value = "/category"></c:url>'>Accessories</a>
 									<div class="sub-menu">
 										<div class="container">
 											<div class="megamenu-left width-33">
 												<a href="#bannerLink" class="banner-wrap">
 													<div class="banner style-13 autosize-text image-hover-scale" data-fontratio="4">
-														<img src="assets/user/images/banners/banner-21.jpg" alt="Banner">
+														<img src='<c:url value = "/assets/user/images/banners/banner-21.jpg"></c:url>' alt="Banner">
 														<div class="banner-caption horc vertb" style="bottom: 3%;">
 															<div class="vert-wrapper">
 																<div class="vert">
@@ -332,7 +332,7 @@
 											<div class="megamenu-categories column-3">
 												<!-- megamenu column 1 -->
 												<div class="col">
-													<a class="category-image light" href="#"><img src="assets/user/images/category/megamenu-category-07.jpg" alt /></a>
+													<a class="category-image light" href="#"><img src='<c:url value = "/assets/user/images/category/megamenu-category-07.jpg"></c:url>' alt /></a>
 													<div class="category-title title-border"><a href="#">Cameras & Camcorders<span class="menu-label">HOT</span></a></div>
 													<ul class="category-links">
 														<li><a href="#">New In</a></li>
@@ -347,7 +347,7 @@
 												<!-- /megamenu column 1 -->
 												<!-- megamenu column 2 -->
 												<div class="col">
-													<a class="category-image light" href="#"><img src="assets/user/images/category/megamenu-category-09.jpg" alt /></a>
+													<a class="category-image light" href="#"><img src='<c:url value = "/assets/user/images/category/megamenu-category-09.jpg"></c:url>' alt /></a>
 													<div class="category-title title-border"><a href="#">Cell Phones<span class="menu-label-alt">NEW</span></a></div>
 													<ul class="category-links">
 														<li><a href="#">No-Contract Phones & Plans</a></li>
@@ -362,7 +362,7 @@
 												<!-- /megamenu column 2 -->
 												<!-- megamenu column 3 -->
 												<div class="col">
-													<a class="category-image light" href="#"><img src="assets/user/images/category/megamenu-category-08.jpg" alt /></a>
+													<a class="category-image light" href="#"><img src='<c:url value = "/assets/user/images/category/megamenu-category-08.jpg"></c:url>' alt /></a>
 													<div class="category-title title-border"><a href="#">Video Games<span class="menu-label">HOT</span></a></div>
 													<ul class="category-links">
 														<li><a href="#">PlayStation 4</a></li>

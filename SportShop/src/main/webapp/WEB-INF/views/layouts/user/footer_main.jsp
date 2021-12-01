@@ -4,14 +4,14 @@
 			<footer class="page-footer variant1">
 				<div class="container">
 					<div class="under-footer">
-						<a href="#"><img src="assets/user/images/banners/footer-banner.jpg" alt="Footer Banner" class="img-responsive"></a>
+						<a href="#"><img src='<c:url value = "/assets/user/images/banners/footer-banner.jpg"></c:url>' alt="Footer Banner" class="img-responsive"></a>
 					</div>
 					<div class="footer-bot">
 						<div class="container">
 							<div class="row">
 								<div class="col-md-4">
 									<div class="footer-logo">
-										<a href="#"><img src="assets/user/images/logo-footer-small.png" alt="Footer Logo"></a>
+										<a href="#"><img src='<c:url value = "/assets/user/images/logo-footer-small.png"></c:url>' alt="Footer Logo"></a>
 									</div>
 								</div>
 								<div class="col-md-4">
@@ -19,10 +19,10 @@
 								</div>
 								<div class="col-md-4">
 									<div class="footer-payment-link">
-										<a href="#"><img src="assets/user/images/payment-logo/icon-pay-1.png" alt=""></a>
-										<a href="#"><img src="assets/user/images/payment-logo/icon-pay-2.png" alt=""></a>
-										<a href="#"><img src="assets/user/images/payment-logo/icon-pay-3.png" alt=""></a>
-										<a href="#"><img src="assets/user/images/payment-logo/icon-pay-4.png" alt=""></a>
+										<a href="#"><img src='<c:url value = "/assets/user/images/payment-logo/icon-pay-1.png"></c:url>' alt=""></a>
+										<a href="#"><img src='<c:url value = "/assets/user/images/payment-logo/icon-pay-2.png"></c:url>' alt=""></a>
+										<a href="#"><img src='<c:url value = "/assets/user/images/payment-logo/icon-pay-3.png"></c:url>' alt=""></a>
+										<a href="#"><img src='<c:url value = "/assets/user/images/payment-logo/icon-pay-4.png"></c:url>' alt=""></a>
 
 									</div>
 								</div>

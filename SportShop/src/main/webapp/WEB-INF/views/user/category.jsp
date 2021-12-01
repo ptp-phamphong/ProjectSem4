@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 			<!-- Page Content -->
 			<main class="page-main">
 				<div class="block">
 					<div class="container">
 						<ul class="breadcrumbs">
-							<li><a href="index.html"><i class="icon icon-home"></i></a></li>
+							<li><a href='<c:url value="/"></c:url>'><i class="icon icon-home"></i></a></li>
 							<li>/<span>WOMEN’S</span></li>
 						</ul>
 					</div>
@@ -29,10 +29,7 @@
 											<div class="sidebar-block-top">
 												<h2>Shoping By</h2>
 												<ul class="selected-filters">
-													<li><a href="#"><span>Trousers</span><span class="remove"><i class="icon icon-close"></i></span></a>
-														<div class="bg-striped"></div>
-													</li>
-													<li><a href="#"><span>Orange <img src="assets/user/images/colorswatch/color-orange.png" alt=""></span><span class="remove"><i class="icon icon-close"></i></span></a>
+													<li><a href="#"><span>Shoes</span><span class="remove"><i class="icon icon-close"></i></span></a>
 														<div class="bg-striped"></div>
 													</li>
 													<li><a href="#"><span>$10-30$</span><span class="remove"><i class="icon icon-close"></i></span></a>
@@ -45,33 +42,24 @@
 											</div>
 											<div class="sidebar-block collapsed">
 												<div class="block-title">
-													<span>Men</span>
+													<span>Sports</span>
 													<div class="toggle-arrow"></div>
 												</div>
 												<div class="block-content">
 													<ul class="category-list">
-														<li class="active"><a href="#" class="value">Dresses</a>
+														<li class="active"><a href="#" class="value">Football</a>
 															<a href="#" class="clear"></a>
 														</li>
-														<li><a href="#">Jackets</a>
+														<li><a href="#">Running</a>
 															<a href="#" class="clear"></a>
 														</li>
-														<li><a href="#">Trousers</a>
+														<li><a href="#">Badminton</a>
 															<a href="#" class="clear"></a>
 														</li>
-														<li><a href="#">Jeans</a>
+														<li><a href="#">Swimming</a>
 															<a href="#" class="clear"></a>
 														</li>
-														<li><a href="#">Jewellery</a>
-															<a href="#" class="clear"></a>
-														</li>
-														<li><a href="#">Scarves & snoods</a>
-															<a href="#" class="clear"></a>
-														</li>
-														<li><a href="#">Sunglasses</a>
-															<a href="#" class="clear"></a>
-														</li>
-														<li><a href="#">Blouses & shirts</a>
+														<li><a href="#">Bicyle</a>
 															<a href="#" class="clear"></a>
 														</li>
 													</ul>
@@ -79,80 +67,23 @@
 												</div>
 											</div>
 											
-											
 											<div class="sidebar-block collapsed">
 												<div class="block-title">
-													<span>Women</span>
+													<span>Types</span>
 													<div class="toggle-arrow"></div>
 												</div>
 												<div class="block-content">
 													<ul class="category-list">
-														<li class="active"><a href="#" class="value">Dresses</a>
+														<li class="active"><a href="#" class="value">Footwear</a>
 															<a href="#" class="clear"></a>
 														</li>
-														<li><a href="#">Jackets</a>
+														<li><a href="#">Tops</a>
 															<a href="#" class="clear"></a>
 														</li>
-														<li><a href="#">Trousers</a>
+														<li><a href="#">Bottoms</a>
 															<a href="#" class="clear"></a>
 														</li>
-														<li><a href="#">Jeans</a>
-															<a href="#" class="clear"></a>
-														</li>
-														<li><a href="#">Jewellery</a>
-															<a href="#" class="clear"></a>
-														</li>
-														<li><a href="#">Scarves & snoods</a>
-															<a href="#" class="clear"></a>
-														</li>
-														<li><a href="#">Sunglasses</a>
-															<a href="#" class="clear"></a>
-														</li>
-														<li><a href="#">Blouses & shirts</a>
-															<a href="#" class="clear"></a>
-														</li>
-													</ul>
-													<div class="bg-striped"></div>
-												</div>
-											</div>
-											<div class="sidebar-block collapsed">
-												<div class="block-title">
-													<span>CHOOSE COLOR</span>
-													<div class="toggle-arrow"></div>
-												</div>
-												<div class="block-content">
-													<ul class="color-list">
-														<li class="active"><a href="#" data-tooltip="Very long some color name" title="Very long some color name"><span class="clear"></span><span class="value"><img src="assets/user/images/colorswatch/color-red.png" alt=""></span></a></li>
-														<li><a href="#" data-tooltip="Pink" title="Pink"><span class="clear"></span><span class="value"><img src="assets/user/images/colorswatch/color-pink.png" alt=""></span></a></li>
-														<li><a href="#" data-tooltip="Violet" title="Violet"><span class="clear"></span><span class="value"><img src="assets/user/images/colorswatch/color-violet.png" alt=""></span></a></li>
-														<li><a href="#" data-tooltip="Blue" title="Blue"><span class="clear"></span><span class="value"><img src="assets/user/images/colorswatch/color-blue.png" alt=""></span></a></li>
-														<li><a href="#" data-tooltip="Marine" title="Marine"><span class="clear"></span><span class="value"><img src="assets/user/images/colorswatch/color-marine.png" alt=""></span></a></li>
-														<li><a href="#" data-tooltip="Orange" title="Orange"><span class="clear"></span><span class="value"><img src="assets/user/images/colorswatch/color-orange.png" alt=""></span></a></li>
-														<li><a href="#" data-tooltip="Yellow" title="Yellow"><span class="clear"></span><span class="value"><img src="assets/user/images/colorswatch/color-yellow.png" alt=""></span></a></li>
-														<li><a href="#" data-tooltip="Dark Yellow" title="Dark Yellow"><span class="clear"></span><span class="value"><img src="assets/user/images/colorswatch/color-darkyellow.png" alt=""></span></a></li>
-														<li><a href="#" data-tooltip="Very long some color name" title="Very long some color name"><span class="clear"></span><span class="value"><img src="assets/user/images/colorswatch/color-black.png" alt=""></span></a></li>
-														<li><a href="#" data-tooltip="White" title="White"><span class="clear"></span><span class="value"><img src="assets/user/images/colorswatch/color-white.png" alt=""></span></a></li>
-													</ul>
-													<div class="bg-striped"></div>
-												</div>
-											</div>
-											<div class="sidebar-block collapsed">
-												<div class="block-title">
-													<span>Brands</span>
-													<div class="toggle-arrow"></div>
-												</div>
-												<div class="block-content">
-													<ul class="category-list">
-														<li><a href="#" class="value">Dresses</a>
-															<a href="#" class="clear"></a>
-														</li>
-														<li><a href="#">Jackets</a>
-															<a href="#" class="clear"></a>
-														</li>
-														<li class="active"><a href="#">Trousers</a>
-															<a href="#" class="clear"></a>
-														</li>
-														<li><a href="#">Jeans</a>
+														<li><a href="#">Swimwear</a>
 															<a href="#" class="clear"></a>
 														</li>
 													</ul>
@@ -201,22 +132,6 @@
 													<div class="bg-striped"></div>
 												</div>
 											</div>
-											<div class="sidebar-block collapsed block-loading">
-												<div class="block-title">
-													<span>Tags</span>
-													<div class="toggle-arrow"></div>
-												</div>
-												<div class="block-content">
-													<ul class="tags">
-														<li class="active"><a href="#"><span class="clear"></span><span class="value"><span>Dresses</span></span></a></li>
-														<li><a href="#"><span class="clear"></span><span class="value"><span>Outerwear</span></span></a></li>
-														<li><a href="#"><span class="clear"></span><span class="value"><span>Tops</span></span></a></li>
-														<li><a href="#"><span class="clear"></span><span class="value"><span>Sleeveless tops</span></span></a></li>
-														<li><a href="#"><span class="clear"></span><span class="value"><span>Sweaters</span></span></a></li>
-													</ul>
-													<div class="bg-striped"></div>
-												</div>
-											</div>
 										</div>
 									</div>
 								</div>
@@ -244,7 +159,7 @@
 									<div class="col-xs-6 col-sm-3">
 										<a href="#" class="category-block">
 											<div class="category-image">
-												<img src="assets/user/images/category/category-img-01.jpg" alt="#">
+												<img src='<c:url value="/assets/user/images/category/category-img-01.jpg"></c:url>' alt="#">
 											</div>
 											<div class="category-title">
 												Dresses
@@ -254,7 +169,7 @@
 									<div class="col-xs-6 col-sm-3">
 										<a href="#" class="category-block">
 											<div class="category-image">
-												<img src="assets/user/images/category/category-img-02.jpg" alt="#">
+												<img src='<c:url value = "/assets/user/images/category/category-img-02.jpg"></c:url>' alt="#">
 											</div>
 											<div class="category-title">
 												Jackets
@@ -264,7 +179,7 @@
 									<div class="col-xs-6 col-sm-3">
 										<a href="#" class="category-block">
 											<div class="category-image">
-												<img src="assets/user/images/category/category-img-03.jpg" alt="#">
+												<img src='<c:url value = "/assets/user/images/category/category-img-03.jpg"></c:url>' alt="#">
 											</div>
 											<div class="category-title">
 												Trousers
@@ -274,7 +189,7 @@
 									<div class="col-xs-6 col-sm-3">
 										<a href="#" class="category-block">
 											<div class="category-image">
-												<img src="assets/user/images/category/category-img-04.jpg" alt="#">
+												<img src='<c:url value = "/assets/user/images/category/category-img-04.jpg"></c:url>' alt="#">
 											</div>
 											<div class="category-title">
 												T-shirts
@@ -339,64 +254,38 @@
 												<div class="product-item-label label-sale"><span>-20%</span></div>
 												<!-- /Product Label -->
 												<!-- product main photo -->
-												<div class="product-item-gallery-main">
-													<a href="#"><img class="product-image-photo" src="assets/user/images/products/product-16-c1.jpg" alt=""></a>
-													<a href="quick-view.html" title="Quick View" class="quick-view-link quick-view-btn"> <i class="icon icon-eye"></i><span>Quick View</span></a>
+												<!-- product inside carousel -->
+												<div class="carousel-inside slide" data-ride="carousel">
+													<div class="carousel-inner" role="listbox">
+														<div class="item active">
+															<a href='<c:url value="/category/product"></c:url>'><img class="product-image-photo" src='<c:url value = "/assets/user/images/products/product-20.jpg"></c:url>' alt=""></a>
+														</div>
+														<div class="item">
+															<a href='<c:url value="/category/product"></c:url>'><img class="product-image-photo" src='<c:url value = "/assets/user/images/products/product-20-1.jpg"></c:url>' alt=""></a>
+														</div>
+														<div class="item">
+															<a href='<c:url value="/category/product"></c:url>'><img class="product-image-photo" src='<c:url value = "/assets/user/images/products/product-20-2.jpg"></c:url>' alt=""></a>
+														</div>
+													</div>
+													<a class="carousel-control next"></a>
+													<a class="carousel-control prev"></a>
 												</div>
+												<!-- /product inside carousel -->
+												<a href="quick-view.html" title="Quick View" class="quick-view-link quick-view-btn"> <i class="icon icon-eye"></i><span>Quick View</span></a>
 												<!-- /product main photo  -->
 												<div class="countdown-box hidden-xs">
 													<div class="countdown-wrapper">
 														<div class="countdown-title">special price expires in</div>
-														<div class="countdown" data-promodate="2016/12/01"></div>
+														<div class="countdown" data-promodate="2021/12/04"></div>
 													</div>
 												</div>
 												<!-- Product Actions -->
 												<a href="#" title="Add to Wishlist" class="wishlist active"> <i class="icon icon-heart"></i><span>Add to Wishlist</span> </a>
-												<div class="product-item-actions">
-													<div class="share-button toBottom">
-														<span class="toggle"></span>
-														<ul class="social-list">
-															<li>
-																<a href="#" class="icon icon-google google"></a>
-															</li>
-															<li>
-																<a href="#" class="icon icon-fancy fancy"></a>
-															</li>
-															<li>
-																<a href="#" class="icon icon-pinterest pinterest"></a>
-															</li>
-															<li>
-																<a href="#" class="icon icon-twitter-logo twitter"></a>
-															</li>
-															<li>
-																<a href="#" class="icon icon-facebook-logo facebook"></a>
-															</li>
-														</ul>
-													</div>
-												</div>
-												<!-- /Product Actions -->
-												<ul class="color-swatch hidden-xs">
-													<li class="active">
-														<a data-image="assets/user/images/products/product-16-c1.jpg" href="#"><img src="assets/user/images/colorswatch/color-blue.png" alt="Blue"></a>
-													</li>
-													<li>
-														<a data-image="assets/user/images/products/product-16-c2.jpg" href="#"><img src="assets/user/images/colorswatch/color-grey.png" alt="Gray"></a>
-													</li>
-													<li>
-														<a data-image="assets/user/images/products/product-16-c3.jpg" href="#"><img src="assets/user/images/colorswatch/color-red.png" alt="Red"></a>
-													</li>
-													<li>
-														<a data-image="assets/user/images/products/product-16-c4.jpg" href="#"><img src="assets/user/images/colorswatch/color-violet.png" alt="Violet"></a>
-													</li>
-													<li>
-														<a data-image="assets/user/images/products/product-16-c5.jpg" href="#"><img src="assets/user/images/colorswatch/color-green.png" alt="Green"></a>
-													</li>
-												</ul>
                                             </div>
 											<!-- /Product Photo -->
 											<!-- Product Details -->
 											<div class="product-item-details">
-												<div class="product-item-name"> <a title="Long sleeve overall" href="product.html" class="product-item-link">Long sleeve overall</a></div>
+												<div class="product-item-name"> <a title="Long sleeve overall" href='<c:url value="/category/product"></c:url>' class="product-item-link">Long sleeve overall</a></div>
 												<div class="product-item-description">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia nonkdni numquam eius modi tempora incidunt ut labore</div>
 												<div class="price-box"> <span class="price-container"> <span class="price-wrapper"> <span class="old-price">$190.00</span> <span class="special-price">$149.00</span> </span>
 													</span>
@@ -423,13 +312,13 @@
 												<div class="carousel-inside slide" data-ride="carousel">
 													<div class="carousel-inner" role="listbox">
 														<div class="item active">
-															<a href="#"><img class="product-image-photo" src="assets/user/images/products/product-20.jpg" alt=""></a>
+															<a href="#"><img class="product-image-photo" src='<c:url value = "/assets/user/images/products/product-20.jpg"></c:url>' alt=""></a>
 														</div>
 														<div class="item">
-															<a href="#"><img class="product-image-photo" src="assets/user/images/products/product-20-1.jpg" alt=""></a>
+															<a href="#"><img class="product-image-photo" src='<c:url value = "/assets/user/images/products/product-20-1.jpg"></c:url>' alt=""></a>
 														</div>
 														<div class="item">
-															<a href="#"><img class="product-image-photo" src="assets/user/images/products/product-20-2.jpg" alt=""></a>
+															<a href="#"><img class="product-image-photo" src='<c:url value = "/assets/user/images/products/product-20-2.jpg"></c:url>' alt=""></a>
 														</div>
 													</div>
 													<a class="carousel-control next"></a>
@@ -495,13 +384,13 @@
 													<div class="carousel-inside slide" data-ride="carousel">
 														<div class="carousel-inner" role="listbox">
 															<div class="item active">
-																<a href="#"><img class="product-image-photo" src="assets/user/images/products/product-26.jpg" alt=""></a>
+																<a href="#"><img class="product-image-photo" src='<c:url value = "/assets/user/images/products/product-26.jpg"></c:url>' alt=""></a>
 															</div>
 															<div class="item">
-																<a href="#"><img class="product-image-photo" src="assets/user/images/products/product-26-1.jpg" alt=""></a>
+																<a href="#"><img class="product-image-photo" src='<c:url value = "/assets/user/images/products/product-26-1.jpg"></c:url>' alt=""></a>
 															</div>
 															<div class="item">
-																<a href="#"><img class="product-image-photo" src="assets/user/images/products/product-26-2.jpg" alt=""></a>
+																<a href="#"><img class="product-image-photo" src='<c:url value = "/assets/user/images/products/product-26-2.jpg"></c:url>' alt=""></a>
 															</div>
 														</div>
 														<a class="carousel-control next"></a>
@@ -575,10 +464,10 @@
 												<div class="carousel-inside slide" data-ride="carousel">
 													<div class="carousel-inner" role="listbox">
 														<div class="item active">
-															<a href="#"><img class="product-image-photo" src="assets/user/images/products/product-25.jpg" alt=""></a>
+															<a href="#"><img class="product-image-photo" src='<c:url value = "/assets/user/images/products/product-25.jpg"></c:url>' alt=""></a>
 														</div>
 														<div class="item">
-															<a href="#"><img class="product-image-photo" src="assets/user/images/products/product-25-1.jpg" alt=""></a>
+															<a href="#"><img class="product-image-photo" src='<c:url value = "/assets/user/images/products/product-25-1.jpg"></c:url>' alt=""></a>
 														</div>
 													</div>
 													<a class="carousel-control next"></a>
@@ -650,13 +539,13 @@
 												<div class="carousel-inside slide" data-ride="carousel">
 													<div class="carousel-inner" role="listbox">
 														<div class="item active">
-															<a href="#"><img class="product-image-photo" src="assets/user/images/products/product-17.jpg" alt=""></a>
+															<a href="#"><img class="product-image-photo" src='<c:url value = "/assets/user/images/products/product-17.jpg"></c:url>' alt=""></a>
 														</div>
 														<div class="item">
-															<a href="#"><img class="product-image-photo" src="assets/user/images/products/product-17-1.jpg" alt=""></a>
+															<a href="#"><img class="product-image-photo" src='<c:url value = "/assets/user/images/products/product-17-1.jpg"></c:url>' alt=""></a>
 														</div>
 														<div class="item">
-															<a href="#"><img class="product-image-photo" src="assets/user/images/products/product-17-2.jpg" alt=""></a>
+															<a href="#"><img class="product-image-photo" src='<c:url value = "/assets/user/images/products/product-17-2.jpg"></c:url>' alt=""></a>
 														</div>
 													</div>
 													<a class="carousel-control next"></a>
