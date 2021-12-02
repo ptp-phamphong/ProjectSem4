@@ -51,8 +51,6 @@
 
 <body class="boxed">
 
-
-
 	<!-- Loader -->
 	<div id="loader-wrapper">
 		<div class="cube-wrapper">
@@ -75,8 +73,19 @@
 	<div id="wrapper">
 		<!-- Page -->
 		<div class="page-wrapper">
-
-			<%@include file="/WEB-INF/views/layouts/user/header_main.jsp"%>
+						<!-- Header -->
+			<header class="page-header variant-2 fullboxed sticky smart">
+				<div class="navbar">
+					<div class="container">
+						<!-- Logo -->
+						<div class="header-logo">
+							<a href='<c:url value="/"></c:url>' title="Logo"><img src='<c:url value = "/assets/user/images/logo.png"></c:url>' alt="Logo" /></a>
+						</div>
+						<!-- /Logo -->
+						<%@include file="/WEB-INF/views/layouts/user/header.jsp"%>
+					</div>
+				</div>
+			</header>
 			<decorator:body />
 			<%@include file="/WEB-INF/views/layouts/user/footer_main.jsp"%>
 		</div>

@@ -55,7 +55,20 @@
 
 
 <body class="fullwidth no-rtl fly_to_cart">
-	<%@include file="/WEB-INF/views/layouts/user/header_landing.jsp"%>
+
+		<!-- Menu Toggle -->
+		<a href="#" class="toggleHeader"><span class="close-icon"><i class="icon icon-close"></i></span><span class="open-icon"><i class="icon icon-menu"></i></span></a>
+		<!-- /Menu Toggle -->
+		<!-- Header -->
+		<header class="page-header fullboxed variant-3 dark">
+			<div class="navbar">
+				<div class="container">
+					<%@include file="/WEB-INF/views/layouts/user/header.jsp"%>
+				</div>
+			</div>
+		</header>
+		<!-- /Header -->
+		
 	<decorator:body />
 </body>
 

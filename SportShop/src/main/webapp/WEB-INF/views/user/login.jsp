@@ -3,7 +3,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
     <!-- Page Content -->
-    <h1>${currentCustomer}</h1>
 			<main class="page-main">
 				<div class="block">
 					<div class="container">
@@ -43,9 +42,7 @@
 											<button class="btn btn-lg" type="submit">Login</button><span class="required-text">* Required Fields</span></div>
 										<div class="back"><a href="#">Forgot Your Password?</a></div>
 									</form:form>
-									
-									
-									
+
 								</div>
 							</div>
 						</div>

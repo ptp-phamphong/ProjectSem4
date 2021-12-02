@@ -73,5 +73,16 @@ public class CustomerController {
 
 		return redirectView;
 	}
-	
+
+	@RequestMapping(value = { "/cart" }, method = RequestMethod.GET)
+	public ModelAndView showCart(Model model) {
+		model.addAttribute("currentCustomer", new Customer());
+		ModelAndView mv = new ModelAndView("user/cart");
+		
+		ArrayList<Cart> cartList = new ArrayList();//TEST sau thay bang session
+		cartList.add(new Cart(1, 2, 10));
+		cartList.add(new Cart(2, 1, 15));
+		mv.addObject("cartList", cartList);
+		return mv;
+	}
 }
