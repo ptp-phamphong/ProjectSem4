@@ -1,5 +1,7 @@
 package com.aptech.Controller.User;
 
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -11,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.aptech.Dao.CustomerDao;
+import com.aptech.Model.Cart;
 import com.aptech.Model.Customer;
 import com.aptech.MyClass.HashPassword;
 
@@ -59,10 +62,15 @@ public class CustomerController {
 //			mv.setViewName("user/login");
 			return redirectView;
 		}
-		RedirectView redirectView = new RedirectView("/category", true);//Nếu muốn truyền về index thì chỉ ghi "/". Thử test đi là biết nguyên lý
+		RedirectView redirectView = new RedirectView("/cart", true);//Nếu muốn truyền về index thì chỉ ghi "/". Thử test đi là biết nguyên lý
 //		mv.setViewName("user/category");
 		redir.addFlashAttribute("currentCustomer", customer);
-//		mv.addObject("currentCustomer", customer);
+		
+		ArrayList<Cart> cartList = new ArrayList();//TEST sau thay bang session
+		cartList.add(new Cart(1, 2, 10));
+		cartList.add(new Cart(2, 1, 15));
+		redir.addFlashAttribute("cartList", cartList);
+
 		return redirectView;
 	}
 	

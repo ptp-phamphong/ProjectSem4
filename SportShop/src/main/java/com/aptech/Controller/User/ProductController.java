@@ -31,4 +31,11 @@ public class ProductController {
 		mv.addObject("list", productDao.getAll());
 		return mv;
 	}
+	
+	@RequestMapping(value = { "/cart" }, method = RequestMethod.GET)
+	public ModelAndView showCart(Model model) {
+		model.addAttribute("customer", new Customer());	
+		ModelAndView mv = new ModelAndView("user/cart");
+		return mv;
+	}
 }
