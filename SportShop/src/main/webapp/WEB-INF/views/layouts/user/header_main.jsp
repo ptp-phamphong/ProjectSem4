@@ -106,8 +106,8 @@
 						<div class="header-links">
 							<!-- Header Account -->
 							<c:choose>
-								<c:when test="${not empty currentCustomer}">
-									<div class="header-link header-account">${currentCustomer.getFullName()}</div>
+								<c:when test="${not empty sessionScope.currentCustomer.getFullName()}">
+									<div class="header-link header-account">${sessionScope.currentCustomer.getFullName()}</div>
 								</c:when>
 								<c:otherwise>
 									<div class="header-link dropdown-link header-account">

@@ -3,6 +3,11 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+
+<%@ page import="org.springframework.ui.Model" %>
+<%@ page import="com.aptech.Model.Customer" %>
+
+
 <!-- Menu Toggle -->
 		<a href="#" class="toggleHeader"><span class="close-icon"><i class="icon icon-close"></i></span><span class="open-icon"><i class="icon icon-menu"></i></span></a>
 		<!-- /Menu Toggle -->
@@ -333,16 +338,17 @@
 					<div class="header-links">
 						
 						<!-- Header Account -->
-						
 						<c:choose>
-							<c:when test="${not empty currentCustomer}">
-								<div class="header-link" style="color: white">${currentCustomer.getFullName()}</div>
+							<c:when test="${not empty sessionScope.currentCustomer.getId()}">
+								<div class="header-link" style="color: white">${sessionScope.currentCustomer.getFullName()}</div>
 							</c:when>
 							<c:otherwise>
 								<div class="header-link dropdown-link header-account"> <a href='<c:url value="/login"></c:url>'><i class="icon icon-user"></i></a>
 									<div class="dropdown-container right">
 										<div class="title">Registered Customers</div>
 										<div class="top-text">If you have an account with us, please log in.</div>
+										
+										
 										
 										<!-- form login  -->
 											<h3 class="text-danger">${Error}</h3>

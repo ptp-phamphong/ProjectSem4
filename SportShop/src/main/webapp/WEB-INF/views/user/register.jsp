@@ -1,42 +1,100 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <!-- Page Content -->
-			<main class="page-main">
-				<div class="block">
-					<div class="container">
-						<ul class="breadcrumbs">
-							<li><a href='<c:url value="/"></c:url>'><i class="icon icon-home"></i></a></li>
-							<li>/<span>Faq</span></li>
-						</ul>
+	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<!-- Page Content -->
+<main class="page-main">
+	<div class="block">
+		<div class="container">
+			<ul class="breadcrumbs">
+				<li><a href='<c:url value="/"></c:url>'><i
+						class="icon icon-home"></i></a></li>
+				<li>/<span>Faq</span></li>
+			</ul>
+		</div>
+	</div>
+	<div class="block">
+		<div class="container">
+			<div class="form-card">
+				<h3>Personal Information</h3>
+
+				<form:form class="account-create" action="registerHandelling"
+					modelAttribute="customer">
+					<label>E-mail<span class="required">*</span></label>
+					<form:input path="email" id="Email" type="email" class="form-control input-lg"
+						required="required" />
+					<input type ="button" onclick="sendEmail()" class="btn btn-xs" value="Validate this Email (Required)"></input><br>
+					
+					<div style="display:none" id="divOTP">
+						<label>OTP Code<span class="required">*</span>
+						</label>
+						<input type="number" type="text" 
+							class="form-control input-lg" required="required" />
 					</div>
-				</div>
-				<div class="block">
-					<div class="container">
-						<div class="form-card">
-							<h3>Personal Information</h3>
-							
-							
-							<form class="account-create" action="#">
-								<label>E-mail<span class="required">*</span></label>
-								<input type="email" class="form-control input-lg" required>
-								<label>Password<span class="required">*</span></label>
-								<input type="password" class="form-control input-lg" required>
-								<label>Full Name</label>
-								<input type="text" class="form-control input-lg">
-								<label>Phone</label>
-								<input type="text" class="form-control input-lg">
-								<label>Address</label>
-								<input type="text" class="form-control input-lg">
-								<div>
-									<button type="submit" class="btn btn-lg">Create</button><span class="required-text">* Required Fields</span></div>
-								<div class="back">or <a href="#">Return to Store <i class="icon icon-undo"></i></a></div>
-							</form>
-							
-							
-							
-						</div>
+
+
+
+
+					<label>Password<span class="required">*</span></label>
+					<form:input path="password" type="password"
+						class="form-control input-lg" required="required" />
+
+					<label>Full Name</label>
+					<form:input path="fullName" class="form-control input-lg" />
+
+					<label>Phone</label>
+					<form:input path="phoneNumber" class="form-control input-lg" />
+
+					<label>Address</label>
+					<form:input path="address" class="form-control input-lg" />
+					<div>
+						<button type="submit" class="btn btn-lg">Create</button>
+						<span class="required-text">* Required Fields</span>
 					</div>
-				</div>
-			</main>
-			<!-- /Page Content -->
+					<div class="back">
+						or <a href="#">Return to Store <i class="icon icon-undo"></i></a>
+					</div>
+				</form:form>
+
+
+
+			</div>
+		</div>
+	</div>
+</main>
+<!-- /Page Content -->
+
+
+
+
+<script>
+	function sendEmail() {
+		
+		//document.getElementById("btnSendEmai").innerHTML = "Haven't Recieve email, click here to get again";
+		/*if (document.getElementById("Email").value == "") {
+			alert("Please type your email");
+			return false;
+		}*/
+		document.getElementById('divOTP').style.display = "block";
+		//Cú pháp ajax, gửi mail thầm kín
+		$.ajax({
+			url : "sendEmailRegister",
+			contentType : "application/json",
+			type : "POST", 
+			data : {
+				mailUser : document.getElementById("Email").value,
+			//Cái này để vào servlet và báo đây là lúc gửi mail, đừng manh động
+			},
+			
+			success : function(data) {
+				//hiện ra cái ô đã gửi mail thành công và báo nó vào mà check mail đi đm
+				alert("Sucess");
+			},
+			error : function(xhr, textStatus, errorThrown) {
+				alert('STATUS: ' + textStatus + '\nERROR THROWN: '
+						+ errorThrown);
+			}
+		});
+		return false;
+	}
+</script>

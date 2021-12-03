@@ -36,5 +36,26 @@ public class CustomerDao {
 		}
 		return null;
 	}
+	
+	
+	public boolean addNew(Customer customer) {
+		String query = "insert into Customer (FullName, Password, Email, PhoneNumber, Address, Status) values (?,?,?,?,?,1)";
+		
+		try {
+			PreparedStatement pre = utilDb.getConnection().prepareStatement(query);
+			pre.setString(1, customer.getFullName());
+			pre.setString(2, customer.getPassword());
+			pre.setString(3, customer.getFullName());
+			pre.setString(4, customer.getPassword());
+			pre.setString(5, customer.getAddress());
+			
+			int rs = pre.executeUpdate();
+			if(rs!=0)
+				return true;
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return false;
+	}
 
 }
