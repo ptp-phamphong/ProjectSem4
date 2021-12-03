@@ -28,11 +28,9 @@
 					<div style="display:none" id="divOTP">
 						<label>OTP Code<span class="required">*</span>
 						</label>
-						<input type="number" type="text" 
-							class="form-control input-lg" required="required" />
+						<input type="number" type="text" name="OTPCode"
+							class="form-control input-lg" required />
 					</div>
-
-
 
 
 					<label>Password<span class="required">*</span></label>
@@ -79,16 +77,12 @@
 		//Cú pháp ajax, gửi mail thầm kín
 		$.ajax({
 			url : "sendEmailRegister",
-			contentType : "application/json",
 			type : "POST", 
-			data : {
-				mailUser : document.getElementById("Email").value,
-			//Cái này để vào servlet và báo đây là lúc gửi mail, đừng manh động
-			},
-			
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+			data : {"email": JSON.parse(JSON.stringify(document.getElementById("Email").value))},
 			success : function(data) {
 				//hiện ra cái ô đã gửi mail thành công và báo nó vào mà check mail đi đm
-				alert("Sucess");
+				alert(data);
 			},
 			error : function(xhr, textStatus, errorThrown) {
 				alert('STATUS: ' + textStatus + '\nERROR THROWN: '
