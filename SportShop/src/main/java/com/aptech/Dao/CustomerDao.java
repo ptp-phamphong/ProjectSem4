@@ -45,7 +45,7 @@ public class CustomerDao {
 			PreparedStatement pre = utilDb.getConnection().prepareStatement(query);
 			pre.setString(1, customer.getFullName());
 			pre.setString(2, customer.getPassword());
-			pre.setString(3, customer.getFullName());
+			pre.setString(3, customer.getEmail());
 			pre.setString(4, customer.getPassword());
 			pre.setString(5, customer.getAddress());
 			
