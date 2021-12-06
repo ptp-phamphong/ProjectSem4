@@ -46,7 +46,7 @@ public class CustomerDao {
 			pre.setString(1, customer.getFullName());
 			pre.setString(2, customer.getPassword());
 			pre.setString(3, customer.getEmail());
-			pre.setString(4, customer.getPassword());
+			pre.setString(4, customer.getPhoneNumber());
 			pre.setString(5, customer.getAddress());
 			
 			int rs = pre.executeUpdate();

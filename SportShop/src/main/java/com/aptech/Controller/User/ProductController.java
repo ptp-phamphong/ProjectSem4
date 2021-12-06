@@ -13,15 +13,30 @@ import com.aptech.Model.Customer;
 public class ProductController {
 
 	@RequestMapping(value = { "/category" }, method = RequestMethod.GET)
-	public ModelAndView showProductListing(Model model) {
+	public ModelAndView showCategory(Model model) {
 		ProductDao productDao = new ProductDao();
-		int a = productDao.getAll().size();
 		model.addAttribute("customer", new Customer());	
 		ModelAndView mv = new ModelAndView("user/category");
 		mv.addObject("list", productDao.getAll());
 
 		return mv;
 	}
+	
+	
+	
+	@RequestMapping(value = { "/category/productList" }, method = RequestMethod.GET)
+	public ModelAndView showProductList(Model model) {
+		ProductDao productDao = new ProductDao();
+		model.addAttribute("customer", new Customer());	
+		ModelAndView mv = new ModelAndView("user/productList");
+		
+		mv.addObject("listProduct", productDao.getAll());
+
+		return mv;
+	}
+	
+	
+	
 	
 	@RequestMapping(value = { "/category/product" }, method = RequestMethod.GET)
 	public ModelAndView showProductDetails(Model model) {

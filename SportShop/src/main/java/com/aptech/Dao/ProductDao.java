@@ -27,6 +27,15 @@ public class ProductDao {
             	Product item = new Product();
             	item.setId(rs.getInt("id"));
             	item.setName(rs.getString("name"));
+            	item.setDetails(rs.getString("Details"));
+            	item.setDiscount(rs.getInt("Discount"));
+            	
+            	
+            	
+            	
+            	
+            	
+//            	item.setProductType()
             
                 list.add(item);
             }

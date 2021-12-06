@@ -91,6 +91,9 @@
 				<span class="arrow"></span>
 			</li>
 			<li>
+				<a href='<c:url value = "/category"></c:url>'>All Products</a>
+			</li>
+			<li>
 				<a href='<c:url value = "/category"></c:url>'>Men</a>
 			</li>
 			<li>
@@ -108,6 +111,9 @@
 	<ul class="nav">
 		<li>
 			<a href='<c:url value = "/"></c:url>'>HOME</a>
+		</li>
+		<li>
+			<a href='<c:url value = "/category/productList"></c:url>'>All Product</a>
 		</li>
 		<li class="mega-dropdown">
 			<a href='<c:url value = "/category"></c:url>'>
