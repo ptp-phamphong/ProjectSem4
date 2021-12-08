@@ -58,4 +58,25 @@ public class CustomerDao {
 		return false;
 	}
 
+	public Customer getAccount(int id) {
+		String sql = "SELECT * FROM Customer WHERE Id = " + id;
+		Customer customer = new Customer();
+		try {
+			Statement stm = utilDb.getConnection().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			
+			if(rs.next()) {
+				customer.setId(rs.getInt("Id"));
+				customer.setEmail("Email");
+				customer.setPassword("Password");
+				customer.setAddress(rs.getString("Address"));
+				customer.setFullName(rs.getString("FullName"));
+				customer.setPhoneNumber(rs.getString("PhoneNumber"));
+				return customer;
+			}
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return null;
+	}
 }

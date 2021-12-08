@@ -11,7 +11,17 @@
 	<!-- Header Account -->
 	<c:choose>
 		<c:when test="${not empty currentCustomer}">
-			<div class="header-link header-account">${currentCustomer.getFullName()}</div>
+			<div class="header-link header-account"></div>
+			<div class="header-link dropdown-link header-account">
+				<a href='<c:url value="/account/${currentCustomer.getId()}"></c:url>'>${currentCustomer.getFullName()}</a>
+				<div class="dropdown-container right">
+					<div class="title">Hello</div>
+					<div class="top-text" style="color: green; font-size: 150%">${currentCustomer.getFullName()}</div>
+					<button onclick="location.href='<c:url value="/account/${currentCustomer.getId()}"></c:url>'" class="btn btn-lg">View Account</button>
+					<button onclick="location.href='<c:url value="/logoutHandelling"></c:url>'" class="btn btn-lg" data-toggle="modal" data-target="#logOutPopup">Logout</button>
+				</div>
+			</div>
+
 		</c:when>
 		<c:otherwise>
 			<div class="header-link dropdown-link header-account">
@@ -23,18 +33,16 @@
 					<div class="top-text">If you have an account with us, please log in.</div>
 
 					<!-- form login  -->
-					<form:form method="post" class="account-create" action="loginHandelling" modelAttribute="customer">
+
+					<c:url var="action_url" value="/loginHandelling" />
+					<form:form method="post" class="account-create" action="${action_url }" modelAttribute="customer">
 
 
-						<label>
-							E-mail
-							<span class="required">*</span>
+						<label> E-mail <span class="required">*</span>
 						</label>
 						<form:input path="email" type="email" class="form-control input-lg" required="required" />
 
-						<label>
-							Password
-							<span class="required">*</span>
+						<label> Password <span class="required">*</span>
 						</label>
 						<form:input path="password" type="password" class="form-control input-lg" required="required" />
 
@@ -67,11 +75,8 @@
 		<form>
 			<input class="exp-search-input " placeholder="Search here ..." type="text" value="">
 			<input class="exp-search-submit" type="submit" value="">
-			<span class="exp-icon-search">
-				<i class="icon icon-magnify"></i>
-			</span>
-			<span class="exp-search-close">
-				<i class="icon icon-close"></i>
+			<span class="exp-icon-search"> <i class="icon icon-magnify"></i>
+			</span> <span class="exp-search-close"> <i class="icon icon-close"></i>
 			</span>
 		</form>
 	</div>
@@ -91,16 +96,13 @@
 				<span class="arrow"></span>
 			</li>
 			<li>
-				<a href='<c:url value = "/category"></c:url>'>All Products</a>
+				<a href='<c:url value = "/all-product"></c:url>'>All Products</a>
 			</li>
 			<li>
-				<a href='<c:url value = "/category"></c:url>'>Men</a>
+				<a href='<c:url value = "/all-product"></c:url>'>Clothes</a>
 			</li>
 			<li>
-				<a href='<c:url value="/category"></c:url>'>Women</a>
-			</li>
-			<li>
-				<a href='<c:url value="/category"></c:url>'>Accessories</a>
+				<a href='<c:url value="/all-product"></c:url>'>Equipment</a>
 			</li>
 		</ul>
 	</div>
@@ -113,12 +115,11 @@
 			<a href='<c:url value = "/"></c:url>'>HOME</a>
 		</li>
 		<li>
-			<a href='<c:url value = "/category/productList"></c:url>'>All Product</a>
+			<a href='<c:url value = "/all-product"></c:url>'>All Product</a>
 		</li>
 		<li class="mega-dropdown">
-			<a href='<c:url value = "/category"></c:url>'>
-				Men
-				<span class="menu-label">-15%</span>
+			<a href='<c:url value = "/all-product"></c:url>'>
+				Clothes <span class="menu-label">-15%</span>
 			</a>
 			<div class="sub-menu">
 				<div class="container">
@@ -216,9 +217,8 @@
 			</div>
 		</li>
 		<li class="mega-dropdown">
-			<a href='<c:url value = "/category"></c:url>'>
-				Women
-				<span class="menu-label-alt">NEW</span>
+			<a href='<c:url value = "/all-product"></c:url>'>
+				Equipments <span class="menu-label-alt">NEW</span>
 			</a>
 			<div class="sub-menu">
 				<div class="container">
@@ -233,9 +233,7 @@
 										<div class="text-3">SAVE UP TO 40% OF</div>
 										<a href="#buttonlink" class="banner-btn-wrap">
 											<div class="banner-btn text-hoverslide" data-hcolor="#f82e56">
-												<span>
-													<span class="text">SHOP NOW</span>
-													<span class="hoverbg"></span>
+												<span> <span class="text">SHOP NOW</span> <span class="hoverbg"></span>
 												</span>
 											</div>
 										</a>
@@ -251,9 +249,8 @@
 								<img src='<c:url value = "/assets/user/images/category/megamenu-category-01.jpg"></c:url>' alt />
 							</a>
 							<div class="category-title title-border">
-								<a href='<c:url value = "/category"></c:url>'>
-									ACCESSORIES
-									<span class="menu-label">HOT</span>
+								<a href='<c:url value = "/all-product"></c:url>'>
+									ACCESSORIES <span class="menu-label">HOT</span>
 								</a>
 							</div>
 							<ul class="category-links column-count-2">
@@ -268,8 +265,7 @@
 								</li>
 								<li>
 									<a href="#">
-										Fascinators & Headpieces
-										<span class="menu-label">HOT PRICE</span>
+										Fascinators & Headpieces <span class="menu-label">HOT PRICE</span>
 									</a>
 								</li>
 								<li>
@@ -312,8 +308,7 @@
 							</a>
 							<div class="category-title title-border">
 								<a href="#">
-									CLOTHING
-									<span class="menu-label-alt">NEW</span>
+									CLOTHING <span class="menu-label-alt">NEW</span>
 								</a>
 							</div>
 							<ul class="category-links column-count-2">
@@ -328,8 +323,7 @@
 								</li>
 								<li>
 									<a href="#">
-										Hoodies & Sweats
-										<span class="menu-label">-15%</span>
+										Hoodies & Sweats <span class="menu-label">-15%</span>
 									</a>
 								</li>
 								<li>
@@ -376,153 +370,8 @@
 				</div>
 			</div>
 		</li>
-		<li class="mega-dropdown">
-			<a href='<c:url value = "/category"></c:url>'>Accessories</a>
-			<div class="sub-menu">
-				<div class="container">
-					<div class="megamenu-left width-33">
-						<a href="#bannerLink" class="banner-wrap">
-							<div class="banner style-13 autosize-text image-hover-scale" data-fontratio="4">
-								<img src='<c:url value = "/assets/user/images/banners/banner-21.jpg"></c:url>' alt="Banner">
-								<div class="banner-caption horc vertb" style="bottom: 3%;">
-									<div class="vert-wrapper">
-										<div class="vert">
-											<div class="text-1">NEW STYLE</div>
-											<div class="text-2">New Collection</div>
-											<div class="banner-btn text-hoverslide" data-hcolor="#f82e56">
-												<span>
-													<span class="text">SHOP NOW</span>
-													<span class="hoverbg"></span>
-												</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</a>
-					</div>
-					<div class="megamenu-categories column-3">
-						<!-- megamenu column 1 -->
-						<div class="col">
-							<a class="category-image light" href="#">
-								<img src='<c:url value = "/assets/user/images/category/megamenu-category-07.jpg"></c:url>' alt />
-							</a>
-							<div class="category-title title-border">
-								<a href="#">
-									Cameras & Camcorders
-									<span class="menu-label">HOT</span>
-								</a>
-							</div>
-							<ul class="category-links">
-								<li>
-									<a href="#">New In</a>
-								</li>
-								<li>
-									<a href="#">All Cameras</a>
-								</li>
-								<li>
-									<a href="#">All Camcorders</a>
-								</li>
-								<li>
-									<a href="#">Camera Accessories</a>
-								</li>
-								<li>
-									<a href="#">Camera Lenses</a>
-								</li>
-								<li>
-									<a href="#">Memory Cards</a>
-								</li>
-								<li>
-									<a href="#">Web Cameras</a>
-								</li>
-							</ul>
-						</div>
-						<!-- /megamenu column 1 -->
-						<!-- megamenu column 2 -->
-						<div class="col">
-							<a class="category-image light" href="#">
-								<img src='<c:url value = "/assets/user/images/category/megamenu-category-09.jpg"></c:url>' alt />
-							</a>
-							<div class="category-title title-border">
-								<a href="#">
-									Cell Phones
-									<span class="menu-label-alt">NEW</span>
-								</a>
-							</div>
-							<ul class="category-links">
-								<li>
-									<a href="#">No-Contract Phones & Plans</a>
-								</li>
-								<li>
-									<a href="#">Accessories</a>
-								</li>
-								<li>
-									<a href="#">Apple iPhone</a>
-								</li>
-								<li>
-									<a href="#">
-										Mobile Hotspots & Plans
-										<span class="menu-label">-15%</span>
-									</a>
-								</li>
-								<li>
-									<a href="#">Samsung Galaxy</a>
-								</li>
-								<li>
-									<a href="#">Prepaid Cell Phones</a>
-								</li>
-								<li>
-									<a href="#">SIM Cards</a>
-								</li>
-							</ul>
-						</div>
-						<!-- /megamenu column 2 -->
-						<!-- megamenu column 3 -->
-						<div class="col">
-							<a class="category-image light" href="#">
-								<img src='<c:url value = "/assets/user/images/category/megamenu-category-08.jpg"></c:url>' alt />
-							</a>
-							<div class="category-title title-border">
-								<a href="#">
-									Video Games
-									<span class="menu-label">HOT</span>
-								</a>
-							</div>
-							<ul class="category-links">
-								<li>
-									<a href="#">PlayStation 4</a>
-								</li>
-								<li>
-									<a href="#">Xbox One</a>
-								</li>
-								<li>
-									<a href="#">Nintendo 3DS / 2DS</a>
-								</li>
-								<li>
-									<a href="#">Video Game Accessories></a>
-								</li>
-								<li>
-									<a href="#">Xbox Live Cards</a>
-								</li>
-								<li>
-									<a href="#">Strategy Guides</a>
-								</li>
-								<li>
-									<a href="#">
-										<i class="icon icon-gift"></i>
-										Gaming Gift Cards
-									</a>
-								</li>
-							</ul>
-						</div>
-						<!-- /megamenu column 3 -->
-					</div>
-				</div>
-			</div>
-		</li>
-		<li>
-			<a href="category.html">Sale</a>
-		</li>
 	</ul>
 </div>
 <!-- /Mega Menu -->
+
+
