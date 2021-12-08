@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
     <!-- Page Content -->
 			<main class="page-main">
 				<div class="block">
@@ -9,19 +8,15 @@
 						<ul class="breadcrumbs">
 							<li><a href='<c:url value="/"></c:url>'><i class="icon icon-home"></i></a></li>
 							<li>/<a href='<c:url value="/category"></c:url>'>Women</a></li>
-							<li>/<span>${productDetails.getName() }</span></li>
-							
-							<c:url value ="/${prevProduct.getProductType().getName() }/${prevProduct.getSportType().getName() }/${prevProduct.getId()}/${fn:replace(prevProduct.getName(), '/', '-') }" var="prevURL"/>
-							<c:url value ="/${nextProduct.getProductType().getName() }/${nextProduct.getSportType().getName() }/${nextProduct.getId()}/${fn:replace(nextProduct.getName(), '/', '-') }" var="nextURL"/>
-							
-							<li class="product-nav"> <i class="icon icon-angle-left"></i><a href="${fn:replace(prevURL, ' ', '-')}" class="product-nav-prev">prev product
+							<li>/<span>Black swimsuit with bindings</span></li>
+							<li class="product-nav"> <i class="icon icon-angle-left"></i><a href="#" class="product-nav-prev">prev product
 									<span class="product-nav-preview">
-										<span class="image"><img src='<c:url value = "/assets/user/images/products/product-prev-preview.jpg"></c:url>' alt=""><span class="price">$100   <!-- {prevProduct.getPrice() } --> </span></span>
-										<span class="name">${prevProduct.getName() }</span>
-									</span></a>/ <a href=${fn:replace(nextURL, ' ', '-')} class="product-nav-next">next product
+										<span class="image"><img src='<c:url value = "/assets/user/images/products/product-prev-preview.jpg"></c:url>' alt=""><span class="price">$280</span></span>
+										<span class="name">Black swimsuit</span>
+									</span></a>/ <a href="#" class="product-nav-next">next product
 									<span class="product-nav-preview">
-										<span class="image"><img src='<c:url value = "/assets/user/images/products/product-next-preview.jpg"></c:url>' alt=""><span class="price">$100 <%-- ${nextProduct.getPrice() } --%></span></span>
-										<span class="name">${nextProduct.getName() }</span>
+										<span class="image"><img src='<c:url value = "/assets/user/images/products/product-next-preview.jpg"></c:url>' alt=""><span class="price">$280</span></span>
+										<span class="name">Black swimsuit</span>
 									</span></a><i class="icon icon-angle-right"></i> </li>
 						</ul>
 					</div>
@@ -47,7 +42,7 @@
 							<div class="col-lg-8 col-lg-push-2">
 								<div class="product-info-block creative">
 									
-									<h1 class="product-name">${productDetails.getName() }</h1>
+									<h1 class="product-name">Black swimsuit with bindings</h1>
 									<div class="product-meta"> <span class="product-labels">
 											<span class="product-label sale">SALE</span> <span class="product-label new">NEW</span> </span> <span class="availability">Availability: <b>In stock</b></span> <span class="rating"><i class="icon icon-star fill"></i><i class="icon icon-star fill"></i><i class="icon icon-star fill"></i><i class="icon icon-star fill"></i><i class="icon icon-star"></i><span class="count">248</span></span> <span><a href="#"><i class="icon icon-heart"></i> Add to wishlist</a></span> <span class="product-sku">SKU: <span>Stock Keeping Unit</span></span>
 										

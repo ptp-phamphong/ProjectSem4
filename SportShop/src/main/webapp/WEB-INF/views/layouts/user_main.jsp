@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 
 
@@ -52,7 +51,10 @@
 	<div id="loader-wrapper">
 		<div class="cube-wrapper">
 			<div class="cube-folding">
-				<span class="leaf1"></span> <span class="leaf2"></span> <span class="leaf3"></span> <span class="leaf4"></span>
+				<span class="leaf1"></span>
+				<span class="leaf2"></span>
+				<span class="leaf3"></span>
+				<span class="leaf4"></span>
 			</div>
 		</div>
 	</div>
@@ -151,10 +153,12 @@
 			</div>
 			<div class="total-cart">
 				<div class="items-total">
-					Items <span class="count">6</span>
+					Items
+					<span class="count">6</span>
 				</div>
 				<div class="subtotal">
-					Subtotal <span class="price">2.150</span>
+					Subtotal
+					<span class="price">2.150</span>
 				</div>
 			</div>
 		</div>
@@ -177,28 +181,7 @@
 	</div>
 	<!-- /Modal Quick View -->
 
-	<div class="modal modal-countdown fade zoom info success" data-interval="10000" id="logOutPopup">
-		<div class="modal-dialog">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">&#10006;</button>
-			</div>
-			<div class="modal-content">
-				<div class="modal-body">
-					<div class="text-center">
-						<div class="icon-info">
-							<i class="icon icon-alert"></i>
-						</div>
-						<p>Logout Sucessfully!!!</p>
-					</div>
-					<div class="modal-countdown">
-						Window has been closed after
-						<b class="count"></b>
-						sec
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+
 
 </body>
 

@@ -3,15 +3,12 @@ package com.aptech.Controller.User;
 import java.net.http.HttpRequest;
 import java.util.Random;
 
-import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -109,30 +106,11 @@ public class CustomerController {
 		}
 		
 		
-		RedirectView redirectView = new RedirectView("/all-product", true);
+		RedirectView redirectView = new RedirectView("/category", true);
 		request.getSession().setAttribute("currentCustomer", customer);
 		
 		//redir.addFlashAttribute("currentCustomer", customer);
 		return redirectView;
-	}
-	
-	@RequestMapping(value= {"/logoutHandelling"})
-	public RedirectView logoutHandelling(RedirectAttributes redir, HttpServletRequest request) {
-		
-		RedirectView redirectView = new RedirectView("/all-product", true);
-		HttpSession session = request.getSession();
-		session.invalidate();
-		
-		//redir.addFlashAttribute("currentCustomer", customer);
-		return redirectView;
-	}
-	
-	@RequestMapping(value = { "/account/{id}" }, method = RequestMethod.GET)
-	public ModelAndView showViewAccount(@PathVariable int id) {
-		CustomerDao customerDAO = new CustomerDao();	
-		ModelAndView mv = new ModelAndView("user/account");
-		mv.addObject("customer", customerDAO.getAccount(id));
-		return mv;
 	}
 	
 }
