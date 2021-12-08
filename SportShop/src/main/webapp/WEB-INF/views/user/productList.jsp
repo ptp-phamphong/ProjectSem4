@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
 <!-- Page Content -->
 <main class="page-main">
@@ -314,21 +315,24 @@
 										<!-- /Product Label -->
 										<div class="product-item-gallery">
 											<!-- product main photo -->
+											
+											<c:url value ="/${item.getProductType().getName() }/${item.getSportType().getName() }/${item.getId() }/${fn:replace(item.getName(), '/', '-') }" var="productURL"/>
+											
 											<!-- product inside carousel -->
 											<div class="carousel-inside slide" data-ride="carousel">
 												<div class="carousel-inner" role="listbox">
 													<div class="item active">
-														<a href="#">
+														<a href="${fn:replace(productURL, ' ', '-')}">
 															<img class="product-image-photo" src='<c:url value = "/assets/user/images/products/product-26.jpg"></c:url>' alt="">
 														</a>
 													</div>
 													<div class="item">
-														<a href="#">
+														<a href="${fn:replace(productURL, ' ', '-')}">
 															<img class="product-image-photo" src='<c:url value = "/assets/user/images/products/product-26-1.jpg"></c:url>' alt="">
 														</a>
 													</div>
 													<div class="item">
-														<a href="#">
+														<a href="${fn:replace(productURL, ' ', '-')}">
 															<img class="product-image-photo" src='<c:url value = "/assets/user/images/products/product-26-2.jpg"></c:url>' alt="">
 														</a>
 													</div>
@@ -355,35 +359,13 @@
 											<i class="icon icon-heart"></i>
 											<span>Add to Wishlist</span>
 										</a>
-										<div class="product-item-actions">
-											<div class="share-button toBottom">
-												<span class="toggle"></span>
-												<ul class="social-list">
-													<li>
-														<a href="#" class="icon icon-google google"></a>
-													</li>
-													<li>
-														<a href="#" class="icon icon-fancy fancy"></a>
-													</li>
-													<li>
-														<a href="#" class="icon icon-pinterest pinterest"></a>
-													</li>
-													<li>
-														<a href="#" class="icon icon-twitter-logo twitter"></a>
-													</li>
-													<li>
-														<a href="#" class="icon icon-facebook-logo facebook"></a>
-													</li>
-												</ul>
-											</div>
-										</div>
 										<!-- /Product Actions -->
 									</div>
 									<!-- /Product Photo -->
 									<!-- Product Details -->
 									<div class="product-item-details">
 										<div class="product-item-name">
-											<a href="product.html" class="product-item-link">${item.getName() }</a>
+											<a href="${fn:replace(productURL, ' ', '-')}" class="product-item-link">${item.getName() }</a>
 										</div>
 										<div class="product-item-description">Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia nonkdni numquam eius modi tempora incidunt
 											ut labore</div>
