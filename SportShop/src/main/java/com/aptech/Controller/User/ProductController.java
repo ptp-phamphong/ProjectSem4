@@ -28,6 +28,7 @@ public class ProductController {
 	}
 		
 	@RequestMapping(value = { "/{productType}/{sportType}/{productID:\\d+}", "/{productType}/{sportType}/{productID:\\d+}/**" }, method = RequestMethod.GET)
+	// \d:+ chỉ nhận giá trị int
 	public ModelAndView showProductDetails(Model model, @PathVariable("productID") int productID) {
 		ProductDao productDao = new ProductDao();
 		model.addAttribute("customer", new Customer());	
