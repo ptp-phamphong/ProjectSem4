@@ -18,8 +18,6 @@ public class HomeController {
 
 	@RequestMapping(value = { "/" }, method = RequestMethod.GET)
 	public ModelAndView showViewIndex(Model model, HttpServletRequest request) {
-		
-		
 		model.addAttribute("customer", new Customer());
 		ModelAndView mv = new ModelAndView("user/index");
 		return mv;

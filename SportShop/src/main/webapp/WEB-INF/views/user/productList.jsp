@@ -318,29 +318,30 @@
 											
 											<c:url value ="/${item.getProductType().getName() }/${item.getSportType().getName() }/${item.getId() }/${fn:replace(item.getName(), '/', '-') }" var="productURL"/>
 											
+											
+											<!-- Mấy tấm hình ở đây  -->
 											<!-- product inside carousel -->
 											<div class="carousel-inside slide" data-ride="carousel">
 												<div class="carousel-inner" role="listbox">
+												<c:forEach items="${item.getImages()}" var="imageName" varStatus="indexImage">
+												<c:if test="${indexImage.index == 0 }">
 													<div class="item active">
-														<a href="${fn:replace(productURL, ' ', '-')}">
-															<img class="product-image-photo" src='<c:url value = "/assets/user/images/products/product-26.jpg"></c:url>' alt="">
-														</a>
-													</div>
+												</c:if>
+												<c:if test="${indexImage.index != 0 }">
 													<div class="item">
+												</c:if>
 														<a href="${fn:replace(productURL, ' ', '-')}">
-															<img class="product-image-photo" src='<c:url value = "/assets/user/images/products/product-26-1.jpg"></c:url>' alt="">
+															<img class="product-image-photo" src='<c:url value = "/assets/user/images/products/${imageName.getName()}.jpg"></c:url>' alt="${imageName.getName()}">
 														</a>
-													</div>
-													<div class="item">
-														<a href="${fn:replace(productURL, ' ', '-')}">
-															<img class="product-image-photo" src='<c:url value = "/assets/user/images/products/product-26-2.jpg"></c:url>' alt="">
-														</a>
-													</div>
+													</div>	
+												</c:forEach>
 												</div>
 												<a class="carousel-control next"></a>
 												<a class="carousel-control prev"></a>
 											</div>
 											<!-- /product inside carousel -->
+											<!-- Xong mấy tấm hình -->
+											
 											<a href="quick-view.html" title="Quick View" class="quick-view-link quick-view-btn">
 												<i class="icon icon-eye"></i>
 												<span>Quick View</span>
@@ -400,14 +401,6 @@
 
 				<nav aria-label="Page navigation example">
 					<ul class="pagination justify-content-center" id="pagination">
-						<!-- <li class="page-item disabled"><a class="page-link" href="#"
-							tabindex="-1">Previous</a></li> -->
-						<!-- 
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li> -->
-						<!-- <li class="page-item"><a class="page-link" href="#">Next</a> -->
-						</li>
 					</ul>
 				</nav>
 				<!-- Hết danh sách rồi đm trang xong -->

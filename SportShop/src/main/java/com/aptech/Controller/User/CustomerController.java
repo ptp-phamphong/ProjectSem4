@@ -50,7 +50,7 @@ public class CustomerController {
 			return "Please type Your Code";
 			
 		}
-		return "Fuck You";
+		return "Wrong Email, please input again";
 	}
 	
 	

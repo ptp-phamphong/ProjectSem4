@@ -34,6 +34,10 @@ public class ProductDao {
 
             	item.setProductType(categoryDao.getProductTypeByID(rs.getInt("ProductTypeId")));
             	item.setSportType(categoryDao.getSportTypeByID(rs.getInt("SportTypeId")));
+            	
+            	//Thêm mấy tấm ảnh nữa
+            	ImageDao imageDao = new ImageDao();
+            	item.setImages(imageDao.getByIdProduct(rs.getInt("id")));
 
 				list.add(item);
 			}
