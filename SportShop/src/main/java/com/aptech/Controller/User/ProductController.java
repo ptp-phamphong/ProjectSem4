@@ -27,8 +27,8 @@ public class ProductController {
 		return mv;
 	}
 		
-	@RequestMapping(value = { "/{productType}/{sportType}/{productID}/{productName}" }, method = RequestMethod.GET)
-	public ModelAndView showProductDetails(Model model, @PathVariable int productID, @PathVariable String productName) {
+	@RequestMapping(value = { "/{productType}/{sportType}/{productID:\\d+}", "/{productType}/{sportType}/{productID:\\d+}/**" }, method = RequestMethod.GET)
+	public ModelAndView showProductDetails(Model model, @PathVariable("productID") int productID) {
 		ProductDao productDao = new ProductDao();
 		model.addAttribute("customer", new Customer());	
 		ModelAndView mv = new ModelAndView("user/product");
