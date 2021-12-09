@@ -2,6 +2,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
+
 <!-- Page Content -->
 <main class="page-main">
 	<div class="block">
@@ -191,58 +192,6 @@
 			<!-- /Left column -->
 			<!-- Center column -->
 			<div class="col-md-9 aside">
-				<!-- Page Title -->
-				<div class="page-title">
-					<div class="title center">
-						<h1>Product List</h1>
-					</div>
-				</div>
-				<!-- /Page Title -->
-				<!-- Categories Info -->
-				<div class="info-block">
-					<p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-						laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet conse ctetur
-						adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqui.</p>
-				</div>
-				<!-- Categories Info -->
-				<!-- Categories -->
-				<div class="categories">
-					<div class="row">
-						<div class="col-xs-6 col-sm-3">
-							<a href="#" class="category-block">
-								<div class="category-image">
-									<img src='<c:url value="/assets/user/images/category/category-img-01.jpg"></c:url>' alt="#">
-								</div>
-								<div class="category-title">Dresses</div>
-							</a>
-						</div>
-						<div class="col-xs-6 col-sm-3">
-							<a href="#" class="category-block">
-								<div class="category-image">
-									<img src='<c:url value = "/assets/user/images/category/category-img-02.jpg"></c:url>' alt="#">
-								</div>
-								<div class="category-title">Jackets</div>
-							</a>
-						</div>
-						<div class="col-xs-6 col-sm-3">
-							<a href="#" class="category-block">
-								<div class="category-image">
-									<img src='<c:url value = "/assets/user/images/category/category-img-03.jpg"></c:url>' alt="#">
-								</div>
-								<div class="category-title">Trousers</div>
-							</a>
-						</div>
-						<div class="col-xs-6 col-sm-3">
-							<a href="#" class="category-block">
-								<div class="category-image">
-									<img src='<c:url value = "/assets/user/images/category/category-img-04.jpg"></c:url>' alt="#">
-								</div>
-								<div class="category-title">T-shirts</div>
-							</a>
-						</div>
-					</div>
-				</div>
-				<!-- /Categories -->
 				<!-- Filter Row -->
 				<div class="filter-row">
 					<div class="row">
@@ -416,59 +365,7 @@
 
 
 				<!-- /Products Grid -->
-				<!-- Filter Row -->
-				<div class="filter-row">
-					<div class="row">
-						<div class="col-xs-8 col-sm-7 col-lg-5 col-left">
-							<div class="filter-button">
-								<a href="#" class="btn filter-col-toggle">
-									<i class="icon icon-filter"></i>
-									<span>FILTER</span>
-								</a>
-							</div>
-							<div class="form-label">Sort by:</div>
-							<div class="select-wrapper-sm">
-								<select class="form-control input-sm">
-									<option value="featured">Featured</option>
-									<option value="rating">Rating</option>
-									<option value="price">Price</option>
-								</select>
-							</div>
-							<div class="directions">
-								<a href="#">
-									<i class="icon icon-arrow-down"></i>
-								</a>
-								<a href="#">
-									<i class="icon icon-arrow-up"></i>
-								</a>
-							</div>
-						</div>
-						<div class="col-sm-2 col-lg-2 hidden-xs">
-							<div class="view-mode">
-								<a href="#" class="grid-view">
-									<i class="icon icon-th"></i>
-								</a>
-								<a href="#" class="list-view">
-									<i class="icon icon-th-list"></i>
-								</a>
-							</div>
-						</div>
-						<div class="col-xs-4 col-sm-3 col-lg-5 col-right">
-							<div class="form-label">Show:</div>
-							<div class="select-wrapper-sm">
-								<select class="form-control input-sm">
-									<option value="featured">12</option>
-									<option value="rating">36</option>
-									<option value="price">100</option>
-								</select>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- /Filter Row -->
-				<!-- Total -->
-				<div class="items-total">Items 1 to 15 of 28 total</div>
-				<!-- /Total -->
+
 			</div>
 			<!-- /Center column -->
 		</div>
@@ -485,94 +382,7 @@
 
 
 <script>
-	function test() {
-		for (var i = 1; i <= 120; i++) {
-			document.getElementById("Product" + i).style.display = '';
-		}
-
-	}
-
-	//Xử lý phân trang
-
-	//Định nghĩa mỗi trang có bao nhiêu sản phẩm
-	var numPerPage = 9;
-
-
-	//Lấy ra số lượng sản phẩm trong db 
-	var numberProduct = document.getElementById("numberProduct").value
-
-	//Lấy ra tổng số trang
-	var numPage = 0;
-	if (numberProduct % numPerPage == 0) {
-		numPage = numberProduct / numPerPage;
-	} else {
-		numPage = Math.floor(numberProduct / numPerPage) + 1;
-	}
-	//Okay lấy ra được tổng số trang
-
-	//Giờ phải in ra cái danh sách trang, cái đống html hiển thị đó
-	document.getElementById("pagination").innerHTML += "<li class='page-item'><button class='page-link' onclick='changePage("
-			+ 0 + ")'>Previous</button></li>";
-	for (var i = 1; i <= numPage; i++) {
-		document.getElementById("pagination").innerHTML += "<li class='page-item'><button id='pag"
-				+ i
-				+ "' class='page-link' onclick='changePage("
-				+ i
-				+ ")'>"
-				+ i + "</button></li>";
-	}
-	document.getElementById("pagination").innerHTML += "<li class='page-item'><button class='page-link' onclick='changePage("
-			+ (parseInt(numPage) + 1) + ")'>Next</button></li>";
-	//In dell gì nhìn dài thế thôi mà kệ đi
-
-	function changePage(pageTo) {
-		var currentPage = document.getElementById("currentPage").value;
-
-		//Mặc định là trang trước là 0, trang kế thì là trang cuối cùng
-		if (pageTo == (parseInt(numPage) + 1)) {
-			if (currentPage == numPage) {
-				return;
-			}
-			//Trường hợp còn lại thì pageTo = currentPage + 1
-			pageTo = parseInt(currentPage) + 1;
-		}
-
-		if (pageTo == 0) { //Hiển thị trước đó hoặc là trang đầu tiên
-			if (currentPage == 1) {//Nếu đã là trang đầu thì bỏ thôi, ko cần làm gì cả
-				return;
-			}
-			//Trường hợp còn lại thì pageTo = currentPage - 1
-			pageTo = currentPage - 1;
-		}
-
-		//Xóa màu cho cái trang cũ
-		document.getElementById("pag" + currentPage).style.backgroundColor = "";
-
-		//Đầu tiên chuyển cái page current thành page to
-		document.getElementById("currentPage").value = pageTo;
-
-		//Tô màu cho cái ô hiển thị số trang active
-		document.getElementById("pag" + pageTo).style.backgroundColor = "yellow";
-
-		//ẩn đi những sản phẩm ở trang trước đó
-		for (var i = ((currentPage - 1) * numPerPage + 1); i <= currentPage
-				* numPerPage; i++) {
-			if (document.getElementById("Product" + i)) {
-				document.getElementById("Product" + i).style.display = "none";
-			}
-		}
-		//Hiện lên những sản phẩm ở trang muốn đến
-		for (var i = ((pageTo - 1) * numPerPage + 1); i <= pageTo * numPerPage; i++) {
-			document.getElementById("Product" + i).style.display = "";
-		}//Lưu ý, từ đây xuống sẽ bị lỗi đấy đm
-
-		//Xong rồi, ez vl
-	}
-
-	//Lúc mới vào thì xử lý cái số trang trước.
-	window.onload = function() {
-		changePage(1);
-	};
+	
 </script>
 
 

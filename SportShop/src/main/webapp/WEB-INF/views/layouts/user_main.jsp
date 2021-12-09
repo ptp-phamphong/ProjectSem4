@@ -204,6 +204,7 @@
 
 
 <!-- jQuery Scripts  -->
+<script src='<c:url value = "/assets/user/js/user/myScript.js"></c:url>'></script>
 <script src='<c:url value = "/assets/user/js/vendor/jquery/jquery.js"></c:url>'></script>
 <script src='<c:url value = "/assets/user/js/vendor/bootstrap/bootstrap.min.js"></c:url>'></script>
 <script src='<c:url value = "/assets/user/js/vendor/swiper/swiper.min.js"></c:url>'></script>

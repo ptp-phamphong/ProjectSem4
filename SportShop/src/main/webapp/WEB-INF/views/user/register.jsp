@@ -66,29 +66,5 @@
 
 
 <script>
-	function sendEmail() {
-		
-		//document.getElementById("btnSendEmai").innerHTML = "Haven't Recieve email, click here to get again";
-		/*if (document.getElementById("Email").value == "") {
-			alert("Please type your email");
-			return false;
-		}*/
-		document.getElementById('divOTP').style.display = "block";
-		//Cú pháp ajax, gửi mail thầm kín
-		$.ajax({
-			url : "sendEmailRegister",
-			type : "POST", 
-            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-			data : {"email": JSON.parse(JSON.stringify(document.getElementById("Email").value))},
-			success : function(data) {
-				//hiện ra cái ô đã gửi mail thành công và báo nó vào mà check mail đi đm
-				alert(data);
-			},
-			error : function(xhr, textStatus, errorThrown) {
-				alert('STATUS: ' + textStatus + '\nERROR THROWN: '
-						+ errorThrown);
-			}
-		});
-		return false;
-	}
+	
 </script>

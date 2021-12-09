@@ -133,7 +133,7 @@
 					</div>
 					<div>
 						<a href='<c:url value="/login"></c:url>' class="btn">Login</a>
-						<a href='<c:url value="/category"></c:url>' class="btn btn-invert">Continue shopping</a>
+						<a href='<c:url value="/all-product"></c:url>' class="btn btn-invert">Continue shopping</a>
 					</div>
 
 				</div>
