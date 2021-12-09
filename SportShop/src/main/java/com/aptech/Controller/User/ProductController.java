@@ -27,20 +27,21 @@ public class ProductController {
 		return mv;
 	}
 		
-//	@RequestMapping(value = { "/{productType}/{sportType}/{productID}/{productName}" }, method = RequestMethod.GET)
-//	public ModelAndView showProductDetails(Model model, @PathVariable int productID, @PathVariable String productName) {
-//		ProductDao productDao = new ProductDao();
-//		model.addAttribute("customer", new Customer());	
-//		ModelAndView mv = new ModelAndView("user/product");
-//		mv.addObject("productDetails", productDao.getByProductID(productID));
-//		mv.addObject("nextProduct", productDao.getByProductID(productID+1));
-//		if (productID == 1) {
-//			mv.addObject("prevProduct", productDao.getLastProduct());
-//		}else {
-//			mv.addObject("prevProduct", productDao.getByProductID(productID-1));
-//		}
-//		return mv;
-//	}
+	@RequestMapping(value = { "/{productType}/{sportType}/{productID:\\d+}", "/{productType}/{sportType}/{productID:\\d+}/**" }, method = RequestMethod.GET)
+	// \d:+ chỉ nhận giá trị int
+	public ModelAndView showProductDetails(Model model, @PathVariable("productID") int productID) {
+		ProductDao productDao = new ProductDao();
+		model.addAttribute("customer", new Customer());	
+		ModelAndView mv = new ModelAndView("user/product");
+		mv.addObject("productDetails", productDao.getByProductID(productID));
+		mv.addObject("nextProduct", productDao.getByProductID(productID+1));
+		if (productID == 1) {
+			mv.addObject("prevProduct", productDao.getLastProduct());
+		}else {
+			mv.addObject("prevProduct", productDao.getByProductID(productID-1));
+		}
+		return mv;
+	}
 	
 	@RequestMapping(value = { "/cart" }, method = RequestMethod.GET)
 	public ModelAndView showCart(Model model) {
