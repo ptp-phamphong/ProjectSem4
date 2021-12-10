@@ -1,43 +1,11 @@
-//Xử lý phân trang
-
-//Định nghĩa mỗi trang có bao nhiêu sản phẩm
-var numPerPage = 9;
-
-
-//Lấy ra số lượng sản phẩm trong db 
-var numberProduct = document.getElementById("numberProduct").value
-
-//Lấy ra tổng số trang
-var numPage = 0;
-if (numberProduct % numPerPage == 0) {
-	numPage = numberProduct / numPerPage;
-} else {
-	numPage = Math.floor(numberProduct / numPerPage) + 1;
-}
-//Okay lấy ra được tổng số trang
-
-//Giờ phải in ra cái danh sách trang, cái đống html hiển thị đó
-document.getElementById("pagination").innerHTML += "<li class='page-item'><button class='page-link' onclick='changePage("
-	+ 0 + ")'>Previous</button></li>";
-for (var i = 1; i <= numPage; i++) {
-	document.getElementById("pagination").innerHTML += "<li class='page-item'><button id='pag"
-		+ i
-		+ "' class='page-link' onclick='changePage("
-		+ i
-		+ ")'>"
-		+ i + "</button></li>";
-}
-document.getElementById("pagination").innerHTML += "<li class='page-item'><button class='page-link' onclick='changePage("
-	+ (parseInt(numPage) + 1) + ")'>Next</button></li>";
-//In dell gì nhìn dài thế thôi mà kệ đi
-
 
 function sendEmail() {
 
-	if (document.getElementById("Email").value == "") {
+	//document.getElementById("btnSendEmai").innerHTML = "Haven't Recieve email, click here to get again";
+	/*if (document.getElementById("Email").value == "") {
 		alert("Please type your email");
 		return false;
-	}
+	}*/
 	document.getElementById('divOTP').style.display = "block";
 	//Cú pháp ajax, gửi mail thầm kín
 	$.ajax({
@@ -49,18 +17,15 @@ function sendEmail() {
 			//hiện ra cái ô đã gửi mail thành công và báo nó vào mà check mail đi đm
 			alert(data);
 		},
-		error: function(XMLHttpRequest, textStatus, errorThrown) {
-			alert(XMLHttpRequest + '\nSTATUS: ' + textStatus + '\nERROR THROWN: '
+		error: function(xhr, textStatus, errorThrown) {
+			alert('STATUS: ' + textStatus + '\nERROR THROWN: '
 				+ errorThrown);
 		}
 	});
 	return false;
 }
 
-function changePage(pageTo) {
-	var currentPage = document.getElementById("currentPage").value;
 
-<<<<<<< HEAD
 function test() {
 	for (var i = 1; i <= 120; i++) {
 		document.getElementById("Product" + i).style.display = '';
@@ -142,46 +107,6 @@ function changePage(pageTo) {
 		document.getElementById("Product" + i).style.display = "";
 	}//Lưu ý, từ đây xuống sẽ bị lỗi đấy đm
 
-=======
-	//Mặc định là trang trước là 0, trang kế thì là trang cuối cùng
-	if (pageTo == (parseInt(numPage) + 1)) {
-		if (currentPage == numPage) {
-			return;
-		}
-		//Trường hợp còn lại thì pageTo = currentPage + 1
-		pageTo = parseInt(currentPage) + 1;
-	}
-
-	if (pageTo == 0) { //Hiển thị trước đó hoặc là trang đầu tiên
-		if (currentPage == 1) {//Nếu đã là trang đầu thì bỏ thôi, ko cần làm gì cả
-			return;
-		}
-		//Trường hợp còn lại thì pageTo = currentPage - 1
-		pageTo = currentPage - 1;
-	}
-
-	//Xóa màu cho cái trang cũ
-	document.getElementById("pag" + currentPage).style.backgroundColor = "";
-
-	//Đầu tiên chuyển cái page current thành page to
-	document.getElementById("currentPage").value = pageTo;
-
-	//Tô màu cho cái ô hiển thị số trang active
-	document.getElementById("pag" + pageTo).style.backgroundColor = "yellow";
-
-	//ẩn đi những sản phẩm ở trang trước đó
-	for (var i = ((currentPage - 1) * numPerPage + 1); i <= currentPage
-		* numPerPage; i++) {
-		if (document.getElementById("Product" + i)) {
-			document.getElementById("Product" + i).style.display = "none";
-		}
-	}
-	//Hiện lên những sản phẩm ở trang muốn đến
-	for (var i = ((pageTo - 1) * numPerPage + 1); i <= pageTo * numPerPage; i++) {
-		document.getElementById("Product" + i).style.display = "";
-	}//Lưu ý, từ đây xuống sẽ bị lỗi đấy đm
-
->>>>>>> abba2cac24e1f3ae959c2692ecfb6c36a36b9e9d
 	//Xong rồi, ez vl
 }
 
@@ -191,7 +116,6 @@ window.onload = function() {
 };
 
 
-<<<<<<< HEAD
 function ajaxTest() {
 	$.ajax({
 		type: "GET",
@@ -207,49 +131,9 @@ function ajaxTest() {
 			alert('Error: ' + e);
 		}
 	});
-=======
-//Nút thêm vào giỏ hàng
-function addToCart(id) {
-
-	//Cú pháp ajax
-	$.ajax({
-		url: "addToCart",
-		type: "POST",
-		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-		data: { "idProduct": JSON.parse(JSON.stringify(id)) },
-		success: function(data) {
-			//hiện ra cái ô đã gửi mail thành công và báo nó vào mà check mail đi đm
-			alert("Thêm vào giỏ hàng thành công");
-		},
-		error: function(XMLHttpRequest, textStatus, errorThrown) {
-			alert(XMLHttpRequest + '\nSTATUS: ' + textStatus + '\nERROR THROWN: '
-				+ errorThrown);
-		}
-	});
-	return false;
->>>>>>> abba2cac24e1f3ae959c2692ecfb6c36a36b9e9d
 }
 
 
 
-<<<<<<< HEAD
-=======
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> abba2cac24e1f3ae959c2692ecfb6c36a36b9e9d
 
 

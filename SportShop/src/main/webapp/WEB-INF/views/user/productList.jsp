@@ -331,7 +331,7 @@
 											<i class="icon icon-star-fill"></i>
 											<i class="icon icon-star-fill"></i>
 										</div>
-										<button class="btn add-to-cart" onclick="addToCart(${item.getId()})" >
+										<button class="btn add-to-cart" data-product="789123">
 											<i class="icon icon-cart"></i>
 											<span>Add to Cart</span>
 										</button>
@@ -354,6 +354,12 @@
 				</nav>
 				<!-- Hết danh sách rồi đm trang xong -->
 
+
+
+
+
+
+
 				<!--có 1 cái input hidden ở đây để biết đang ở trang nào-->
 				<input type="hidden" id="currentPage" value="1">
 
@@ -374,7 +380,12 @@
 
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+	
+</script>
+
+
 
 
 
