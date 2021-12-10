@@ -3,10 +3,12 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!-- Header Cart -->
-<%@include file="/WEB-INF/views/layouts/user/headerCart.jsp"%>
+<div id="test"><%@include file="/WEB-INF/views/layouts/user/headerCart.jsp"%>
+</div>
+
 <!-- /Header Cart -->
 
-<!-- Header Links -->
+<!-- Header Links -->	
 <div class="header-links">
 	<!-- Header Account -->
 	<c:choose>

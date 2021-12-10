@@ -5,4 +5,7 @@
 	<decorator name="user" page="user_main.jsp">
 		<pattern>/*</pattern>
 	</decorator>
+	<excludes>
+        <pattern>/ajax/*</pattern>
+    </excludes>
 </decorators>
