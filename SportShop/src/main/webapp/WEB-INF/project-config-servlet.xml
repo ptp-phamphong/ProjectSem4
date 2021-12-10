@@ -31,6 +31,7 @@
 		</property>
 	</bean>
 
+
 	<mvc:annotation-driven />
 	<mvc:resources location="/assets/" mapping="/assets/**"></mvc:resources>
 
