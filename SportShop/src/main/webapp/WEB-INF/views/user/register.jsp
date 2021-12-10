@@ -21,14 +21,15 @@
 				<form:form class="account-create" action="registerHandelling"
 					modelAttribute="customer">
 					<label>E-mail<span class="required">*</span></label>
-					<form:input path="email" id="Email" type="email" class="form-control input-lg"
-						required="required" />
-					<input type ="button" onclick="sendEmail()" class="btn btn-xs" value="Validate this Email (Required)"></input><br>
-					
-					<div style="display:none" id="divOTP">
+					<form:input path="email" id="Email" type="email"
+						class="form-control input-lg" required="required" />
+					<input type="button" onclick="sendEmail()" class="btn btn-xs"
+						value="Validate this Email (Required)"></input>
+					<br>
+
+					<div style="display: none" id="divOTP">
 						<label>OTP Code<span class="required">*</span>
-						</label>
-						<input type="number" type="text" name="OTPCode"
+						</label> <input type="number" type="text" name="OTPCode"
 							class="form-control input-lg" required />
 					</div>
 
@@ -62,6 +63,11 @@
 </main>
 <!-- /Page Content -->
 
+
+<div id="test">
+
+
+</div>
 
 
 
