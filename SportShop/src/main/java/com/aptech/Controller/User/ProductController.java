@@ -1,17 +1,25 @@
 package com.aptech.Controller.User;
 
 import java.util.ArrayList;
+import java.util.Random;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.aptech.Dao.ProductDao;
+import com.aptech.Dao.ProductDetailDao;
 import com.aptech.Model.Cart;
 import com.aptech.Model.Customer;
+import com.aptech.Model.Product;
+import com.aptech.MyClass.SendingEmail;
 
 @Controller
 public class ProductController {
@@ -53,4 +61,48 @@ public class ProductController {
 		mv.addObject("cartList", cartList);
 		return mv;
 	}
+	
+	
+	//Các hàm xử lý giỏ hàng
+	@ResponseBody
+	@RequestMapping(value = { "/addToCart" }, method = RequestMethod.POST)
+	public String sendEmail( HttpServletRequest request) {
+		int idProduct = Integer.parseInt(request.getParameter("idProduct"));
+		
+		HttpSession session = request.getSession();
+		ArrayList<Cart> curCart = new ArrayList<Cart>();
+		curCart = (ArrayList<Cart>) session.getAttribute("cart");
+		
+		
+		if(curCart == null) {//Nếu trong cart chưa có gì
+			curCart = new ArrayList<Cart>();
+			
+			Cart newItem = new Cart();
+			ProductDao productDao = new ProductDao();
+			ProductDetailDao productDetailDao = new ProductDetailDao();
+			Product productToCart = new Product();
+			productToCart =  productDao.getByProductID(Integer.parseInt(request.getParameter("idProduct")));
+			//newItem.set
+			newItem.setQuantity(1);
+			newItem.setPrice(productDetailDao.getByIdProduct(idProduct).get(0).getPrice());
+			newItem.setProductDetail(productDetailDao.getByIdProduct(idProduct).get(0));
+			curCart.add(newItem);
+			session.setAttribute("curCart", curCart);
+		}
+			
+			
+		return "done";
+	}
+	
+	
+	
+	
+	
+	
+	//Hết hàm rồi đấy, đmẹ đáng lẽ nên xài cái service
+	
+	
+	
+	
+	
 }
