@@ -17,8 +17,8 @@ function sendEmail() {
 			//hiện ra cái ô đã gửi mail thành công và báo nó vào mà check mail đi đm
 			alert(data);
 		},
-		error: function(xhr, textStatus, errorThrown) {
-			alert('STATUS: ' + textStatus + '\nERROR THROWN: '
+		error: function(XMLHttpRequest, textStatus, errorThrown) {
+			alert(XMLHttpRequest + '\nSTATUS: ' + textStatus + '\nERROR THROWN: '
 				+ errorThrown);
 		}
 	});
@@ -26,12 +26,6 @@ function sendEmail() {
 }
 
 
-function test() {
-		for (var i = 1; i <= 120; i++) {
-			document.getElementById("Product" + i).style.display = '';
-		}
-
-	}
 
 	//Xử lý phân trang
 
