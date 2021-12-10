@@ -64,6 +64,9 @@ public class ProductDao {
 				item.setProductType(categoryDao.getProductTypeByID(rs.getInt("ProductTypeId")));
             	item.setSportType(categoryDao.getSportTypeByID(rs.getInt("SportTypeId")));
 				
+            	ImageDao imageDao = new ImageDao();
+            	item.setImages(imageDao.getByIdProduct(rs.getInt("id")));
+
 				return item;
 			}
 		} catch (Exception e) {
@@ -74,6 +77,7 @@ public class ProductDao {
 
 	public Product getLastProduct() {
 		String sql = "SELECT TOP 1 *  FROM Product ORDER BY Id DESC";
+		CategoryDao categoryDao = new CategoryDao();
 		try {
 			Statement stm = utilDb.getConnection().createStatement();
 			ResultSet rs = stm.executeQuery(sql);
@@ -83,6 +87,13 @@ public class ProductDao {
 				item.setName(rs.getString("name"));
 				item.setDetails(rs.getString("Details"));
 				item.setDiscount(rs.getInt("Discount"));
+				
+				item.setProductType(categoryDao.getProductTypeByID(rs.getInt("ProductTypeId")));
+            	item.setSportType(categoryDao.getSportTypeByID(rs.getInt("SportTypeId")));
+				
+				ImageDao imageDao = new ImageDao();
+            	item.setImages(imageDao.getByIdProduct(rs.getInt("id")));
+
 				return item;
 			}
 		} catch (Exception e) {
