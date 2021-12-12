@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%-- <c:choose>
 	<c:when test="${not empty currentCustomer }"><!-- Nếu đã đăng nhập --> --%>
 <c:choose>
@@ -47,7 +48,7 @@
 									<a href='<c:url value="/category/product"></c:url>'>${item.getProductDetail().getProduct().getName()}</a>
 
 								</div>
-								<div class="price">$${item.getPrice()}</div>
+								<div class="price">$<fmt:formatNumber type="number" value="${item.getPrice()}" /></div>
 								<div class="qty qty-changer">
 									<fieldset>
 										<input type="button" value="&#8210;" onclick="decrease(${item.getProductDetail().getId()})">
@@ -56,7 +57,7 @@
 									</fieldset>
 								</div>
 								<div class="subtotal">
-									$${item.getPrice() * item.getQuantity() }
+									$<fmt:formatNumber type="number" value="${item.getPrice() * item.getQuantity() }" />
 									<c:set var="subTotal"
 										value="${subTotal + item.getPrice() * item.getQuantity() }"></c:set>
 								</div>
@@ -71,20 +72,25 @@
 							<table class="total-price">
 								<tr>
 									<td>Subtotal</td>
-									<td>$${subTotal }</td>
+									<td>$<fmt:formatNumber type="number" value="${subTotal }" /></td>
 								</tr>
-								<tr>
+								<!-- <tr>
 									<td>Discount</td>
 									<td>$12.00</td>
-								</tr>
+								</tr> -->
 								<tr class="total">
 									<td>Grand Total</td>
-									<td>$${subTotal }</td>
+									<td>$<fmt:formatNumber type="number" value="${subTotal }" /></td>
 								</tr>
 							</table>
 							<div class="cart-action">
 								<div>
-									<button class="btn">Checkout</button>
+									<c:if test="${not empty sessionScope.currentCustomer}">
+										<a href="checkOutHandelling"><button class="btn" >Checkout</button></a>
+									</c:if>
+									<c:if test="${empty sessionScope.currentCustomer}">
+										<a href="login"><button class="btn" >Please Login To Checkout</button></a>
+									</c:if>
 								</div>
 							</div>
 						</div>

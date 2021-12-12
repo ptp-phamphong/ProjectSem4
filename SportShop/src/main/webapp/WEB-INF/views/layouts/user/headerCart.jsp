@@ -25,6 +25,7 @@
 							</c:if>
 							
 							<c:if test="${sessionScope.curCart != null }">
+								<c:set var="subTotal" value="${0 }"></c:set>
 								<!-- Vòng lặp ở đây -->
 								<c:forEach var="item" items="${sessionScope.curCart}">
 									<li class="item product product-item">
@@ -75,14 +76,11 @@
 											</div>
 										</div>
 									</li>
+									<c:set var="subTotal"
+										value="${subTotal + item.getPrice() * item.getQuantity() }"></c:set>
 								</c:forEach>
 								<!-- Kết thúc vòng lặp -->
 							</c:if>
-
-
-
-
-
 
 
 						</ol>
@@ -91,7 +89,7 @@
 						<span class="label"> <span>Subtotal</span>
 						</span>
 						<div class="amount price-container">
-							<span class="price-wrapper"> <span class="price">$50.00</span>
+							<span class="price-wrapper"> <span class="price">$<fmt:formatNumber type="number" value="${subTotal }" /></span>
 							</span>
 						</div>
 					</div>

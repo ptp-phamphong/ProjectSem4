@@ -300,6 +300,8 @@
 						<!-- /megamenu bottom -->
 					</div>
 				</div>
+			</div></li>
+		<li><a href='<c:url value = "/ShoppingHistory"></c:url>'>Shopping History</a></li>
 	</ul>
 </div>
 <!-- /Mega Menu -->

@@ -188,7 +188,7 @@ function addToCart(idProduct) {
 //Thêm vào giỏ hàng trong chi tiết sản phẩm
 function addToCartInDetail() {
 	$.ajax({
-		url: "ajax/addItemToCartInDetail",
+		url: "/SportShop/ajax/addItemToCartInDetail",
 		type: "GET",
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		data: {
@@ -198,6 +198,7 @@ function addToCartInDetail() {
 		},
 		success: function(data) {
 			console.log(data);
+			
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
 			alert(XMLHttpRequest + '\nSTATUS: ' + textStatus + '\nERROR THROWN: '
