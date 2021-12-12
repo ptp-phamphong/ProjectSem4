@@ -163,14 +163,19 @@ function ajaxTest() {
 }
 
 //Nút thêm vào giỏ hàng
-function addToCart(id) {
+function addToCart(idProduct) {
 	$.ajax({
-		url: "addItemToCart",
+		url: "ajax/addItemToCart",
 		type: "POST",
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-		data: { "idProduct": JSON.parse(JSON.stringify(id)) },
+		data: {
+			"idProduct": JSON.parse(JSON.stringify(idProduct)),
+			"quantity": JSON.parse(JSON.stringify(1)),
+			"inDetails": false,
+		},
 		success: function(data) {
-			
+			console.log(data);
+			$('#headerCart').html(data);
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
 			alert(XMLHttpRequest + '\nSTATUS: ' + textStatus + '\nERROR THROWN: '
@@ -180,8 +185,32 @@ function addToCart(id) {
 	return false;
 }
 
+//Thêm vào giỏ hàng trong chi tiết sản phẩm
+function addToCartInDetail() {
+	$.ajax({
+		url: "ajax/addItemToCartInDetail",
+		type: "GET",
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		data: {
+			"idProduct": JSON.parse(JSON.stringify(document.getElementById("listProductDetails").value)),
+			"quantity": JSON.parse(JSON.stringify(document.getElementById("quantity").value)),
+			"inDetails": false,
+		},
+		success: function(data) {
+			console.log(data);
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) {
+			alert(XMLHttpRequest + '\nSTATUS: ' + textStatus + '\nERROR THROWN: '
+				+ errorThrown);
+		}
+	});
+	return false;
+}
+
+
+
 //Tăng số lượng trong giỏ hàng
-function increase(id){
+function increase(id) {
 	$.ajax({
 		url: "ajax/increseQuantity",
 		type: "POST",
@@ -199,7 +228,7 @@ function increase(id){
 }
 
 //Giảm số lượng trong giỏ hàng
-function decrease(id){
+function decrease(id) {
 	$.ajax({
 		url: "ajax/decreaseQuantity",
 		type: "POST",
@@ -216,6 +245,35 @@ function decrease(id){
 	return false;
 }
 
+//Xóa 1 phần tử trong giỏ hàng
+function removeItemCart(id) {
+	$.ajax({
+		url: "ajax/removeItemCart",
+		type: "POST",
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		data: { "idProductDetail": JSON.parse(JSON.stringify(id)) },
+		success: function(data) {
+			$('#mainCart').html(data);
+			$.ajax({
+				url: "ajax/showHeaderCart",
+				type: "POST",
+				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+				success: function(data) {
+					$('#headerCart').html(data);
+				},
+				error: function(XMLHttpRequest, textStatus, errorThrown) {
+					alert(XMLHttpRequest + '\nSTATUS: ' + textStatus + '\nERROR THROWN: '
+						+ errorThrown);
+				}
+			});
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) {
+			alert(XMLHttpRequest + '\nSTATUS: ' + textStatus + '\nERROR THROWN: '
+				+ errorThrown);
+		}
+	});
+	return false;
+}
 
 
 

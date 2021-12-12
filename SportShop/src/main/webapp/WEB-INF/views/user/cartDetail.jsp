@@ -61,7 +61,7 @@
 										value="${subTotal + item.getPrice() * item.getQuantity() }"></c:set>
 								</div>
 								<div class="remove">
-									<a href="#" class="icon icon-close-2"></a>
+									<button href="#" class="icon icon-close-2" onclick="return removeItemCart(${item.getProductDetail().getId()});"></button>
 								</div>
 							</div>
 						</c:forEach>
