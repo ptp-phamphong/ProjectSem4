@@ -362,4 +362,51 @@ public class ProductDao {
         }
         return false;  
     }
+	
+	public ArrayList<Product> getByProductType(int productTypeId) {
+		String sql = "SELECT * FROM Product, ProductDetails WHERE ProductDetails.ProductId = Product.Id AND ProductTypeId = " + productTypeId ;
+		return getProductbySQL(sql);
+	}
+	
+	public ArrayList<Product> getBySportType(int productTypeId, int sportTypeId) {
+		String sql = "SELECT * FROM Product, ProductDetails WHERE ProductDetails.ProductId = Product.Id AND ProductTypeId = " + productTypeId + " AND SportTypeId = "+ sportTypeId;
+		return getProductbySQL(sql);
+	}
+	
+	
+	//đỡ viết hàm nhiều
+	public ArrayList<Product> getProductbySQL(String sql) {
+
+		ArrayList<Product> list = new ArrayList<Product>();
+		Statement stm;
+		try {
+			CategoryDao categoryDao = new CategoryDao();
+			stm = utilDb.getConnection().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			while (rs.next()) {
+				Product item = new Product();
+				item.setId(rs.getInt("id"));
+				item.setName(rs.getString("name"));
+				item.setDetails(rs.getString("Details"));
+				item.setDiscount(rs.getInt("Discount"));
+
+            	item.setProductType(categoryDao.getProductTypeByID(rs.getInt("ProductTypeId")));
+            	item.setSportType(categoryDao.getSportTypeByID(rs.getInt("SportTypeId")));
+            	
+            	//Thêm mấy tấm ảnh nữa
+            	ImageDao imageDao = new ImageDao();
+            	item.setImages(imageDao.getByIdProduct(rs.getInt("id")));
+            	
+            	ArrayList<ProductDetail> listProductDetails = new ArrayList<ProductDetail>();
+        		ProductDetailDao productDetailDao = new ProductDetailDao();
+        		item.setProductDetails(productDetailDao.getByIdProduct(rs.getInt("id")));
+        		
+				list.add(item);
+			}
+			return list;
+		} catch (Exception ex) {
+			System.out.print("abc");
+		}
+		return list;
+	}
 }

@@ -31,7 +31,7 @@ public class CategoryDao {
 				ProductType item = new ProductType();
 				item.setId(rs.getInt("id"));
 				item.setName(rs.getString("Name"));
-				item.setStatus(true);
+				item.setStatus(rs.getBoolean("Status"));
             	
 				list.add(item);
 			}
@@ -56,7 +56,7 @@ public class CategoryDao {
 				SportType item = new SportType();
 				item.setId(rs.getInt("id"));
 				item.setName(rs.getString("Name"));
-				item.setStatus(true);
+				item.setStatus(rs.getBoolean("Status"));
             	
 				list.add(item);
 			}
@@ -103,4 +103,5 @@ public class CategoryDao {
 		}
 		return null;
 	}
+	
 }

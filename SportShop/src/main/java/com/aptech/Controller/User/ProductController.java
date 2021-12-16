@@ -7,6 +7,7 @@ import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,11 +39,33 @@ public class ProductController {
 	@RequestMapping(value = { "/all-product" }, method = RequestMethod.GET)
 	public ModelAndView showProductList(Model model) {
 		ProductDao productDao = new ProductDao();
+		CategoryDao categoryDao = new CategoryDao();
 		model.addAttribute("customer", new Customer());
 		ModelAndView mv = new ModelAndView("user/productList");
 
 		mv.addObject("listProduct", productDao.getAll());
+		mv.addObject("productTypeList", categoryDao.getAllProductType());
+		mv.addObject("sportTypeList", categoryDao.getAllSportType());
+		return mv;
+	}
 
+	@RequestMapping(value = { "/{productType}/{sportType}", "/{productType}" }, method = RequestMethod.GET)
+	public ModelAndView showProductbySportType(Model model, @RequestParam("productType") Integer productTypeID,
+			@Nullable @RequestParam(value = "sportType", required=false) Integer sportTypeID) {
+		
+		ProductDao productDao = new ProductDao();
+		CategoryDao categoryDao = new CategoryDao();
+		model.addAttribute("customer", new Customer());
+		ModelAndView mv = new ModelAndView("user/productList");
+		
+		if (sportTypeID != null) {
+			mv.addObject("listProduct", productDao.getBySportType(productTypeID, sportTypeID));
+		}else {
+			mv.addObject("listProduct", productDao.getByType(productTypeID));
+		}
+		
+		mv.addObject("productTypeList", categoryDao.getAllProductType());
+		mv.addObject("sportTypeList", categoryDao.getAllSportType());
 		return mv;
 	}
 
@@ -63,11 +86,11 @@ public class ProductController {
 	@ResponseBody
 	@RequestMapping(value = { "/ChangeImageProduct" }, method = RequestMethod.GET)
 	public String ChangeImageProduct(@RequestParam String imgItem) {
-		
-		String html="";
-		String url = "/SportShop/assets/user/images/products/"+imgItem+".jpg";
-		
-		html += "<img src='"+url+"' alt=\"product\" />";
+
+		String html = "";
+		String url = "/SportShop/assets/user/images/products/" + imgItem + ".jpg";
+
+		html += "<img src='" + url + "' alt=\"product\" />";
 		return html;
 	}
 
@@ -121,7 +144,7 @@ public class ProductController {
 		ProductDetailDao productDetailDao = new ProductDetailDao();
 		model.addAttribute("staff", new Staff());
 		ModelAndView mv = new ModelAndView("admin/productDetail");
-		
+
 		mv.addObject("ProductDetail", productDetailDao.getByIdProduct(id));
 		mv.addObject("Product", productDao.getByProductID(id));
 		mv.addObject("MainImage", imgDao.getByIdProduct(id).get(0));
@@ -131,7 +154,7 @@ public class ProductController {
 
 		return mv;
 	}
-	
+
 	@RequestMapping(value = { "/admin/editproduct/{id}" }, method = RequestMethod.GET)
 	public ModelAndView editProduct(Model model, @PathVariable("id") int id) {
 		ProductDao productDao = new ProductDao();
@@ -152,12 +175,13 @@ public class ProductController {
 	@RequestMapping(value = { "/{productType}/{sportType}/{productID:\\d+}",
 			"/{productType}/{sportType}/{productID:\\d+}/**" }, method = RequestMethod.GET)
 	// \d:+ chỉ nhận giá trị int
-	public ModelAndView showProductDetails(Model model, HttpServletRequest request , @PathVariable("productID") int productID) {
+	public ModelAndView showProductDetails(Model model, HttpServletRequest request,
+			@PathVariable("productID") int productID) {
 		ProductDao productDao = new ProductDao();
 		model.addAttribute("customer", new Customer());
 		ModelAndView mv = new ModelAndView("user/product");
 		mv.addObject("productDetails", productDao.getByProductID(productID));
-		
+
 		// Lấy ra các productDetails thuộc về sản phẩm này để hiển thị bên view
 		ArrayList<ProductDetail> listProductDetails = new ArrayList<ProductDetail>();
 		ProductDetailDao productDetailDao = new ProductDetailDao();
@@ -171,6 +195,9 @@ public class ProductController {
 		} else {
 			mv.addObject("prevProduct", productDao.getByProductID(productID - 1));
 		}
+		CategoryDao categoryDao = new CategoryDao();
+		mv.addObject("productTypeList", categoryDao.getAllProductType());
+		mv.addObject("sportTypeList", categoryDao.getAllSportType());
 		return mv;
 	}
 
