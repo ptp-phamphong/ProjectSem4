@@ -14,12 +14,118 @@ public class ProductDao {
 		utilDb.connect();
 	}
 
-	
 	public ArrayList<Product> getAll() {
 
 		ArrayList<Product> list = new ArrayList<Product>();
 
 		String query = "SELECT TOP 25 * FROM Product";
+		Statement stm;
+		try {
+			CategoryDao categoryDao = new CategoryDao();
+			stm = utilDb.getConnection().createStatement();
+			ResultSet rs = stm.executeQuery(query);
+			while (rs.next()) {
+				Product item = new Product();
+				item.setId(rs.getInt("id"));
+				item.setName(rs.getString("name"));
+				item.setDetails(rs.getString("Details"));
+				item.setDiscount(rs.getInt("Discount"));
+
+            	item.setProductType(categoryDao.getProductTypeByID(rs.getInt("ProductTypeId")));
+            	item.setSportType(categoryDao.getSportTypeByID(rs.getInt("SportTypeId")));
+            	
+            	//Thêm mấy tấm ảnh nữa
+            	ImageDao imageDao = new ImageDao();
+            	item.setImages(imageDao.getByIdProduct(rs.getInt("id")));
+//            	ProductDetailDao productDetailDao = new ProductDetailDao();
+//            	item.setProductDetails(productDetailDao.getByIdProduct(rs.getInt("id")));
+            	
+				list.add(item);
+			}
+			return list;
+		} catch (Exception ex) {
+			System.out.print("abc");
+		}
+		return list;
+	}
+	
+	public ArrayList<Product> getAllProduct() {
+
+		ArrayList<Product> list = new ArrayList<Product>();
+
+		String query = "SELECT * FROM Product";
+		Statement stm;
+		try {
+			CategoryDao categoryDao = new CategoryDao();
+			stm = utilDb.getConnection().createStatement();
+			ResultSet rs = stm.executeQuery(query);
+			while (rs.next()) {
+				Product item = new Product();
+				item.setId(rs.getInt("id"));
+				item.setName(rs.getString("name"));
+				item.setDetails(rs.getString("Details"));
+				item.setDiscount(rs.getInt("Discount"));
+
+            	item.setProductType(categoryDao.getProductTypeByID(rs.getInt("ProductTypeId")));
+            	item.setSportType(categoryDao.getSportTypeByID(rs.getInt("SportTypeId")));
+            	
+            	//Thêm mấy tấm ảnh nữa
+            	ImageDao imageDao = new ImageDao();
+            	item.setImages(imageDao.getByIdProduct(rs.getInt("id")));
+//            	ProductDetailDao productDetailDao = new ProductDetailDao();
+//            	item.setProductDetails(productDetailDao.getByIdProduct(rs.getInt("id")));
+            	
+				list.add(item);
+			}
+			return list;
+		} catch (Exception ex) {
+			System.out.print("abc");
+		}
+		return list;
+	}
+	
+	
+	
+	public ArrayList<Product> getByType(int type) {
+
+		ArrayList<Product> list = new ArrayList<Product>();
+
+		String query = "SELECT * FROM Product WHERE ProductTypeId="+type;
+		Statement stm;
+		try {
+			CategoryDao categoryDao = new CategoryDao();
+			stm = utilDb.getConnection().createStatement();
+			ResultSet rs = stm.executeQuery(query);
+			while (rs.next()) {
+				Product item = new Product();
+				item.setId(rs.getInt("id"));
+				item.setName(rs.getString("name"));
+				item.setDetails(rs.getString("Details"));
+				item.setDiscount(rs.getInt("Discount"));
+
+            	item.setProductType(categoryDao.getProductTypeByID(rs.getInt("ProductTypeId")));
+            	item.setSportType(categoryDao.getSportTypeByID(rs.getInt("SportTypeId")));
+            	
+            	//Thêm mấy tấm ảnh nữa
+            	ImageDao imageDao = new ImageDao();
+            	item.setImages(imageDao.getByIdProduct(rs.getInt("id")));
+//            	ProductDetailDao productDetailDao = new ProductDetailDao();
+//            	item.setProductDetails(productDetailDao.getByIdProduct(rs.getInt("id")));
+            	
+				list.add(item);
+			}
+			return list;
+		} catch (Exception ex) {
+			System.out.print("abc");
+		}
+		return list;
+	}
+	
+	public ArrayList<Product> getBySport(int sport) {
+
+		ArrayList<Product> list = new ArrayList<Product>();
+
+		String query = "SELECT * FROM Product WHERE SportTypeId="+sport;
 		Statement stm;
 		try {
 			CategoryDao categoryDao = new CategoryDao();

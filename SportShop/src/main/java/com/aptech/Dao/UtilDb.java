@@ -24,13 +24,14 @@ public class UtilDb {
     }
     
     public void connect(){
-        if(this.connection == null){
-            String dbURL = "jdbc:sqlserver://localhost\\PHAMTHANHPHONG:1433;databaseName=SportShop;user=sa;password=sa";
+        if(connection == null){
+//            String dbURL = "jdbc:sqlserver://localhost\\PHAMTHANHPHONG:1433;databaseName=SportShop;user=sa;password=sa";
 //            String dbURL = "jdbc:sqlserver://localhost;databaseName=SportShop;user=sa;password=123456"; //Huy
+            String dbURL = "jdbc:sqlserver://localhost:1433;databaseName=SportShop;user=sa;password=123";	// Long
             //Ai xài chuỗi kết nối nào thì điền xuống dưới rồi thôi, comment người khác lại
             try{
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                this.connection = DriverManager.getConnection(dbURL);
+                connection = DriverManager.getConnection(dbURL);
             }
             catch(Exception e){
                 System.out.println(e.getMessage());

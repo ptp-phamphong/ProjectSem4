@@ -22,5 +22,4 @@ public class HomeController {
 		ModelAndView mv = new ModelAndView("user/index");
 		return mv;
 	}
-	
 }

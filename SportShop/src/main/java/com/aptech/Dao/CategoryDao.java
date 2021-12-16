@@ -17,6 +17,56 @@ public class CategoryDao {
 		utilDb.connect();
 	}
 	
+	public ArrayList<ProductType> getAllProductType() {
+
+		ArrayList<ProductType> list = new ArrayList<ProductType>();
+
+		String query = "SELECT * FROM ProductType";
+		Statement stm;
+		try {
+			CategoryDao categoryDao = new CategoryDao();
+			stm = utilDb.getConnection().createStatement();
+			ResultSet rs = stm.executeQuery(query);
+			while (rs.next()) {
+				ProductType item = new ProductType();
+				item.setId(rs.getInt("id"));
+				item.setName(rs.getString("Name"));
+				item.setStatus(true);
+            	
+				list.add(item);
+			}
+			return list;
+		} catch (Exception ex) {
+			System.out.print("abc");
+		}
+		return list;
+	}
+	
+	public ArrayList<SportType> getAllSportType() {
+
+		ArrayList<SportType> list = new ArrayList<SportType>();
+
+		String query = "SELECT * FROM SportType";
+		Statement stm;
+		try {
+			CategoryDao categoryDao = new CategoryDao();
+			stm = utilDb.getConnection().createStatement();
+			ResultSet rs = stm.executeQuery(query);
+			while (rs.next()) {
+				SportType item = new SportType();
+				item.setId(rs.getInt("id"));
+				item.setName(rs.getString("Name"));
+				item.setStatus(true);
+            	
+				list.add(item);
+			}
+			return list;
+		} catch (Exception ex) {
+			System.out.print("abc");
+		}
+		return list;
+	}
+	
 	public ProductType getProductTypeByID(int id) {
 		String query = "SELECT * FROM ProductType WHERE Id =" + id;
 		Statement stm;

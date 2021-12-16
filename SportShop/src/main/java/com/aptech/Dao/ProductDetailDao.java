@@ -38,7 +38,6 @@ public class ProductDetailDao {
 				item.setSize(null);
 				
 				
-				
 				list.add(item);
 			}
 			
