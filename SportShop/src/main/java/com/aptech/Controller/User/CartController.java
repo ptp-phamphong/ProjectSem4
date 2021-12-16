@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -204,10 +205,9 @@ public class CartController {
 		}
 		
 		//Hàm đưa người dùng ra lịch sử mua hàng
-		@RequestMapping(value = { "/ShoppingHistory" }, method = RequestMethod.GET)
-		public ModelAndView ShoppingHistory(Model model, HttpServletRequest request) {
-			
-			
+		@RequestMapping(value = { "/account/{accountID}/ShoppingHistory" }, method = RequestMethod.GET)
+		public ModelAndView ShoppingHistory(Model model, HttpServletRequest request, @PathVariable int accountID) {
+
 			ModelAndView mv = new ModelAndView("/user/ShoppingHistory");
 			return mv;
 		}
