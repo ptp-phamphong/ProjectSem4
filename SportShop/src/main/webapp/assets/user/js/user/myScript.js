@@ -165,7 +165,7 @@ function ajaxTest() {
 //Nút thêm vào giỏ hàng
 function addToCart(idProduct) {
 	$.ajax({
-		url: "ajax/addItemToCart",
+		url: "/SportShop/ajax/addItemToCart",
 		type: "POST",
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		data: {
@@ -213,7 +213,7 @@ function addToCartInDetail() {
 //Tăng số lượng trong giỏ hàng
 function increase(id) {
 	$.ajax({
-		url: "ajax/increseQuantity",
+		url: "/SportShop/ajax/increseQuantity",
 		type: "POST",
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		data: { "idProductDetail": JSON.parse(JSON.stringify(id)) },
@@ -231,7 +231,7 @@ function increase(id) {
 //Giảm số lượng trong giỏ hàng
 function decrease(id) {
 	$.ajax({
-		url: "ajax/decreaseQuantity",
+		url: "/SportShop/ajax/decreaseQuantity",
 		type: "POST",
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		data: { "idProductDetail": JSON.parse(JSON.stringify(id)) },
@@ -249,7 +249,7 @@ function decrease(id) {
 //Xóa 1 phần tử trong giỏ hàng
 function removeItemCart(id) {
 	$.ajax({
-		url: "ajax/removeItemCart",
+		url: "/SportShop/ajax/removeItemCart",
 		type: "POST",
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		data: { "idProductDetail": JSON.parse(JSON.stringify(id)) },

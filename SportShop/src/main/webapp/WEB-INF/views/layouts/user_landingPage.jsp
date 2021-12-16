@@ -72,6 +72,7 @@
 
 
 <!-- jQuery Scripts  -->
+<script src='<c:url value = "/assets/user/js/user/myScript.js"></c:url>'></script>
 <script src="./assets/user/js/vendor/jquery/jquery.js"></script>
 <script src="./assets/user/js/vendor/bootstrap/bootstrap.min.js"></script>
 <script src="./assets/user/js/vendor/swiper/swiper.min.js"></script>

@@ -40,7 +40,7 @@
 								<div class="photo">
 								
 									<a href='<c:url value="/category/product"></c:url>'> <img
-										src='<c:url value = "/assets/user/images/products/${item.getProductDetail().getProduct().getImages().get(0).getName()}.jpg"></c:url>'
+										src='<c:url value = "/assets/user/images/products/${item.getProductDetail().getProduct().getImages()[0].getName()}.jpg"></c:url>'
 										alt="">
 									</a>
 								</div>
@@ -130,6 +130,7 @@
 		</main>
 	</c:otherwise>
 </c:choose>
+
 <%-- </c:when>
 	<c:otherwise>
 		<main class="page-main">

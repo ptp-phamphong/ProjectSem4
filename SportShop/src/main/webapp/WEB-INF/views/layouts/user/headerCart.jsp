@@ -35,7 +35,7 @@
 												class="product-image-container"> <span
 													class="product-image-wrapper"> <img
 														class="product-image-photo"
-														src='<c:url value = "/assets/user/images/products/${item.getProductDetail().getProduct().getImages().get(0).getName()}.jpg"></c:url>'
+														src='<c:url value = "/assets/user/images/products/${item.getProductDetail().getProduct().getImages()[0].getName()}.jpg"></c:url>'
 														alt="Long sleeve overall">
 												</span>
 											</span>
