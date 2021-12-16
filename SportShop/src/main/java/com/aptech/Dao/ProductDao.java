@@ -320,4 +320,46 @@ public class ProductDao {
 		}
 		return null;
 	}
+	
+	public boolean add(Product pro){
+        String query="insert into Product(ProductTypeId, SportTypeId, Name, Details, Discount, Status) values(?,?,?,?,?,?)";
+        try{
+            PreparedStatement pstm=utilDb.getConnection().prepareStatement(query);
+            pstm.setInt(1, pro.getProductType().getId());
+            pstm.setInt(2, pro.getSportType().getId());       
+            pstm.setString(3, pro.getName());         
+            pstm.setString(4, pro.getDetails());    
+            pstm.setFloat(5, pro.getDiscount());    
+            pstm.setBoolean(6, pro.getStatus());   
+            int result = pstm.executeUpdate();
+            if(result!=0){
+                return true;
+            }
+        }
+        catch (SQLException ex) {
+        	System.out.print("abc");
+        }
+        return false;
+    }
+	
+	public boolean edit(int ProductTypeId, int SportTypeId, String name, String details, float discount, int id){
+        String sql="update Product set ProductTypeId=?, SportTypeId=?, Name=?, Details=?, Discount=? where Id=?";
+        try{
+            PreparedStatement pstm=utilDb.getConnection().prepareStatement(sql);
+            pstm.setInt(1, ProductTypeId);
+            pstm.setInt(2, SportTypeId);
+            pstm.setString(3, name);
+            pstm.setString(4, details);
+            pstm.setFloat(5, discount);
+            pstm.setInt(6, id);
+            int rs = pstm.executeUpdate();
+            if(rs!=0){
+                return true;         
+            }  
+        }
+        catch(SQLException ex){
+        	System.out.print("abc");
+        }
+        return false;  
+    }
 }

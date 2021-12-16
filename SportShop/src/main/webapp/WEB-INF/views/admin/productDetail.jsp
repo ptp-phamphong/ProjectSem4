@@ -43,13 +43,15 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<c:forEach items="${ProductDetail}" var="item" varStatus="index">
+							<c:forEach items="${ProductDetail}" var="item" varStatus="index">
+								<tr>
+
 									<td>${item.getSize().getName() }</td>
-									<td>${item.getPrice() } VND</td>
+									<td>${item.getPrice() }VND</td>
 									<td>${item.getInventory() }</td>
-								</c:forEach>
-							</tr>
+
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 					<hr>
