@@ -143,3 +143,141 @@ function changePage(pageTo) {
 window.onload = function() {
 	changePage(1);
 };
+
+
+function ajaxTest() {
+	$.ajax({
+		type: "GET",
+		url: "/SportShop/ajax/cartModal",
+		success: function(data) {
+			// we have the response
+
+			console.log(data);
+			$('#test').html(data);
+		},
+
+		error: function(e) {
+			alert('Error: ' + e);
+		}
+	});
+}
+
+//Nút thêm vào giỏ hàng
+function addToCart(idProduct) {
+	$.ajax({
+		url: "/SportShop/ajax/addItemToCart",
+		type: "POST",
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		data: {
+			"idProduct": JSON.parse(JSON.stringify(idProduct)),
+			"quantity": JSON.parse(JSON.stringify(1)),
+			"inDetails": false,
+		},
+		success: function(data) {
+			console.log(data);
+			$('#headerCart').html(data);
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) {
+			alert(XMLHttpRequest + '\nSTATUS: ' + textStatus + '\nERROR THROWN: '
+				+ errorThrown);
+		}
+	});
+	return false;
+}
+
+//Thêm vào giỏ hàng trong chi tiết sản phẩm
+function addToCartInDetail() {
+	$.ajax({
+		url: "/SportShop/ajax/addItemToCartInDetail",
+		type: "GET",
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		data: {
+			"idProduct": JSON.parse(JSON.stringify(document.getElementById("listProductDetails").value)),
+			"quantity": JSON.parse(JSON.stringify(document.getElementById("quantity").value)),
+			"inDetails": false,
+		},
+		success: function(data) {
+			console.log(data);
+			
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) {
+			alert(XMLHttpRequest + '\nSTATUS: ' + textStatus + '\nERROR THROWN: '
+				+ errorThrown);
+		}
+	});
+	return false;
+}
+
+
+
+//Tăng số lượng trong giỏ hàng
+function increase(id) {
+	$.ajax({
+		url: "/SportShop/ajax/increseQuantity",
+		type: "POST",
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		data: { "idProductDetail": JSON.parse(JSON.stringify(id)) },
+		success: function(data) {
+			$('#mainCart').html(data);
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) {
+			alert(XMLHttpRequest + '\nSTATUS: ' + textStatus + '\nERROR THROWN: '
+				+ errorThrown);
+		}
+	});
+	return false;
+}
+
+//Giảm số lượng trong giỏ hàng
+function decrease(id) {
+	$.ajax({
+		url: "/SportShop/ajax/decreaseQuantity",
+		type: "POST",
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		data: { "idProductDetail": JSON.parse(JSON.stringify(id)) },
+		success: function(data) {
+			$('#mainCart').html(data);
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) {
+			alert(XMLHttpRequest + '\nSTATUS: ' + textStatus + '\nERROR THROWN: '
+				+ errorThrown);
+		}
+	});
+	return false;
+}
+
+//Xóa 1 phần tử trong giỏ hàng
+function removeItemCart(id) {
+	$.ajax({
+		url: "/SportShop/ajax/removeItemCart",
+		type: "POST",
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		data: { "idProductDetail": JSON.parse(JSON.stringify(id)) },
+		success: function(data) {
+			$('#mainCart').html(data);
+			$.ajax({
+				url: "ajax/showHeaderCart",
+				type: "POST",
+				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+				success: function(data) {
+					$('#headerCart').html(data);
+				},
+				error: function(XMLHttpRequest, textStatus, errorThrown) {
+					alert(XMLHttpRequest + '\nSTATUS: ' + textStatus + '\nERROR THROWN: '
+						+ errorThrown);
+				}
+			});
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) {
+			alert(XMLHttpRequest + '\nSTATUS: ' + textStatus + '\nERROR THROWN: '
+				+ errorThrown);
+		}
+	});
+	return false;
+}
+
+
+
+
+
+

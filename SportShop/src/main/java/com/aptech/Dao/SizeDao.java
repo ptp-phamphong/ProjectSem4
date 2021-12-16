@@ -5,8 +5,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.aptech.Model.*;
+import com.aptech.Model.Product;
+import com.aptech.Model.Size;
 
 public class SizeDao {
+
 	private UtilDb utilDb;
 
 	public SizeDao() {
@@ -33,21 +36,38 @@ public class SizeDao {
 		return list;
 	}
 	
-	public ArrayList<Size> getById(int id) {
-		ArrayList<Size> list = new ArrayList<Size>();
-		String sql = "Select * from Size where Id="+id;
-		Statement stm;
+	public Size getById(int id) {
+
+		String sql = "SELECT * FROM Size WHERE Id = " + id;
 		try {
-			stm = utilDb.getConnection().createStatement();
+			Statement stm = utilDb.getConnection().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			if (rs.next()) {
+				Size item = new Size();
+				item.setId(rs.getInt("id"));
+				item.setName(rs.getString("name"));
+				return item;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
+
+	public ArrayList<Size> getByIdProduct(int ProductId) {
+		ArrayList<Size> list = new ArrayList<Size>();
+		String sql = "SELECT SizeId FROM ProductDetails WHERE ProductId = " + ProductId;
+		try {
+			Statement stm = utilDb.getConnection().createStatement();
 			ResultSet rs = stm.executeQuery(sql);
 			while (rs.next()) {
 				Size item = new Size();
-				item.setId(rs.getInt("Id"));
-				item.setName(rs.getString("Name"));
+				SizeDao sizeDao = new SizeDao();
+				item = sizeDao.getById(rs.getInt("SizeId"));
 				list.add(item);
 			}
-		} catch (Exception ex) {
-			System.out.print(ex.getMessage());
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 		return list;
 	}

@@ -1,5 +1,6 @@
 package com.aptech.Controller.User;
 
+import java.net.http.HttpRequest;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,10 +23,13 @@ import com.aptech.Dao.CategoryDao;
 import com.aptech.Dao.ImageDao;
 import com.aptech.Dao.ProductDao;
 import com.aptech.Dao.ProductDetailDao;
+import com.aptech.Dao.SizeDao;
 import com.aptech.Model.Cart;
 import com.aptech.Model.Customer;
 import com.aptech.Model.Product;
 import com.aptech.Model.Staff;
+import com.aptech.Model.ProductDetail;
+import com.aptech.Model.Size;
 import com.aptech.MyClass.SendingEmail;
 
 @Controller
@@ -146,28 +152,25 @@ public class ProductController {
 	@RequestMapping(value = { "/{productType}/{sportType}/{productID:\\d+}",
 			"/{productType}/{sportType}/{productID:\\d+}/**" }, method = RequestMethod.GET)
 	// \d:+ chỉ nhận giá trị int
-	public ModelAndView showProductDetails(Model model, @PathVariable("productID") int productID) {
+	public ModelAndView showProductDetails(Model model, HttpServletRequest request , @PathVariable("productID") int productID) {
 		ProductDao productDao = new ProductDao();
 		model.addAttribute("customer", new Customer());
 		ModelAndView mv = new ModelAndView("user/product");
 		mv.addObject("productDetails", productDao.getByProductID(productID));
+		
+		// Lấy ra các productDetails thuộc về sản phẩm này để hiển thị bên view
+		ArrayList<ProductDetail> listProductDetails = new ArrayList<ProductDetail>();
+		ProductDetailDao productDetailDao = new ProductDetailDao();
+		listProductDetails = productDetailDao.getByIdProduct(productID);
+		mv.addObject("listProductDetails", listProductDetails);
+
+		mv.addObject("item", productDao.getByProductID(productID));
 		mv.addObject("nextProduct", productDao.getByProductID(productID + 1));
 		if (productID == 1) {
 			mv.addObject("prevProduct", productDao.getLastProduct());
 		} else {
 			mv.addObject("prevProduct", productDao.getByProductID(productID - 1));
 		}
-		return mv;
-	}
-
-	@RequestMapping(value = { "/cart" }, method = RequestMethod.GET)
-	public ModelAndView showCart(Model model) {
-		model.addAttribute("customer", new Customer());
-		ModelAndView mv = new ModelAndView("user/cart");
-		ArrayList<Cart> cartList = new ArrayList();// TEST sau thay bang session
-		cartList.add(new Cart(1, 2, 10));
-		cartList.add(new Cart(2, 1, 15));
-		mv.addObject("cartList", cartList);
 		return mv;
 	}
 

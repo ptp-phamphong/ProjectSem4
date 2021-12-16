@@ -20,6 +20,11 @@ public class HomeController {
 	public ModelAndView showViewIndex(Model model, HttpServletRequest request) {
 		model.addAttribute("customer", new Customer());
 		ModelAndView mv = new ModelAndView("user/index");
+		ProductDao productDao = new ProductDao();
+		model.addAttribute("customer", new Customer());
+		mv.addObject("index_listProduct", productDao.getIndexListProduct());
+		mv.addObject("index_featuredProduct", productDao.getIndexFeaturedProduct());
+		mv.addObject("index_newestProduct", productDao.getNewestProduct());
 		return mv;
 	}
 }

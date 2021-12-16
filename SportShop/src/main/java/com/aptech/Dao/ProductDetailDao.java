@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import com.aptech.Model.Image;
 import com.aptech.Model.ProductDetail;
+import com.aptech.Model.Size;
 
 public class ProductDetailDao {
 
@@ -35,7 +36,8 @@ public class ProductDetailDao {
 				//Lấy khóa ngoại
 				ProductDao productDao = new ProductDao();
 				item.setProduct(productDao.getByProductID(rs.getInt("ProductId")));
-				item.setSize(null);
+				SizeDao sizeDao = new SizeDao();
+				item.setSize(sizeDao.getById(rs.getInt("SizeId")));
 				
 				
 				list.add(item);
@@ -47,4 +49,33 @@ public class ProductDetailDao {
 		
 		return list;
 	}
+	
+	public ProductDetail getById(int id) {
+		String query = "SELECT * FROM ProductDetails WHERE Id = " + id;
+		Statement stm;
+		try {
+			stm = utilDb.getConnection().createStatement();
+			ResultSet rs = stm.executeQuery(query);
+			if (rs.next()) {
+				ProductDetail item = new ProductDetail();
+				item.setId(rs.getInt("id"));
+				item.setInventory(rs.getInt(("Inventory")));
+				item.setPrice(rs.getInt(("Price")));
+				
+				//Lấy khóa ngoại
+				ProductDao productDao = new ProductDao();
+				item.setProduct(productDao.getByProductID(rs.getInt("ProductId")));
+				SizeDao sizeDao = new SizeDao();
+				item.setSize(sizeDao.getById(rs.getInt("SizeId")));
+				
+				return item;
+			}
+			
+		} catch (Exception ex) {
+			System.out.print(ex.getMessage());
+		}
+		
+		return null;
+	}
+	
 }

@@ -5,48 +5,47 @@ import java.sql.DriverManager;
 
 public class UtilDb {
 
+	private Connection connection;
 
-    private Connection connection;
+	public UtilDb(Connection conection) {
+		this.connection = conection;
+	}
 
-    public UtilDb(Connection conection) {
-        this.connection = conection;
-    }
+	UtilDb() {
+	}
 
-    UtilDb() {
-    }
-    
-    public Connection getConnection(){
-        return connection;
-    }
+	public Connection getConnection() {
+		return connection;
+	}
 
-    public void setConnection(Connection connection) {
-        this.connection = connection;
-    }
-    
-    public void connect(){
-        if(connection == null){
+	public void setConnection(Connection connection) {
+		this.connection = connection;
+	}
+
+	public void connect() {
+		if (connection == null) {
 //            String dbURL = "jdbc:sqlserver://localhost\\PHAMTHANHPHONG:1433;databaseName=SportShop;user=sa;password=sa";
 //            String dbURL = "jdbc:sqlserver://localhost;databaseName=SportShop;user=sa;password=123456"; //Huy
-            String dbURL = "jdbc:sqlserver://localhost:1433;databaseName=SportShop;user=sa;password=123";	// Long
-            //Ai xài chuỗi kết nối nào thì điền xuống dưới rồi thôi, comment người khác lại
-            try{
-                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                connection = DriverManager.getConnection(dbURL);
-            }
-            catch(Exception e){
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-    
-    public void disConnect(){
-        if(connection!=null){
-            try{
-                connection.close();
-            }catch(Exception e){
-                System.out.println(e.getMessage());
-            }
-        }
-    }
+			String dbURL = "jdbc:sqlserver://localhost:1433;databaseName=SportShop;user=sa;password=123"; // Long
+			if (this.connection == null) {
+				try {
+					Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+					connection = DriverManager.getConnection(dbURL);
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
+			}
+		}
+	}
+
+	public void disConnect() {
+		if (connection != null) {
+			try {
+				connection.close();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+		}
+	}
 
 }
