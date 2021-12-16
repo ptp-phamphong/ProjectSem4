@@ -148,7 +148,7 @@ public class CartController {
 		
 		//Trả về header Cart để in ra.
 		@ResponseBody
-		@RequestMapping(value = { "/ajax/showHeaderCart" }, method = RequestMethod.POST)
+		@RequestMapping(value = { "/ajax/showHeaderCart" }, method = RequestMethod.GET)
 		public ModelAndView showHeaderCart(HttpServletRequest request) {
 			ModelAndView mv = new ModelAndView("/layouts/user/headerCart");
 			return mv;

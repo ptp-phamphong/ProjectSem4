@@ -260,19 +260,9 @@ function removeItemCart(id) {
 		data: { "idProductDetail": JSON.parse(JSON.stringify(id)) },
 		success: function(data) {
 			$('#mainCart').html(data);
-			$.ajax({
-				url: "ajax/showHeaderCart",
-				type: "POST",
-				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-				success: function(data) {
-					$('#headerCart').html(data);
-					jQuery("#productstack").load("/SportShop/ajax/productStack");
-				},
-				error: function(XMLHttpRequest, textStatus, errorThrown) {
-					alert(XMLHttpRequest + '\nSTATUS: ' + textStatus + '\nERROR THROWN: '
-						+ errorThrown);
-				}
-			});
+			jQuery("#headerCart").load("/SportShop/ajax/showHeaderCart");
+			jQuery("#productstack").load("/SportShop/ajax/productStack");
+				
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
 			alert(XMLHttpRequest + '\nSTATUS: ' + textStatus + '\nERROR THROWN: '
