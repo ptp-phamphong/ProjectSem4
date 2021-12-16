@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.aptech.Dao.CategoryDao;
 import com.aptech.Dao.InvoiceDao;
 import com.aptech.Dao.InvoiceDetailDao;
 import com.aptech.Dao.ProductDetailDao;
@@ -36,6 +37,9 @@ public class CartController {
 			model.addAttribute("customer", new Customer());
 
 			ModelAndView mv = new ModelAndView("user/cart");
+			CategoryDao categoryDao = new CategoryDao();
+			mv.addObject("productTypeList", categoryDao.getAllProductType());
+			mv.addObject("sportTypeList", categoryDao.getAllSportType());
 			return mv;
 		}
 
@@ -64,7 +68,7 @@ public class CartController {
 		// Thêm sản phẩm vào giỏ hàng ở chi tiết sản phẩm
 		@ResponseBody
 		@RequestMapping(value = { "/ajax/addItemToCartInDetail" }, method = RequestMethod.GET)
-		public String addItemToCartInDetail(@ModelAttribute Customer customer, BindingResult bindingResult,HttpServletRequest request) {
+		public ModelAndView addItemToCartInDetail(@ModelAttribute Customer customer, BindingResult bindingResult,HttpServletRequest request) {
 			ProductDetailDao productDetailDao = new ProductDetailDao();
 			ProductDetail productToCart = new ProductDetail();
 			int quantity = Integer.parseInt(request.getParameter("quantity").toString());
@@ -72,9 +76,11 @@ public class CartController {
 
 			addItemToCartHandelling(productToCart, quantity, request);
 
-			return "done";
+			ModelAndView mv = new ModelAndView("/layouts/user/headerCart");
+			return mv;
 		}
 
+		
 		
 		
 		// Hàm Ajax tăng số lượng trong giỏ hàng
@@ -139,14 +145,18 @@ public class CartController {
 			ModelAndView mv = new ModelAndView("user/cartDetail");
 			return mv;
 		}
-
 		
 		//Trả về header Cart để in ra.
 		@ResponseBody
 		@RequestMapping(value = { "/ajax/showHeaderCart" }, method = RequestMethod.POST)
 		public ModelAndView showHeaderCart(HttpServletRequest request) {
-			
 			ModelAndView mv = new ModelAndView("/layouts/user/headerCart");
+			return mv;
+		}
+		//Trả về productStack để in ra.
+		@RequestMapping(value = { "/ajax/productStack" }, method = RequestMethod.GET)
+		public ModelAndView productStack() {
+			ModelAndView mv = new ModelAndView("/user/productStack");
 			return mv;
 		}
 		

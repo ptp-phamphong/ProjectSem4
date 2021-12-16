@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.aptech.Dao.CategoryDao;
 import com.aptech.Dao.CustomerDao;
 import com.aptech.Model.Customer;
 import com.aptech.MyClass.HashPassword;
@@ -32,6 +33,9 @@ public class CustomerController {
 	public ModelAndView showViewRegister(Model model) {
 		model.addAttribute("customer", new Customer());
 		ModelAndView mv = new ModelAndView("user/register");
+		CategoryDao categoryDao = new CategoryDao();
+		mv.addObject("productTypeList", categoryDao.getAllProductType());
+		mv.addObject("sportTypeList", categoryDao.getAllSportType());
 		return mv;
 	}
 	
@@ -81,6 +85,9 @@ public class CustomerController {
 	public ModelAndView showViewLogin(Model model) {
 		model.addAttribute("customer", new Customer());
 		ModelAndView mv = new ModelAndView("user/login");
+		CategoryDao categoryDao = new CategoryDao();
+		mv.addObject("productTypeList", categoryDao.getAllProductType());
+		mv.addObject("sportTypeList", categoryDao.getAllSportType());
 		return mv;
 	}
 	
@@ -128,6 +135,9 @@ public class CustomerController {
 		CustomerDao customerDAO = new CustomerDao();	
 		ModelAndView mv = new ModelAndView("user/account");
 		mv.addObject("customer", customerDAO.getAccount(id));
+		CategoryDao categoryDao = new CategoryDao();
+		mv.addObject("productTypeList", categoryDao.getAllProductType());
+		mv.addObject("sportTypeList", categoryDao.getAllSportType());
 		return mv;
 	}
 	

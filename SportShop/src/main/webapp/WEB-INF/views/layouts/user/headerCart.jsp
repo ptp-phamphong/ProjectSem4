@@ -42,7 +42,7 @@
 											</a>
 											<div class="product-item-details">
 												<div class="product-item-name">
-													<a href="#">${item.getProductDetail().getProduct().getName() }</a>
+													<a href="#"><span style="font-size: 75%">${item.getProductDetail().getProduct().getName() }</span></a>
 												</div>
 												<div class="product-item-qty">
 													<label class="label">Qty</label> <input
@@ -63,7 +63,7 @@
 													</div>
 													<div class="product actions">
 														<div class="secondary">
-															<a href="#" class="action delete" title="Remove item">
+															<a href="#" onclick="return removeItemCart(${item.getProductDetail().getId()});" class="action delete" title="Remove item">
 																<span>Delete</span>
 															</a>
 														</div>
@@ -91,17 +91,12 @@
 						<div class="amount price-container">
 							<span class="price-wrapper"> <span class="price">$<fmt:formatNumber type="number" value="${subTotal }" /></span>
 							</span>
-						</div>
+						</div>	
 					</div>
 					<div class="actions">
 						<div class="secondary">
-							<a href="#" class="btn btn-alt"> <i class="icon icon-cart"></i>
+							<a href='<c:url value = "/cart" />' class="btn btn-alt"> <i class="icon icon-cart"></i>
 								<span>View and edit cart</span>
-							</a>
-						</div>
-						<div class="primary">
-							<a class="btn" href="#"> <i class="icon icon-external-link"></i>
-								<span>Go to Checkout</span>
 							</a>
 						</div>
 					</div>

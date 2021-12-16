@@ -5,7 +5,7 @@ var numPerPage = 9;
 
 
 //Lấy ra số lượng sản phẩm trong db 
-var numberProduct = document.getElementById("numberProduct").value
+var numberProduct = document.getElementById("numberProduct").value;
 
 //Lấy ra tổng số trang
 var numPage = 0;
@@ -176,6 +176,8 @@ function addToCart(idProduct) {
 		success: function(data) {
 			console.log(data);
 			$('#headerCart').html(data);
+			jQuery("#productstack").load("/SportShop/ajax/productStack");
+
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
 			alert(XMLHttpRequest + '\nSTATUS: ' + textStatus + '\nERROR THROWN: '
@@ -198,7 +200,8 @@ function addToCartInDetail() {
 		},
 		success: function(data) {
 			console.log(data);
-			
+			$('#headerCart').html(data);
+			jQuery("#productstack").load("/SportShop/ajax/productStack");
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
 			alert(XMLHttpRequest + '\nSTATUS: ' + textStatus + '\nERROR THROWN: '
@@ -219,6 +222,7 @@ function increase(id) {
 		data: { "idProductDetail": JSON.parse(JSON.stringify(id)) },
 		success: function(data) {
 			$('#mainCart').html(data);
+			jQuery("#productstack").load("/SportShop/ajax/productStack");
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
 			alert(XMLHttpRequest + '\nSTATUS: ' + textStatus + '\nERROR THROWN: '
@@ -237,6 +241,7 @@ function decrease(id) {
 		data: { "idProductDetail": JSON.parse(JSON.stringify(id)) },
 		success: function(data) {
 			$('#mainCart').html(data);
+			jQuery("#productstack").load("/SportShop/ajax/productStack");
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
 			alert(XMLHttpRequest + '\nSTATUS: ' + textStatus + '\nERROR THROWN: '
@@ -261,6 +266,7 @@ function removeItemCart(id) {
 				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 				success: function(data) {
 					$('#headerCart').html(data);
+					jQuery("#productstack").load("/SportShop/ajax/productStack");
 				},
 				error: function(XMLHttpRequest, textStatus, errorThrown) {
 					alert(XMLHttpRequest + '\nSTATUS: ' + textStatus + '\nERROR THROWN: '

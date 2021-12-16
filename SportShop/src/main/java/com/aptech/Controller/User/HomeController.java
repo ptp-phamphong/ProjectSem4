@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.aptech.Dao.CategoryDao;
 import com.aptech.Dao.ProductDao;
 import com.aptech.Model.Customer;
 
@@ -25,6 +26,9 @@ public class HomeController {
 		mv.addObject("index_listProduct", productDao.getIndexListProduct());
 		mv.addObject("index_featuredProduct", productDao.getIndexFeaturedProduct());
 		mv.addObject("index_newestProduct", productDao.getNewestProduct());
+		CategoryDao categoryDao = new CategoryDao();
+		mv.addObject("productTypeList", categoryDao.getAllProductType());
+		mv.addObject("sportTypeList", categoryDao.getAllSportType());
 		return mv;
 	}
 }

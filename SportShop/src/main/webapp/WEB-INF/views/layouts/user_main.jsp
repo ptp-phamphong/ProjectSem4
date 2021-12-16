@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 
 
@@ -52,7 +52,10 @@
 	<div id="loader-wrapper">
 		<div class="cube-wrapper">
 			<div class="cube-folding">
-				<span class="leaf1"></span> <span class="leaf2"></span> <span class="leaf3"></span> <span class="leaf4"></span>
+				<span class="leaf1"></span>
+				<span class="leaf2"></span>
+				<span class="leaf3"></span>
+				<span class="leaf4"></span>
 			</div>
 		</div>
 	</div>
@@ -92,74 +95,17 @@
 		<!-- Page Content -->
 	</div>
 
-
 	<!-- ProductStack -->
+
 	<div class="productStack disable hide_on_scroll">
 		<a href="#" class="toggleStack">
 			<i class="icon icon-cart"></i>
-			(2) items
+			(${sessionScope.curCart.size() }) items
 		</a>
-		<div class="productstack-content">
-			<div class="products-list-wrapper">
-				<ul class="products-list">
-					<li>
-						<a href="product.html" title="Product Name Long Name">
-							<img class="product-image-photo" src='<c:url value = "/assets/user/images/products/product-10.jpg"></c:url>' alt="">
-						</a>
-						<span class="item-qty">3</span>
-						<div class="actions">
-							<a href="#" class="action edit" title="Edit item">
-								<i class="icon icon-pencil"></i>
-							</a>
-							<a class="action delete" href="#" title="Delete item">
-								<i class="icon icon-trash-alt"></i>
-							</a>
-							<div class="edit-qty">
-								<input type="number" value="3">
-								<button type="button" class="btn">Apply</button>
-							</div>
-						</div>
-					</li>
-
-					<li>
-						<a href="product.html" title="Product Name Long Name">
-							<img class="product-image-photo" src='<c:url value = "/assets/user/images/products/product-14.jpg"></c:url>' alt="">
-						</a>
-						<span class="item-qty">3</span>
-						<div class="actions">
-							<a class="action edit" href="#" title="Edit item">
-								<i class="icon icon-pencil"></i>
-							</a>
-							<a class="action delete" href="#" title="Delete item">
-								<i class="icon icon-trash-alt"></i>
-							</a>
-							<div class="edit-qty">
-								<input type="number" value="3">
-								<button type="button" class="btn">Apply</button>
-							</div>
-						</div>
-					</li>
-				</ul>
-			</div>
-			<div class="action-cart">
-				<button type="button" class="btn" title="Checkout">
-					<span>Checkout</span>
-				</button>
-				<button type="button" class="btn" title="Go to Cart">
-					<span>Go to Cart</span>
-				</button>
-			</div>
-			<div class="total-cart">
-				<div class="items-total">
-					Items <span class="count">6</span>
-				</div>
-				<div class="subtotal">
-					Subtotal <span class="price">2.150</span>
-				</div>
-			</div>
+		<div id="productstack" class="productstack-content">
+			<%@include file="/WEB-INF/views/user/productStack.jsp"%>
 		</div>
 	</div>
-	<!-- /ProductStack -->
 
 	<!-- Modal Quick View -->
 	<div class="modal quick-view zoom" id="quickView">
