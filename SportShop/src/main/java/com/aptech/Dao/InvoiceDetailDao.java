@@ -2,9 +2,13 @@ package com.aptech.Dao;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 import com.aptech.Model.Invoice;
 import com.aptech.Model.InvoiceDetail;
+import com.aptech.Model.ProductDetail;
 
 public class InvoiceDetailDao {
 
@@ -33,4 +37,34 @@ public class InvoiceDetailDao {
 		}
 		return false;
 	}
+	
+	public ArrayList<InvoiceDetail> getByInvoiceId(int id){
+		
+		ArrayList<InvoiceDetail> list = new ArrayList<InvoiceDetail>();
+		String query = "SELECT * FROM InvoiceDetails WHERE InvoiceId = " + id;
+		Statement stm;
+		try {
+			stm = utilDb.getConnection().createStatement();
+			ResultSet rs = stm.executeQuery(query);
+			while (rs.next()) {
+				InvoiceDetail item = new InvoiceDetail();
+				item.setId(rs.getInt("id"));
+				item.setQuantity(rs.getInt("quantity"));
+				item.setUnit(rs.getInt("unit"));
+				
+				ProductDetailDao productDetailDao = new ProductDetailDao();
+				item.setProductDetail(productDetailDao.getById(rs.getInt("ProductDetailsID")));
+				
+				
+				list.add(item);
+			}
+			
+		} catch (Exception ex) {
+			System.out.print(ex.getMessage());
+		}
+		
+		
+		return list;
+	}
+	
 }

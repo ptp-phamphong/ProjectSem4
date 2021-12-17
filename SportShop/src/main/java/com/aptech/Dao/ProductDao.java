@@ -19,7 +19,7 @@ public class ProductDao {
 
 		ArrayList<Product> list = new ArrayList<Product>();
 
-		String query = "SELECT * FROM Product, ProductDetails WHERE ProductDetails.ProductId = Product.Id";
+		String query = "SELECT TOP 25 * FROM Product, ProductDetails WHERE ProductDetails.ProductId = Product.Id";
 		Statement stm;
 		try {
 			CategoryDao categoryDao = new CategoryDao();

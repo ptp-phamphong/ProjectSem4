@@ -24,8 +24,8 @@ public class UtilDb {
 
 	public void connect() {
 		if (connection == null) {
-//            String dbURL = "jdbc:sqlserver://localhost\\PHAMTHANHPHONG:1433;databaseName=SportShop;user=sa;password=sa";
-            String dbURL = "jdbc:sqlserver://localhost;databaseName=SportShop;user=sa;password=123456"; //Huy
+            String dbURL = "jdbc:sqlserver://localhost\\PHAMTHANHPHONG:1433;databaseName=SportShop;user=sa;password=sa";
+//            String dbURL = "jdbc:sqlserver://localhost;databaseName=SportShop;user=sa;password=123456"; //Huy
 //			String dbURL = "jdbc:sqlserver://localhost:1433;databaseName=SportShop;user=sa;password=123"; // Long
 			if (this.connection == null) {
 				try {
