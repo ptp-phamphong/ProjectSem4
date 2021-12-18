@@ -1,5 +1,6 @@
 package com.aptech.Controller.User;
 
+import java.io.IOException;
 import java.net.http.HttpRequest;
 import java.util.ArrayList;
 import java.util.Random;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -170,6 +172,34 @@ public class ProductController {
 		mv.addObject("SportTypeList", cateDao.getAllSportType());
 
 		return mv;
+	}
+	
+	@RequestMapping(value = { "/admin/addProduct" }, method = RequestMethod.GET)
+	public ModelAndView addProduct(Model model) {
+		ProductDao productDao = new ProductDao();
+		CategoryDao cateDao = new CategoryDao();
+		ImageDao imgDao = new ImageDao();
+		model.addAttribute("staff", new Staff());
+		ModelAndView mv = new ModelAndView("admin/addProduct");
+
+		mv.addObject("ProductTypeList", cateDao.getAllProductType());
+		mv.addObject("SportTypeList", cateDao.getAllSportType());
+
+		return mv;
+	}
+	
+	@PostMapping("addNewProduct")
+	public void addProduct(@RequestParam String name, int productType, int sportType, String details, int discount, String image1, String image2, String image3) {
+		ProductDao proDao = new ProductDao();
+		CategoryDao cateDao = new CategoryDao();
+		Product pro = new Product();
+		
+		pro.setName(name);
+		pro.setProductType(cateDao.getProductTypeByID(productType));
+		pro.setSportType(cateDao.getSportTypeByID(sportType));
+		pro.setDetails(details);
+		pro.setDiscount(discount);
+		proDao.add(pro);
 	}
 
 	@RequestMapping(value = { "/{productType}/{sportType}/{productID:\\d+}",
