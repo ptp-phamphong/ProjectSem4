@@ -1,13 +1,22 @@
 package com.aptech.Controller.User;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.http.HttpRequest;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Random;
+import java.util.Set;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +29,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.aptech.Dao.CategoryDao;
@@ -32,8 +43,14 @@ import com.aptech.Model.Customer;
 import com.aptech.Model.Product;
 import com.aptech.Model.Staff;
 import com.aptech.Model.ProductDetail;
+import com.aptech.Model.ProductType;
 import com.aptech.Model.Size;
+import com.aptech.Model.SportType;
 import com.aptech.MyClass.SendingEmail;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import antlr.collections.List;
 
 @Controller
 public class ProductController {
@@ -182,30 +199,97 @@ public class ProductController {
 	
 	@RequestMapping(value = { "/admin/addProduct" }, method = RequestMethod.GET)
 	public ModelAndView addProduct(Model model) {
-		ProductDao productDao = new ProductDao();
+		ProductDao proDao = new ProductDao();
 		CategoryDao cateDao = new CategoryDao();
+		SizeDao sizeDao = new SizeDao();
 		ImageDao imgDao = new ImageDao();
 		model.addAttribute("staff", new Staff());
 		ModelAndView mv = new ModelAndView("admin/addProduct");
-
+		
+		mv.addObject("SizeList", sizeDao.getAll());
 		mv.addObject("ProductTypeList", cateDao.getAllProductType());
 		mv.addObject("SportTypeList", cateDao.getAllSportType());
 
 		return mv;
 	}
 	
-	@PostMapping("addNewProduct")
-	public void addProduct(@RequestParam String name, int productType, int sportType, String details, int discount, String image1, String image2, String image3) {
-		ProductDao proDao = new ProductDao();
-		CategoryDao cateDao = new CategoryDao();
-		Product pro = new Product();
+	@Autowired
+	ServletContext context;
+	
+	@PostMapping("UploadFile")
+	@ResponseBody
+	public String UploadFile(MultipartHttpServletRequest request) {
+		String path_save_file = context.getRealPath("/assets/user/images/products/");
+		Iterator<String> listNames = request.getFileNames();
+		MultipartFile mpf = request.getFile(listNames.next());
 		
-		pro.setName(name);
-		pro.setProductType(cateDao.getProductTypeByID(productType));
-		pro.setSportType(cateDao.getSportTypeByID(sportType));
-		pro.setDetails(details);
-		pro.setDiscount(discount);
-		proDao.add(pro);
+		File file_save = new File(path_save_file + mpf.getOriginalFilename());
+		try {
+			mpf.transferTo(file_save);
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "true";
+	}
+	
+	@PostMapping("addNewProduct")
+	@ResponseBody
+	public void addNewProduct(@RequestParam String datajson) {
+		ObjectMapper objectMapper = new ObjectMapper();
+		
+		JsonNode jsonObject;
+		try {
+			Product product = new Product();
+			ProductDao proDao = new ProductDao();
+			jsonObject = objectMapper.readTree(datajson);
+			
+			String name = jsonObject.get("name").asText();
+			String detail = jsonObject.get("details").asText();
+			int discount = jsonObject.get("discount").asInt();
+			int type = jsonObject.get("productType").asInt();
+			int sport = jsonObject.get("sportType").asInt();
+			
+			if(sport==-1) {
+				SportType Newsport = new SportType();
+				CategoryDao cateDao = new CategoryDao();
+				String sportName = jsonObject.get("other").asText();
+				cateDao.addSport(sportName);
+				Newsport = cateDao.getNewSport();
+				int newSport = Newsport.getId();
+				proDao.add(type, newSport, name, detail, discount);
+			}
+			else {
+				proDao.add(type, sport, name, detail, discount);
+			}
+			
+			product = proDao.getNewProduct();
+			
+			JsonNode jsonDetail = jsonObject.get("ProductDetails");
+			
+			for (JsonNode objectDetail : jsonDetail) {
+				ProductDetailDao productDetailDao = new ProductDetailDao();
+				int size = objectDetail.get("size").asInt();
+				int proId = product.getId();
+				int price = objectDetail.get("price").asInt();
+				int inventory = objectDetail.get("inventory").asInt();
+				productDetailDao.add(size, proId, inventory, price);
+			}
+			
+			JsonNode jsonImage = jsonObject.get("Images");
+			for (JsonNode objectImage : jsonImage) {
+				ImageDao imgDao = new ImageDao();
+				int proId = product.getId();
+				String nameImg = objectImage.get("img").asText();
+				imgDao.add(proId, nameImg);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@RequestMapping(value = { "/{productType}/{sportType}/{productID:\\d+}",

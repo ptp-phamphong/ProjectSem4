@@ -1,10 +1,15 @@
 package com.aptech.Dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.transaction.Transactional;
+
 import com.aptech.Model.Product;
+import com.aptech.Model.ProductDetail;
 import com.aptech.Model.ProductType;
 import com.aptech.Model.SportType;
 
@@ -104,4 +109,41 @@ public class CategoryDao {
 		return null;
 	}
 	
+	@Transactional
+	public boolean addSport(String Name){		
+        String query="insert into SportType(Name, Status) values(?,?)";
+        ProductDetailDao proDao = new ProductDetailDao();
+        try {
+        	PreparedStatement pstm=utilDb.getConnection().prepareStatement(query);
+            pstm.setString(1, Name);
+            pstm.setBoolean(2, true);
+            int rs = pstm.executeUpdate();
+            if(rs!=0){
+                return true;         
+            }
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        return false;
+    }
+	
+	public SportType getNewSport() {
+		String query = "SELECT TOP 1 * FROM SportType order by Id desc";
+		Statement stm;
+		try {
+			stm = utilDb.getConnection().createStatement();
+			ResultSet rs = stm.executeQuery(query);
+			if (rs.next()) {
+				SportType item = new SportType();
+				item.setId(rs.getInt("id"));
+				item.setName(rs.getString("name"));
+				item.setStatus(true);
+        		return item;
+			}
+		} catch (Exception ex) {
+			System.out.print("abc");
+		}
+		return null;
+	}
 }

@@ -3,6 +3,12 @@ package com.aptech.Dao;
 import java.sql.*;
 import java.util.ArrayList;
 
+import javax.mail.Session;
+import javax.transaction.Transactional;
+
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.aptech.Model.Product;
 import com.aptech.Model.ProductDetail;
 
@@ -49,6 +55,38 @@ public class ProductDao {
 			System.out.print("abc");
 		}
 		return list;
+	}
+	
+	public Product getNewProduct() {
+		String query = "SELECT TOP 1 * FROM Product order by Id desc";
+		Statement stm;
+		try {
+			CategoryDao categoryDao = new CategoryDao();
+			stm = utilDb.getConnection().createStatement();
+			ResultSet rs = stm.executeQuery(query);
+			if (rs.next()) {
+				Product item = new Product();
+				item.setId(rs.getInt("id"));
+				item.setName(rs.getString("name"));
+				item.setDetails(rs.getString("Details"));
+				item.setDiscount(rs.getInt("Discount"));
+
+            	item.setProductType(categoryDao.getProductTypeByID(rs.getInt("ProductTypeId")));
+            	item.setSportType(categoryDao.getSportTypeByID(rs.getInt("SportTypeId")));
+            	
+            	//Thêm mấy tấm ảnh nữa
+            	ImageDao imageDao = new ImageDao();
+            	item.setImages(imageDao.getByIdProduct(rs.getInt("id")));
+            	
+            	ArrayList<ProductDetail> listProductDetails = new ArrayList<ProductDetail>();
+        		ProductDetailDao productDetailDao = new ProductDetailDao();
+        		item.setProductDetails(productDetailDao.getByIdProduct(rs.getInt("id")));
+        		return item;
+			}
+		} catch (Exception ex) {
+			System.out.print("abc");
+		}
+		return null;
 	}
 	
 	public ArrayList<Product> getAllProduct() {
@@ -320,24 +358,26 @@ public class ProductDao {
 		return null;
 	}
 	
-	public boolean add(Product pro){
+	@Transactional
+	public boolean add(int ProductTypeId, int SportTypeId, String name, String details, float discount){		
         String query="insert into Product(ProductTypeId, SportTypeId, Name, Details, Discount, Status) values(?,?,?,?,?,?)";
-        try{
-            PreparedStatement pstm=utilDb.getConnection().prepareStatement(query);
-            pstm.setInt(1, pro.getProductType().getId());
-            pstm.setInt(2, pro.getSportType().getId());       
-            pstm.setString(3, pro.getName());         
-            pstm.setString(4, pro.getDetails());    
-            pstm.setFloat(5, pro.getDiscount());    
-            pstm.setBoolean(6, pro.getStatus());   
-            int result = pstm.executeUpdate();
-            if(result!=0){
-                return true;
+        ProductDetailDao proDao = new ProductDetailDao();
+        try {
+        	PreparedStatement pstm=utilDb.getConnection().prepareStatement(query);
+            pstm.setInt(1, ProductTypeId);
+            pstm.setInt(2, SportTypeId);
+            pstm.setString(3, name);
+            pstm.setString(4, details);
+            pstm.setFloat(5, discount);
+            pstm.setBoolean(6, true);
+            int rs = pstm.executeUpdate();
+            if(rs!=0){
+                return true;         
             }
-        }
-        catch (SQLException ex) {
-        	System.out.print("abc");
-        }
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
         return false;
     }
 	
