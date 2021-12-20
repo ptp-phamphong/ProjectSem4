@@ -1,6 +1,8 @@
 package com.aptech.Dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -78,4 +80,23 @@ public class ProductDetailDao {
 		return null;
 	}
 	
+	public boolean add(int SizeId, int ProductId, int inventory, int price){		
+        String query="insert into ProductDetails(SizeId, ProductId, Inventory, Price) values(?,?,?,?)";
+        ProductDetailDao proDao = new ProductDetailDao();
+        try {
+        	PreparedStatement pstm=utilDb.getConnection().prepareStatement(query);
+            pstm.setInt(1, SizeId);
+            pstm.setInt(2, ProductId);
+            pstm.setInt(3, inventory);
+            pstm.setInt(4, price);
+            int rs = pstm.executeUpdate();
+            if(rs!=0){
+                return true;         
+            }
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        return false;
+    }
 }

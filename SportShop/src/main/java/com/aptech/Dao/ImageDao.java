@@ -1,6 +1,8 @@
 package com.aptech.Dao;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -37,4 +39,21 @@ public class ImageDao {
 		
 		return list;
 	}
+	
+	public boolean add(int productId, String name){		
+        String query="insert into Image(ProductId, Name) values(?,?)";
+        try {
+        	PreparedStatement pstm=utilDb.getConnection().prepareStatement(query);
+            pstm.setInt(1, productId);
+            pstm.setString(2, name);
+            int rs = pstm.executeUpdate();
+            if(rs!=0){
+                return true;         
+            }
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        return false;
+    }
 }

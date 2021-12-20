@@ -43,6 +43,8 @@
 <link href='<c:url value = "/assets/themes/css/sb-admin-2.min.css"></c:url>' rel="stylesheet">
 <link href='<c:url value = "/assets/themes/css/mycss.css"></c:url>' rel="stylesheet">
 
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 
 <style type="text/css">
 div.dataTables_wrapper {
