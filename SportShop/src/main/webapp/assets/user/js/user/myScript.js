@@ -272,7 +272,22 @@ function removeItemCart(id) {
 	return false;
 }
 
-
+function addFilter(id, type){
+	$.ajax({
+		url: "/SportShop/ajax/addFilter",
+		type: "POST",
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		data: { "type": type, "id": id },
+		success: function(data) {
+			$('#filter_productList').html(data);
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) {
+			alert(XMLHttpRequest + '\nSTATUS: ' + textStatus + '\nERROR THROWN: '
+				+ errorThrown);
+		}
+	});
+	return false;;
+}
 
 
 
