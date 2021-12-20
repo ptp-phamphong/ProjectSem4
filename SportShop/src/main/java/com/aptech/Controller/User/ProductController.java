@@ -51,21 +51,27 @@ public class ProductController {
 		return mv;
 	}
 
-	@RequestMapping(value = { "/{productType}/{sportType}", "/{productType}" }, method = RequestMethod.GET)
-	public ModelAndView showProductbySportType(Model model, @RequestParam("productType") Integer productTypeID,
-			@Nullable @RequestParam(value = "sportType", required=false) Integer sportTypeID) {
+	@RequestMapping(value = {"/{productType}-{productTypeId:\\d+}/{sportType}-{sportTypeId:\\d+}" }, method = RequestMethod.GET)
+	public ModelAndView showProductbySportType(Model model, @PathVariable(value = "productTypeId") Integer productTypeID,
+			@PathVariable(value = "sportTypeId") Integer sportTypeID) {
+		ProductDao productDao = new ProductDao();
+		CategoryDao categoryDao = new CategoryDao();
+		model.addAttribute("customer", new Customer());
+		ModelAndView mv = new ModelAndView("user/productList");
+		mv.addObject("listProduct", productDao.getBySportType(productTypeID, sportTypeID));
+		mv.addObject("productTypeList", categoryDao.getAllProductType());
+		mv.addObject("sportTypeList", categoryDao.getAllSportType());
+		return mv;
+	}
+	
+	@RequestMapping(value = {"/{productType}-{productTypeId:\\d+}" }, method = RequestMethod.GET)
+	public ModelAndView showProductbyType(Model model, @PathVariable(value = "productTypeId") Integer productTypeID) {
 		
 		ProductDao productDao = new ProductDao();
 		CategoryDao categoryDao = new CategoryDao();
 		model.addAttribute("customer", new Customer());
 		ModelAndView mv = new ModelAndView("user/productList");
-		
-		if (sportTypeID != null) {
-			mv.addObject("listProduct", productDao.getBySportType(productTypeID, sportTypeID));
-		}else {
-			mv.addObject("listProduct", productDao.getByType(productTypeID));
-		}
-		
+		mv.addObject("listProduct", productDao.getByType(productTypeID));
 		mv.addObject("productTypeList", categoryDao.getAllProductType());
 		mv.addObject("sportTypeList", categoryDao.getAllSportType());
 		return mv;
@@ -262,4 +268,10 @@ public class ProductController {
 
 	// Hết hàm rồi đấy, đmẹ đáng lẽ nên xài cái service
 
+	@ResponseBody
+	@RequestMapping(value = { "/ajax/showProductList" }, method = RequestMethod.GET)
+	public ModelAndView showProductList(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("/user/productList");
+		return mv;
+	}
 }

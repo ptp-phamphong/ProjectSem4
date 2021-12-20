@@ -16,10 +16,9 @@ public class ProductDao {
 	}
 
 	public ArrayList<Product> getAll() {
-
 		ArrayList<Product> list = new ArrayList<Product>();
 
-		String query = "SELECT TOP 25 * FROM Product, ProductDetails WHERE ProductDetails.ProductId = Product.Id";
+		String query = "SELECT * FROM Product";
 		Statement stm;
 		try {
 			CategoryDao categoryDao = new CategoryDao();
@@ -217,7 +216,7 @@ public class ProductDao {
 		
 		ArrayList<Product> list = new ArrayList<Product>();
 
-		String query = "SELECT TOP 4 * FROM Product, ProductDetails WHERE ProductDetails.ProductId = Product.Id ORDER BY NEWID()";
+		String query = "SELECT TOP 4 * FROM Product ORDER BY NEWID()";
 		Statement stm;
 		try {
 			CategoryDao categoryDao = new CategoryDao();
@@ -252,7 +251,7 @@ public class ProductDao {
 	public ArrayList<Product> getIndexFeaturedProduct(){
 		ArrayList<Product> list = new ArrayList<Product>();
 
-		String query = "SELECT TOP 8 * FROM Product, ProductDetails WHERE ProductDetails.ProductId = Product.Id ORDER BY NEWID()";
+		String query = "SELECT TOP 8 * FROM Product ORDER BY NEWID()";
 		Statement stm;
 		try {
 			CategoryDao categoryDao = new CategoryDao();
@@ -288,7 +287,7 @@ public class ProductDao {
 	public ArrayList<Product> getNewestProduct(){
 		ArrayList<Product> list = new ArrayList<Product>();
 
-		String query = "SELECT TOP 8 * FROM Product, ProductDetails WHERE ProductDetails.ProductId = Product.Id ORDER BY Product.Id DESC";
+		String query = "SELECT TOP 8 * FROM Product ORDER BY Product.Id DESC";
 		Statement stm;
 		try {
 			CategoryDao categoryDao = new CategoryDao();
@@ -364,12 +363,12 @@ public class ProductDao {
     }
 	
 	public ArrayList<Product> getByProductType(int productTypeId) {
-		String sql = "SELECT * FROM Product, ProductDetails WHERE ProductDetails.ProductId = Product.Id AND ProductTypeId = " + productTypeId ;
+		String sql = "SELECT * FROM Product WHERE ProductTypeId = " + productTypeId ;
 		return getProductbySQL(sql);
 	}
 	
 	public ArrayList<Product> getBySportType(int productTypeId, int sportTypeId) {
-		String sql = "SELECT * FROM Product, ProductDetails WHERE ProductDetails.ProductId = Product.Id AND ProductTypeId = " + productTypeId + " AND SportTypeId = "+ sportTypeId;
+		String sql = "SELECT * FROM Product WHERE ProductTypeId = " + productTypeId + " AND SportTypeId = "+ sportTypeId;
 		return getProductbySQL(sql);
 	}
 	

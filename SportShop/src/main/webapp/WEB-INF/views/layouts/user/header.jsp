@@ -132,8 +132,8 @@
 
 		<c:forEach var="productTypeItem" items="${productTypeList}" varStatus="index">
 			<li class="mega-dropdown">
-				<c:url value="/${fn:replace(productTypeItem.getName(), ' ', '-')}" var="productTypeURL">
-					<c:param name="productType" value="${productTypeItem.getId() }"></c:param>
+				<c:url value="/${fn:replace(productTypeItem.getName(), ' ', '-')}-${productTypeItem.getId() }" var="productTypeURL">
+					<%-- <c:param name="productTypeId" value="${productTypeItem.getId() }"></c:param> --%>
 				</c:url>
 				<a href="${productTypeURL }">
 					${productTypeItem.getName() }
@@ -159,9 +159,9 @@
 								</div>
 								<ul class="category-links">
 									<c:forEach var="sportTypeItem" items="${sportTypeList }" varStatus="index">
-										<c:url value="/${productTypeItem.getName() }/${fn:replace(sportTypeItem.getName(), ' ', '-') }" var="sportTypeURL">
-											<c:param name="productType" value="${productTypeItem.getId() }"></c:param>
-											<c:param name="sportType" value="${sportTypeItem.getId() }"></c:param>
+										<c:url value="/${fn:replace(productTypeItem.getName(), ' ', '-')}-${productTypeItem.getId() }/${fn:replace(sportTypeItem.getName(), ' ', '-') }-${sportTypeItem.getId() }" var="sportTypeURL">
+											<%-- <c:param name="productTypeId" value="${productTypeItem.getId() }"></c:param>
+											<c:param name="sportTypeId" value="${sportTypeItem.getId() }"></c:param> --%>
 										</c:url>
 										<li>
 											<a href="${sportTypeURL }">${sportTypeItem.getName() }</a>

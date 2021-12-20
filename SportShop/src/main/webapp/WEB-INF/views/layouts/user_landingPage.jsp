@@ -18,23 +18,23 @@
 <link rel="shortcut icon" href="assets/user/images/favicon.ico">
 
 <!-- Vendor -->
-<link href="./assets/user/js/vendor/bootstrap/bootstrap.min.css" rel="stylesheet">
-<link href="./assets/user/js/vendor/slick/slick.css" rel="stylesheet">
-<link href="./assets/user/js/vendor/swiper/swiper.min.css" rel="stylesheet">
-<link href="./assets/user/js/vendor/magnificpopup/dist/magnific-popup.css" rel="stylesheet">
-<link href="./assets/user/js/vendor/nouislider/nouislider.css" rel="stylesheet">
-<link href="./assets/user/js/vendor/darktooltip/dist/darktooltip.css" rel="stylesheet">
-<link href="./assets/user/css/animate.css" rel="stylesheet">
+<link href='<c:url value = "/assets/user/js/vendor/bootstrap/bootstrap.min.css"/>' rel="stylesheet">
+<link href='<c:url value = "/assets/user/js/vendor/slick/slick.css"/>' rel="stylesheet">
+<link href='<c:url value = "/assets/user/js/vendor/swiper/swiper.min.css"/>' rel="stylesheet">
+<link href='<c:url value = "/assets/user/js/vendor/magnificpopup/dist/magnific-popup.css"/>' rel="stylesheet">
+<link href='<c:url value = "/assets/user/js/vendor/nouislider/nouislider.css"/>' rel="stylesheet">
+<link href='<c:url value = "/assets/user/js/vendor/darktooltip/dist/darktooltip.css"/>' rel="stylesheet">
+<link href='<c:url value = "/assets/user/css/animate.css"/>' rel="stylesheet">
 
 <!-- Custom -->
-<link href="./assets/user/css/style.css" rel="stylesheet" />
-<link href="./assets/user/css/megamenu.css" rel="stylesheet">
+<link href='<c:url value = "/assets/user/css/style.css"/>' rel="stylesheet" />
+<link href='<c:url value = "/assets/user/css/megamenu.css"/>' rel="stylesheet">
 
 <!-- Color Schemes -->
 <!-- your style-color.css here  -->
 
 <!-- Icon Font -->
-<link href="./assets/user/fonts/icomoon-reg/style.css" rel="stylesheet">
+<link href='<c:url value = "/assets/user/fonts/icomoon-reg/style.css"/>' rel="stylesheet">
 
 <!-- Google Font -->
 <link href="https://fonts.googleapis.com/css?family=Oswald:300,400,700|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Roboto:300,300i,400,400i,500,500i,700,700i,900,900i"
@@ -46,7 +46,18 @@
 
 
 <body class="fullwidth no-rtl fly_to_cart">
-
+	<!-- Loader -->
+	<div id="loader-wrapper">
+		<div class="cube-wrapper">
+			<div class="cube-folding">
+				<span class="leaf1"></span>
+				<span class="leaf2"></span>
+				<span class="leaf3"></span>
+				<span class="leaf4"></span>
+			</div>
+		</div>
+	</div>
+	<!-- /Loader -->
 	<!-- Menu Toggle -->
 	<a href="#" class="toggleHeader">
 		<span class="close-icon">
@@ -68,6 +79,7 @@
 	<!-- /Header -->
 
 	<decorator:body />
+	
 	<div class="productStack disable hide_on_scroll">
 		<a href="#" class="toggleStack">
 			<i class="icon icon-cart"></i>
@@ -78,29 +90,46 @@
 		</div>
 	</div>
 
+	<!-- Modal Quick View -->
+	<div class="modal quick-view zoom" id="quickView">
+		<div class="modal-dialog">
+			<div class="modalLoader-wrapper">
+				<div class="modalLoader bg-striped"></div>
+			</div>
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">&#10006;</button>
+			</div>
+			<div class="modal-content">
+				<iframe></iframe>
+			</div>
+		</div>
+	</div>
+	<!--function location: quickView app.js -->
+	<!-- /Modal Quick View -->
+
 </body>
 
 
 <!-- jQuery Scripts  -->
-<script src='<c:url value = "/assets/user/js/user/myScript.js"></c:url>'></script>
-<script src="./assets/user/js/vendor/jquery/jquery.js"></script>
-<script src="./assets/user/js/vendor/bootstrap/bootstrap.min.js"></script>
-<script src="./assets/user/js/vendor/swiper/swiper.min.js"></script>
-<script src="./assets/user/js/vendor/slick/slick.min.js"></script>
-<script src="./assets/user/js/vendor/parallax/parallax.js"></script>
-<script src="./assets/user/js/vendor/isotope/isotope.pkgd.min.js"></script>
-<script src="./assets/user/js/vendor/magnificpopup/dist/jquery.magnific-popup.js"></script>
-<script src="./assets/user/js/vendor/countdown/jquery.countdown.min.js"></script>
-<script src="./assets/user/js/vendor/nouislider/nouislider.min.js"></script>
-<script src="./assets/user/js/vendor/ez-plus/jquery.ez-plus.js"></script>
-<script src="./assets/user/js/vendor/tocca/tocca.min.js"></script>
-<script src="./assets/user/js/vendor/bootstrap-tabcollapse/bootstrap-tabcollapse.js"></script>
-<script src="./assets/user/js/vendor/scrollLock/jquery-scrollLock.min.js"></script>
-<script src="./assets/user/js/vendor/darktooltip/dist/jquery.darktooltip.js"></script>
-<script src="./assets/user/js/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-<script src="./assets/user/js/vendor/instafeed/instafeed.min.js"></script>
-<script src="./assets/user/js/megamenu.min.js"></script>
-<script src="./assets/user/js/app.js"></script>
+<script src='<c:url value = "/assets/user/js/user/myScript.js"/>'></script>
+<script src='<c:url value = "/assets/user/js/vendor/jquery/jquery.js"/>'></script>
+<script src='<c:url value = "/assets/user/js/vendor/bootstrap/bootstrap.min.js"/>'></script>
+<script src='<c:url value = "/assets/user/js/vendor/swiper/swiper.min.js"/>'></script>
+<script src='<c:url value = "/assets/user/js/vendor/slick/slick.min.js"/>'></script>
+<script src='<c:url value = "/assets/user/js/vendor/parallax/parallax.js"/>'></script>
+<script src='<c:url value = "/assets/user/js/vendor/isotope/isotope.pkgd.min.js"/>'></script>
+<script src='<c:url value = "/assets/user/js/vendor/magnificpopup/dist/jquery.magnific-popup.js"/>'></script>
+<script src='<c:url value = "/assets/user/js/vendor/countdown/jquery.countdown.min.js"/>'></script>
+<script src='<c:url value = "/assets/user/js/vendor/nouislider/nouislider.min.js"/>'></script>
+<script src='<c:url value = "/assets/user/js/vendor/ez-plus/jquery.ez-plus.js"/>'></script>
+<script src='<c:url value = "/assets/user/js/vendor/tocca/tocca.min.js"/>'></script>
+<script src='<c:url value = "/assets/user/js/vendor/bootstrap-tabcollapse/bootstrap-tabcollapse.js"/>'></script>
+<script src='<c:url value = "/assets/user/js/vendor/scrollLock/jquery-scrollLock.min.js"/>'></script>
+<script src='<c:url value = "/assets/user/js/vendor/darktooltip/dist/jquery.darktooltip.js"/>'></script>
+<script src='<c:url value = "/assets/user/js/vendor/imagesloaded/imagesloaded.pkgd.min.js"/>'></script>
+<script src='<c:url value = "/assets/user/js/vendor/instafeed/instafeed.min.js"/>'></script>
+<script src='<c:url value = "/assets/user/js/megamenu.min.js"/>'></script>
+<script src='<c:url value = "/assets/user/js/app.js"/>'></script>
 </html>
 
 

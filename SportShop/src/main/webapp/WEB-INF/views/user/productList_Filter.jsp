@@ -14,10 +14,10 @@
 				<a href="#" class="filter-col-toggle"></a>
 			</div>
 			<div class="filter-col-content">
-				<div class="sidebar-block-top">
+				<div id="filter_Input">
 					<%@include file="/WEB-INF/views/user/filterInput.jsp"%>
 				</div>
-				<div class="sidebar-block collapsed">
+				<div class="sidebar-block collapsed open">
 					<div class="block-title">
 						<span>Sports</span>
 						<div class="toggle-arrow"></div>

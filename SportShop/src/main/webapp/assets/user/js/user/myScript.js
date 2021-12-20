@@ -277,9 +277,10 @@ function addFilter(id, type){
 		url: "/SportShop/ajax/addFilter",
 		type: "POST",
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-		data: { "type": type, "id": id },
+		data: {"id": id, "type": type },
 		success: function(data) {
-			$('#filter_productList').html(data);
+			jQuery("#filter_Input").load("/SportShop/ajax/showFilterInput");
+			$('#product_List').html(data);
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
 			alert(XMLHttpRequest + '\nSTATUS: ' + textStatus + '\nERROR THROWN: '
