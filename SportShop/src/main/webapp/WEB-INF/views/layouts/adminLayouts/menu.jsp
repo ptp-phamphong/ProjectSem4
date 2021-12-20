@@ -2,7 +2,7 @@
 <!-- Sidebar - Brand -->
 <a
 	class="sidebar-brand d-flex align-items-center justify-content-center"
-	href="index.html">
+	href='<c:url value = "/admin/"></c:url>'>
 	<div class="sidebar-brand-icon rotate-n-15">
 		<i class="fas fa-laugh-wink"></i>
 	</div>
@@ -76,7 +76,8 @@
 		data-parent="#accordionSidebar">
 		<div class="bg-white py-2 collapse-inner rounded">
 			<h6 class="collapse-header">Warehouse management:</h6>
-			<a class="collapse-item" href="buttons.html">Import</a> <a
+			<a class="collapse-item" href='<c:url value = "/admin/addProduct"></c:url>'>Add new product</a>
+			<a class="collapse-item" href='<c:url value = "/admin/import"></c:url>'>Import</a> <a
 				class="collapse-item" href="cards.html">Export</a>
 		</div>
 	</div></li>
