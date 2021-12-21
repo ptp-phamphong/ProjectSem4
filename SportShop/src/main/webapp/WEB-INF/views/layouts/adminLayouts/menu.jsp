@@ -77,7 +77,7 @@
 		<div class="bg-white py-2 collapse-inner rounded">
 			<h6 class="collapse-header">Warehouse management:</h6>
 			<a class="collapse-item" href='<c:url value = "/admin/addProduct"></c:url>'>Add new product</a>
-			<a class="collapse-item" href='<c:url value = "/admin/import"></c:url>'>Import</a> <a
+			<a class="collapse-item" href='<c:url value = "/admin/product/type/0"></c:url>'>Import</a> <a
 				class="collapse-item" href="cards.html">Export</a>
 		</div>
 	</div></li>

@@ -118,6 +118,18 @@ public class ProductController {
 		html += "<img src='" + url + "' alt=\"product\" />";
 		return html;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = { "/DeleteProduct" }, method = RequestMethod.GET)
+	public void DeleteProduct(@RequestParam int proItem) {
+		ProductDao proDao = new ProductDao();
+		ProductDetailDao detailDao = new ProductDetailDao();
+		ImageDao imgDao = new ImageDao();
+		
+		imgDao.delete(proItem);
+		detailDao.delete(proItem);
+		proDao.delete(proItem);		
+	}
 
 	@RequestMapping(value = { "/admin/product/sport/{sport}" }, method = RequestMethod.GET)
 	public ModelAndView showAdminProductListBySport(Model model, @PathVariable("sport") int sport) {
@@ -197,6 +209,25 @@ public class ProductController {
 		return mv;
 	}
 	
+	@RequestMapping(value = { "/admin/importProduct/{id}" }, method = RequestMethod.GET)
+	public ModelAndView importProduct(Model model, @PathVariable("id") int id) {
+		ProductDao productDao = new ProductDao();
+		CategoryDao cateDao = new CategoryDao();
+		ProductDetailDao productDetailDao = new ProductDetailDao();
+		ImageDao imgDao = new ImageDao();
+		model.addAttribute("staff", new Staff());
+		ModelAndView mv = new ModelAndView("admin/importProduct");
+
+		mv.addObject("ProductDetail", productDetailDao.getByIdProduct(id));
+		mv.addObject("Product", productDao.getByProductID(id));
+		mv.addObject("MainImage", imgDao.getByIdProduct(id).get(0));
+		mv.addObject("Images", imgDao.getByIdProduct(id));
+		mv.addObject("ProductTypeList", cateDao.getAllProductType());
+		mv.addObject("SportTypeList", cateDao.getAllSportType());
+
+		return mv;
+	}
+	
 	@RequestMapping(value = { "/admin/addProduct" }, method = RequestMethod.GET)
 	public ModelAndView addProduct(Model model) {
 		ProductDao proDao = new ProductDao();
@@ -221,6 +252,7 @@ public class ProductController {
 	public String UploadFile(MultipartHttpServletRequest request) {
 		String path_save_file = context.getRealPath("/assets/user/images/products/");
 		Iterator<String> listNames = request.getFileNames();
+		
 		MultipartFile mpf = request.getFile(listNames.next());
 		
 		File file_save = new File(path_save_file + mpf.getOriginalFilename());
@@ -234,6 +266,110 @@ public class ProductController {
 			e.printStackTrace();
 		}
 		return "true";
+	}
+	
+	@PostMapping("UploadFile1")
+	@ResponseBody
+	public String UploadFile1(MultipartHttpServletRequest request) {
+		String path_save_file = context.getRealPath("/assets/user/images/products/");
+		Iterator<String> listNames = request.getFileNames();
+		MultipartFile mpf = request.getFile(listNames.next());
+		
+		File file_save = new File(path_save_file + mpf.getOriginalFilename());
+		try {
+			mpf.transferTo(file_save);
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "true";
+	}
+	
+	@PostMapping("UploadFile2")
+	@ResponseBody
+	public String UploadFile2(MultipartHttpServletRequest request) {
+		String path_save_file = context.getRealPath("/assets/user/images/products/");
+		Iterator<String> listNames = request.getFileNames();
+		MultipartFile mpf = request.getFile(listNames.next());
+		
+		File file_save = new File(path_save_file + mpf.getOriginalFilename());
+		try {
+			mpf.transferTo(file_save);
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "true";
+	}
+	
+	@PostMapping("editProduct")
+	@ResponseBody
+	public void editProduct(@RequestParam String datajson) {
+		ObjectMapper objectMapper = new ObjectMapper();
+		
+		JsonNode jsonObject;
+		try {
+			Product product = new Product();
+			ProductDao proDao = new ProductDao();
+			jsonObject = objectMapper.readTree(datajson);
+			
+			String name = jsonObject.get("name").asText();
+			String detail = jsonObject.get("details").asText();
+			int discount = jsonObject.get("discount").asInt();
+			int type = jsonObject.get("productType").asInt();
+			int sport = jsonObject.get("sportType").asInt();
+			int id = jsonObject.get("id").asInt();
+			
+			if(sport==-1) {
+				SportType Newsport = new SportType();
+				CategoryDao cateDao = new CategoryDao();
+				String sportName = jsonObject.get("other").asText();
+				cateDao.addSport(sportName);
+				Newsport = cateDao.getNewSport();
+				int newSport = Newsport.getId();
+				proDao.edit(type, newSport, name, detail, discount, id);
+			}
+			else {
+				proDao.edit(type, sport, name, detail, discount, id);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@PostMapping("importProduct")
+	@ResponseBody
+	public void importProduct(@RequestParam String datajson) {
+		ObjectMapper objectMapper = new ObjectMapper();
+		
+		JsonNode jsonObject;
+		
+		ProductDetail productdetail = new ProductDetail();
+		ProductDetailDao productdetailDao = new ProductDetailDao();
+		
+		try {
+			jsonObject = objectMapper.readTree(datajson);
+			
+			for (JsonNode object : jsonObject) {
+				int id = object.get("id").asInt();
+				int imp = object.get("import").asInt();
+				
+				int inventory = productdetailDao.getById(id).getInventory() +imp;
+				
+				productdetailDao.importProduct(inventory, id);
+			}
+			System.out.println(jsonObject);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@PostMapping("addNewProduct")
