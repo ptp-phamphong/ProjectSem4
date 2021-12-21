@@ -26,8 +26,8 @@
 						<ul class="category-list">
 							<c:forEach var="sportTypeItem" items="${sportTypeList }">
 								<li>
-									<a id="filter_Sport_${sportTypeItem.getId() }" href="#" onclick="return addFilter(${sportTypeItem.getId()}, 'sport')" class="value">${sportTypeItem.getName() }</a>
-									<a href="#" onclick="return deleteFilter(${sportTypeItem.getId()}, 'sport')" class="clear"></a>
+									<a id="filter_Sport_${sportTypeItem.getId() }" href="#" onclick="return addFilter(${sportTypeItem.getId()}, 'SportTypeId')" class="value">${sportTypeItem.getName() }</a>
+									<a href="#" onclick="return deleteFilter(${sportTypeItem.getId()}, 'SportTypeId')" class="clear"></a>
 								</li>
 							</c:forEach>
 						</ul>
@@ -44,8 +44,8 @@
 						<ul class="category-list">
 							<c:forEach var="productTypeItem" items="${productTypeList}" varStatus="index">
 								<li>
-									<a  id="filter_Type_${productTypeItem.getId() }" href="#" onclick="return addFilter(${productTypeItem.getId()}, 'type')" class="value">${productTypeItem.getName() }</a>
-									<a href="#" onclick="return deleteFilter(${productTypeItem.getId()}, 'type')" class="clear"></a>
+									<a  id="filter_Type_${productTypeItem.getId() }" href="#" onclick="return addFilter(${productTypeItem.getId()}, 'ProductTypeId')" class="value">${productTypeItem.getName() }</a>
+									<a href="#" onclick="return deleteFilter(${productTypeItem.getId()}, 'ProductTypeId')" class="clear"></a>
 								</li>
 							</c:forEach>
 						</ul>
