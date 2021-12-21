@@ -219,6 +219,7 @@ $("#importProduct").click(function(event) {
 		arrayDetail.push(object);
 	});
 	
+	console.log(arrayDetail);
 	json["listDetail"] = arrayDetail;
 
 	$.ajax({

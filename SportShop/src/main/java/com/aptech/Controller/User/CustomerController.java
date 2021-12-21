@@ -21,7 +21,9 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.aptech.Dao.CategoryDao;
 import com.aptech.Dao.CustomerDao;
+import com.aptech.Dao.StaffDao;
 import com.aptech.Model.Customer;
+import com.aptech.Model.Staff;
 import com.aptech.MyClass.HashPassword;
 import com.aptech.MyClass.SendingEmail;
 
@@ -77,7 +79,12 @@ public class CustomerController {
 		return modelAndView;
 	}
 
-	
+	@RequestMapping(value = { "admin/loginAdmin" }, method = RequestMethod.GET)
+	public ModelAndView loginAdmin(Model model) {
+		model.addAttribute("staff", new Staff());
+		ModelAndView mv = new ModelAndView("admin/loginAdmin");
+		return mv;
+	}
 	
 	
 	

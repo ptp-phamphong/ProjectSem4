@@ -17,7 +17,6 @@
 			<th>Type</th>
 			<th>Sport type</th>
 			<th>Discount</th>
-			<th>Status</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -27,7 +26,6 @@
 			<td>${item.getProductType().getName() }</td>
 			<td>${item.getSportType().getName() }</td>
 			<td>${item.getDiscount()}</td>
-			<td>${item.getStatus()}</td>
 		</tr>
 	</c:forEach>
 	</tbody>
@@ -37,7 +35,6 @@
 			<th>Type</th>
 			<th>Sport type</th>
 			<th>Discount</th>
-			<th>Status</th>
 		</tr>
 	</tfoot>
 </table>

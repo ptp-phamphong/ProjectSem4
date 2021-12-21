@@ -44,6 +44,7 @@
 								</tr>
 							</thead>
 							<tbody id="details">
+								<div class="imports">
 								<c:forEach items="${ProductDetail}" var="item" varStatus="index">
 									<tr>
 
@@ -56,6 +57,7 @@
 
 									</tr>
 								</c:forEach>
+								</div>
 							</tbody>
 						</table>
 						<button id="importProduct" class="btn btn-primary">Save</button>

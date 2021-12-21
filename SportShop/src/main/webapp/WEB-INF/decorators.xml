@@ -8,6 +8,9 @@
 	<decorator name="admin" page="admin_main.jsp">
 		<pattern>/admin/*</pattern>
 	</decorator>
+	<decorator name="loginAdmin" page="login_Admin.jsp">
+		<pattern>/admin/loginAdmin</pattern>
+	</decorator>
 	<excludes>
         <pattern>/ajax/*</pattern>
     </excludes>

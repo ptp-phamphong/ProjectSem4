@@ -94,20 +94,6 @@ public class ProductController {
 		return mv;
 	}
 
-	@RequestMapping(value = { "/admin/" }, method = RequestMethod.GET)
-	public ModelAndView showAdminProductList(Model model) {
-		ProductDao productDao = new ProductDao();
-		CategoryDao cateDao = new CategoryDao();
-		model.addAttribute("staff", new Staff());
-		ModelAndView mv = new ModelAndView("admin/index");
-
-		mv.addObject("ProductTypeList", cateDao.getAllProductType());
-		mv.addObject("SportTypeList", cateDao.getAllSportType());
-		mv.addObject("listProduct", productDao.getAllProduct());
-
-		return mv;
-	}
-
 	@ResponseBody
 	@RequestMapping(value = { "/ChangeImageProduct" }, method = RequestMethod.GET)
 	public String ChangeImageProduct(@RequestParam String imgItem) {
