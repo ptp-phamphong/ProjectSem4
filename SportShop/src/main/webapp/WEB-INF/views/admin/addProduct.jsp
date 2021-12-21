@@ -46,15 +46,15 @@
 						<div id="containerImage">
 							<div class="Images">
 								<label for="image"><strong>Image 1:</strong></label> <input
-									type="file" name="image" id="image" class="form-control" />
+									type="file" name="image" id="image" class="form-control img" />
 							</div>
 							<div class="Images">
-								<label for="image"><strong>Image 2:</strong></label> <input
-									type="file" name="image" id="image" class="form-control" />
+								<label for="image1"><strong>Image 2:</strong></label> <input
+									type="file" name="image" id="image1" class="form-control img" />
 							</div>
 							<div class="Images">
-								<label for="image"><strong>Image 3:</strong></label> <input
-									type="file" name="image" id="image" class="form-control" />
+								<label for="image2"><strong>Image 3:</strong></label> <input
+									type="file" name="image" id="image2" class="form-control img" />
 							</div>
 							<br>
 						</div>

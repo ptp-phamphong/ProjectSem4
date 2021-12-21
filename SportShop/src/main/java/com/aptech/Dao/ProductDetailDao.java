@@ -99,4 +99,36 @@ public class ProductDetailDao {
 		}
         return false;
     }
+	
+	public boolean delete(int id) {
+		String sql1 = "delete from ProductDetails where ProductId=?";
+		try {
+			PreparedStatement pstm = utilDb.getConnection().prepareStatement(sql1);
+			pstm.setInt(1, id);
+			int rs1 = pstm.executeUpdate();
+			if (rs1 != 0)
+				return true;
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean importProduct(int inventory, int id){
+        String sql="update ProductDetails set Inventory=? where Id=?";
+        try{
+            PreparedStatement pstm=utilDb.getConnection().prepareStatement(sql);
+            pstm.setInt(1, inventory);
+            pstm.setInt(2, id);
+            int rs = pstm.executeUpdate();
+            if(rs!=0){
+                return true;         
+            }  
+        }
+        catch(SQLException ex){
+        	System.out.print("abc");
+        }
+        return false;  
+    }
 }
