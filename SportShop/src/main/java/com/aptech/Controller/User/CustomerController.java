@@ -21,6 +21,9 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.aptech.Dao.CategoryDao;
 import com.aptech.Dao.CustomerDao;
+import com.aptech.Dao.ImageDao;
+import com.aptech.Dao.ProductDao;
+import com.aptech.Dao.ProductDetailDao;
 import com.aptech.Dao.StaffDao;
 import com.aptech.Model.Customer;
 import com.aptech.Model.Staff;
@@ -86,7 +89,35 @@ public class CustomerController {
 		return mv;
 	}
 	
+	@RequestMapping(value = { "admin/customerList" }, method = RequestMethod.GET)
+	public ModelAndView customerList(Model model) {
+		ProductDao productDao = new ProductDao();
+		CategoryDao cateDao = new CategoryDao();
+		model.addAttribute("staff", new Staff());
+		CustomerDao cusDao = new CustomerDao();
+		model.addAttribute("accountList", cusDao.getAll());
+		ModelAndView mv = new ModelAndView("admin/customerAccountList");
+		
+		mv.addObject("ProductTypeList", cateDao.getAllProductType());
+		mv.addObject("SportTypeList", cateDao.getAllSportType());
+		
+		return mv;
+	}
 	
+	@RequestMapping(value = { "/admin/customerDetail/{id}" }, method = RequestMethod.GET)
+	public ModelAndView exportProduct(Model model, @PathVariable("id") int id) {
+		ProductDao productDao = new ProductDao();
+		CategoryDao cateDao = new CategoryDao();
+		CustomerDao cusDao = new CustomerDao();
+		
+		ModelAndView mv = new ModelAndView("admin/customerDetail");
+		mv.addObject("Customer", cusDao.getAccount(id));
+		mv.addObject("ProductTypeList", cateDao.getAllProductType());
+		mv.addObject("SportTypeList", cateDao.getAllSportType());
+		
+		return mv;
+	}
+
 	
 	@RequestMapping(value = { "/login" }, method = RequestMethod.GET)
 	public ModelAndView showViewLogin(Model model) {

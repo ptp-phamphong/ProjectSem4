@@ -29,7 +29,7 @@
 						<Strong>Sport:</Strong> ${Product.getSportType().getName() }
 					</p>
 					<p style="font-size: 27px">
-						<Strong>Detail:</Strong> <br> - ${Product.getDetails() }
+						<Strong>Description:</Strong> <br> - ${Product.getDetails() }
 					</p>
 					<p style="font-size: 27px">
 						<Strong>Discount:</Strong> ${Product.getDiscount() } %
@@ -57,7 +57,7 @@
 					<hr>
 					<a class="btn btn-primary"
 						href='<c:url value = "/admin/editproduct/${Product.getId()}"></c:url>'>Edit
-						this product</a>
+						this product</a> <a class="btn btn-success" href='<c:url value = "/admin/importProduct/${Product.getId()}"></c:url>'>Import</a> <a class="btn btn-secondary" href='<c:url value = "/admin/exportProduct/${Product.getId()}"></c:url>'>Export</a>
 				</div>
 				<div class="col-4">
 					<div class="product-img">

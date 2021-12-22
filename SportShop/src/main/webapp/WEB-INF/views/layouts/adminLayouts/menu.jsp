@@ -69,16 +69,19 @@
 
 <li class="nav-item"><a class="nav-link collapsed" href="#"
 	data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
-	aria-controls="collapseTwo"> <i class="fa fa-archive" aria-hidden="true"></i> <span>Import
-			/ Export</span>
+	aria-controls="collapseTwo"> <i class="fa fa-archive"
+		aria-hidden="true"></i> <span>Import / Export</span>
 </a>
 	<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
 		data-parent="#accordionSidebar">
 		<div class="bg-white py-2 collapse-inner rounded">
 			<h6 class="collapse-header">Warehouse management:</h6>
-			<a class="collapse-item" href='<c:url value = "/admin/addProduct"></c:url>'>Add new product</a>
-			<a class="collapse-item" href='<c:url value = "/admin/product/type/0"></c:url>'>Import</a> <a
-				class="collapse-item" href="cards.html">Export</a>
+			<a class="collapse-item"
+				href='<c:url value = "/admin/addProduct"></c:url>'>Add new
+				product</a> <a class="collapse-item"
+				href='<c:url value = "/admin/product/type/0"></c:url>'>Import</a> <a
+				class="collapse-item"
+				href='<c:url value = "/admin/product/type/0"></c:url>'>Export</a>
 		</div>
 	</div></li>
 
@@ -86,26 +89,20 @@
 <hr class="sidebar-divider">
 
 <!-- Heading -->
-<div class="sidebar-heading">Addons</div>
+<div class="sidebar-heading">Accounts</div>
 
 <!-- Nav Item - Pages Collapse Menu -->
 <li class="nav-item"><a class="nav-link collapsed" href="#"
 	data-toggle="collapse" data-target="#collapsePages"
 	aria-expanded="true" aria-controls="collapsePages"> <i
-		class="fas fa-fw fa-folder"></i> <span>Pages</span>
+		class="fas fa-fw fa-user"></i> <span>Account list</span>
 </a>
 	<div id="collapsePages" class="collapse" aria-labelledby="headingPages"
 		data-parent="#accordionSidebar">
 		<div class="bg-white py-2 collapse-inner rounded">
-			<h6 class="collapse-header">Login Screens:</h6>
-			<a class="collapse-item" href="login.html">Login</a> <a
-				class="collapse-item" href="register.html">Register</a> <a
-				class="collapse-item" href="forgot-password.html">Forgot
-				Password</a>
-			<div class="collapse-divider"></div>
-			<h6 class="collapse-header">Other Pages:</h6>
-			<a class="collapse-item" href="404.html">404 Page</a> <a
-				class="collapse-item" href="blank.html">Blank Page</a>
+			<h6 class="collapse-header">See the list:</h6>
+			<a class="collapse-item" href='<c:url value = "/admin/customerList"></c:url>'>Customer</a> <a
+				class="collapse-item" href='<c:url value = "/admin/staffList"></c:url>'>Staff</a>
 		</div>
 	</div></li>
 

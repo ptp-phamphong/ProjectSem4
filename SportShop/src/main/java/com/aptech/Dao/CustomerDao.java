@@ -1,8 +1,11 @@
 package com.aptech.Dao;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import com.aptech.Model.Customer;
+import com.aptech.Model.Product;
+import com.aptech.Model.ProductDetail;
 
 public class CustomerDao {
 	private UtilDb utilDb;
@@ -10,6 +13,33 @@ public class CustomerDao {
 	public CustomerDao() {
 		utilDb = new UtilDb();
 		utilDb.connect();
+	}
+	
+	public ArrayList<Customer> getAll() {
+		ArrayList<Customer> list = new ArrayList<Customer>();
+
+		String query = "SELECT * FROM Customer";
+		Statement stm;
+		try {
+			stm = utilDb.getConnection().createStatement();
+			ResultSet rs = stm.executeQuery(query);
+			while (rs.next()) {
+				Customer item = new Customer();
+				item.setId(rs.getInt("id"));
+				item.setFullName(rs.getString("FullName"));
+				item.setEmail(rs.getString("Email"));
+				item.setPassword(rs.getString("Password"));
+				item.setAddress(rs.getString("Address"));
+				item.setPhoneNumber(rs.getString("PhoneNumber"));
+				item.setStatus(rs.getBoolean("Status"));
+        		
+				list.add(item);
+			}
+			return list;
+		} catch (Exception ex) {
+			System.out.print("abc");
+		}
+		return list;
 	}
 
 	public Customer getAccountLogin(String email, String password) {
@@ -67,16 +97,64 @@ public class CustomerDao {
 			
 			if(rs.next()) {
 				customer.setId(rs.getInt("Id"));
-				customer.setEmail("Email");
-				customer.setPassword("Password");
+				customer.setEmail(rs.getString("Email"));
+				customer.setPassword(rs.getString("Password"));
 				customer.setAddress(rs.getString("Address"));
 				customer.setFullName(rs.getString("FullName"));
 				customer.setPhoneNumber(rs.getString("PhoneNumber"));
+				customer.setStatus(rs.getBoolean("Status"));
 				return customer;
 			}
 		} catch (Exception e) {
 			System.out.print(e.getMessage());
 		}
 		return null;
+	}
+	
+	public boolean turnOff(int id){
+        String sql="update Customer set Status=0 where Id=?";
+        try{
+            PreparedStatement pstm=utilDb.getConnection().prepareStatement(sql);
+            pstm.setInt(1, id);
+            int rs = pstm.executeUpdate();
+            if(rs!=0){
+                return true;         
+            }  
+        }
+        catch(SQLException ex){
+        	System.out.print("abc");
+        }
+        return false;  
+    }
+	
+	public boolean turnOn(int id){
+        String sql="update Customer set Status=1 where Id=?";
+        try{
+            PreparedStatement pstm=utilDb.getConnection().prepareStatement(sql);
+            pstm.setInt(1, id);
+            int rs = pstm.executeUpdate();
+            if(rs!=0){
+                return true;         
+            }  
+        }
+        catch(SQLException ex){
+        	System.out.print("abc");
+        }
+        return false;  
+    }
+	
+	public boolean delete(int id) {
+		String sql1 = "delete from Customer where Id=? and Status=0";
+		try {
+			PreparedStatement pstm = utilDb.getConnection().prepareStatement(sql1);
+			pstm.setInt(1, id);
+			int rs1 = pstm.executeUpdate();
+			if (rs1 != 0)
+				return true;
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return false;
 	}
 }

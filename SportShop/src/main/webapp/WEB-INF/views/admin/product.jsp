@@ -26,7 +26,7 @@
 				<td>${item.getProductType().getName() }</td>
 				<td>${item.getSportType().getName() }</td>
 				<td>${item.getDiscount()}</td>
-				<td><a class="btn btn-success" href='<c:url value = "/admin/importProduct/${item.getId()}"></c:url>'>Import</a> <button id="deleteProduct" class="btn btn-danger" onclick="deleteThis('${item.getId()}')" >Delete</button></td>
+				<td><a class="btn btn-success" href='<c:url value = "/admin/importProduct/${item.getId()}"></c:url>'>Import</a> <a class="btn btn-secondary" href='<c:url value = "/admin/exportProduct/${item.getId()}"></c:url>'>Export</a> <button id="deleteProduct" class="btn btn-danger" onclick="deleteThis('${item.getId()}')" >Delete</button></td>
 			</tr>
 		</c:forEach>
 	</tbody>

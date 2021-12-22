@@ -220,6 +220,25 @@ public class ProductController {
 		return mv;
 	}
 	
+	@RequestMapping(value = { "/admin/exportProduct/{id}" }, method = RequestMethod.GET)
+	public ModelAndView exportProduct(Model model, @PathVariable("id") int id) {
+		ProductDao productDao = new ProductDao();
+		CategoryDao cateDao = new CategoryDao();
+		ProductDetailDao productDetailDao = new ProductDetailDao();
+		ImageDao imgDao = new ImageDao();
+		model.addAttribute("staff", new Staff());
+		ModelAndView mv = new ModelAndView("admin/exportProduct");
+
+		mv.addObject("ProductDetail", productDetailDao.getByIdProduct(id));
+		mv.addObject("Product", productDao.getByProductID(id));
+		mv.addObject("MainImage", imgDao.getByIdProduct(id).get(0));
+		mv.addObject("Images", imgDao.getByIdProduct(id));
+		mv.addObject("ProductTypeList", cateDao.getAllProductType());
+		mv.addObject("SportTypeList", cateDao.getAllSportType());
+
+		return mv;
+	}
+	
 	@RequestMapping(value = { "/admin/addProduct" }, method = RequestMethod.GET)
 	public ModelAndView addProduct(Model model) {
 		ProductDao proDao = new ProductDao();
@@ -354,6 +373,34 @@ public class ProductController {
 				int imp = object.get("import").asInt();
 				
 				int inventory = productdetailDao.getById(id).getInventory() +imp;
+				
+				productdetailDao.importProduct(inventory, id);
+			}
+			System.out.println(jsonObject);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@PostMapping("exportProduct")
+	@ResponseBody
+	public void exportProduct(@RequestParam String datajson) {
+		ObjectMapper objectMapper = new ObjectMapper();
+		
+		JsonNode jsonObject;
+		
+		ProductDetail productdetail = new ProductDetail();
+		ProductDetailDao productdetailDao = new ProductDetailDao();
+		
+		try {
+			jsonObject = objectMapper.readTree(datajson);
+			
+			for (JsonNode object : jsonObject) {
+				int id = object.get("id").asInt();
+				int imp = object.get("export").asInt();
+				
+				int inventory = productdetailDao.getById(id).getInventory() -imp;
 				
 				productdetailDao.importProduct(inventory, id);
 			}

@@ -219,14 +219,14 @@ $("#importProduct").click(function(event) {
 		arrayDetail.push(object);
 	});
 	
-	console.log(arrayDetail);
+	console.log(json);
 	json["listDetail"] = arrayDetail;
 
 	$.ajax({
 		url: "/SportShop/importProduct",
 		type: 'POST',
 		data: {
-			datajson: JSON.stringify(json)
+			datajson: JSON.stringify(arrayDetail)
 		},
 		success: function(value) {
 			swal("Success!", "Import product successfully!", "success");
@@ -236,3 +236,69 @@ $("#importProduct").click(function(event) {
 		}
 	});
 })
+
+$("#exportProduct").click(function(event) {
+	event.preventDefault();
+	var formdata = $("#formExportProduct").serializeArray();
+	json = {};
+	arrayDetail = [];
+	$.each(formdata, function(i, field) {
+		json[field.name] = field.value;
+	});
+	
+	$("#details").each(function() {
+		object = {};
+		id = $(this).find("#id").val();
+		imp = $(this).find("#export").val();
+		object['id'] = id;
+		object['export'] = imp;
+		arrayDetail.push(object);
+	});
+	
+	console.log(arrayDetail);
+	json["listDetail"] = arrayDetail;
+
+	$.ajax({
+		url: "/SportShop/exportProduct",
+		type: 'POST',
+		data: {
+			datajson: JSON.stringify(arrayDetail)
+		},
+		success: function(value) {
+			swal("Success!", "Import product successfully!", "success");
+		},
+		error: function(xhr) {
+			swal("Oops", "Something went wrong!", "error");
+		}
+	});
+})
+
+function editStatus(param) {
+	var id = param;
+	swal({
+		title: "Are you sure?",
+		text: "Once deleted, you will not be able to recover this product!",
+		icon: "warning",
+		buttons: true,
+		dangerMode: true,
+	})
+		.then((willDelete) => {
+			if (willDelete) {
+				$.ajax({
+					url: "/SportShop/editStatus",
+					type: 'get',
+					data: {
+						proItem: id
+					},
+					success: function(value) {
+						console.log(param);
+					},
+					error: function(xhr) {
+
+					}
+				})
+			} else {
+				swal("Your product is safe!");
+			}
+		});
+}
