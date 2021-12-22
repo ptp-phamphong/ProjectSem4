@@ -57,6 +57,41 @@ public class ProductDao {
 		return list;
 	}
 	
+	public ArrayList<Product> getAll_25() {
+		ArrayList<Product> list = new ArrayList<Product>();
+
+		String query = "SELECT TOP 25 * FROM Product";
+		Statement stm;
+		try {
+			CategoryDao categoryDao = new CategoryDao();
+			stm = utilDb.getConnection().createStatement();
+			ResultSet rs = stm.executeQuery(query);
+			while (rs.next()) {
+				Product item = new Product();
+				item.setId(rs.getInt("id"));
+				item.setName(rs.getString("name"));
+				item.setDetails(rs.getString("Details"));
+				item.setDiscount(rs.getInt("Discount"));
+
+            	item.setProductType(categoryDao.getProductTypeByID(rs.getInt("ProductTypeId")));
+            	item.setSportType(categoryDao.getSportTypeByID(rs.getInt("SportTypeId")));
+            	
+            	//Thêm mấy tấm ảnh nữa
+            	ImageDao imageDao = new ImageDao();
+            	item.setImages(imageDao.getByIdProduct(rs.getInt("id")));
+            	
+            	ArrayList<ProductDetail> listProductDetails = new ArrayList<ProductDetail>();
+        		ProductDetailDao productDetailDao = new ProductDetailDao();
+        		item.setProductDetails(productDetailDao.getByIdProduct(rs.getInt("id")));
+        		
+				list.add(item);
+			}
+			return list;
+		} catch (Exception ex) {
+			System.out.print("abc");
+		}
+		return list;
+	}
 	public Product getNewProduct() {
 		String query = "SELECT TOP 1 * FROM Product order by Id desc";
 		Statement stm;
