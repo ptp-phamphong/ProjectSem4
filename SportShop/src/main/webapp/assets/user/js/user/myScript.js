@@ -247,7 +247,10 @@ function addToCart(idProduct) {
 			console.log(data);
 			$('#headerCart').html(data);
 			jQuery("#productstack").load("/SportShop/ajax/productStack");
-
+			jQuery("#headerCart").load("/SportShop/ajax/showHeaderCart");
+			$('#productStackSize').html("("+data+") items");
+			$('#headerCartBadge').html(data);
+			
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
 			alert(XMLHttpRequest + '\nSTATUS: ' + textStatus + '\nERROR THROWN: '
@@ -270,8 +273,10 @@ function addToCartInDetail() {
 		},
 		success: function(data) {
 			console.log(data);
-			$('#headerCart').html(data);
 			jQuery("#productstack").load("/SportShop/ajax/productStack");
+			jQuery("#headerCart").load("/SportShop/ajax/showHeaderCart");
+			$('#productStackSize').html("("+data+") items");
+			$('#headerCartBadge').html(data);
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
 			alert(XMLHttpRequest + '\nSTATUS: ' + textStatus + '\nERROR THROWN: '
@@ -292,6 +297,7 @@ function increase(id) {
 		data: { "idProductDetail": JSON.parse(JSON.stringify(id)) },
 		success: function(data) {
 			$('#mainCart').html(data);
+			jQuery("#headerCart").load("/SportShop/ajax/showHeaderCart");
 			jQuery("#productstack").load("/SportShop/ajax/productStack");
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -312,6 +318,7 @@ function decrease(id) {
 		data: { "idProductDetail": JSON.parse(JSON.stringify(id)) },
 		success: function(data) {
 			$('#mainCart').html(data);
+			jQuery("#headerCart").load("/SportShop/ajax/showHeaderCart");
 			jQuery("#productstack").load("/SportShop/ajax/productStack");
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -330,9 +337,12 @@ function removeItemCart(id) {
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 		data: { "idProductDetail": JSON.parse(JSON.stringify(id)) },
 		success: function(data) {
-			$('#mainCart').html(data);
+			/*$('#mainCart').html(data);*/
+			jQuery("#mainCart").load("/SportShop/ajax/showMainCart");
 			jQuery("#headerCart").load("/SportShop/ajax/showHeaderCart");
 			jQuery("#productstack").load("/SportShop/ajax/productStack");
+			$('#productStackSize').html("("+data+") items");
+			$('#headerCartBadge').html(data);
 
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -379,7 +389,3 @@ function removeFilter(id, type) {
 	});
 	return false;;
 }
-
-
-
-

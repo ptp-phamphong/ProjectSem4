@@ -100,7 +100,7 @@
 	<div class="productStack disable hide_on_scroll">
 		<a href="#" class="toggleStack">
 			<i class="icon icon-cart"></i>
-			(${sessionScope.curCart.size() }) items
+			<span id="productStackSize">(${sessionScope.curCart.size() }) items</span>
 		</a>
 		<div id="productstack" class="productstack-content">
 			<%@include file="/WEB-INF/views/user/productStack.jsp"%>

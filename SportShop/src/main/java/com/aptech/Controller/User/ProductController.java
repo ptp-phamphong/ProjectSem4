@@ -71,8 +71,10 @@ public class ProductController {
 		return mv;
 	}
 
-	@RequestMapping(value = {"/{productType}-{productTypeId:\\d+}/{sportType}-{sportTypeId:\\d+}" }, method = RequestMethod.GET)
-	public ModelAndView showProductbySportType(Model model, @PathVariable(value = "productTypeId") Integer productTypeID,
+	@RequestMapping(value = {
+			"/{productType}-{productTypeId:\\d+}/{sportType}-{sportTypeId:\\d+}" }, method = RequestMethod.GET)
+	public ModelAndView showProductbySportType(Model model,
+			@PathVariable(value = "productTypeId") Integer productTypeID,
 			@PathVariable(value = "sportTypeId") Integer sportTypeID, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		session.removeAttribute("productFilterList");
@@ -85,9 +87,10 @@ public class ProductController {
 		mv.addObject("sportTypeList", categoryDao.getAllSportType());
 		return mv;
 	}
-	
-	@RequestMapping(value = {"/{productType}-{productTypeId:\\d+}" }, method = RequestMethod.GET)
-	public ModelAndView showProductbyType(Model model, @PathVariable(value = "productTypeId") Integer productTypeID, HttpServletRequest request) {
+
+	@RequestMapping(value = { "/{productType}-{productTypeId:\\d+}" }, method = RequestMethod.GET)
+	public ModelAndView showProductbyType(Model model, @PathVariable(value = "productTypeId") Integer productTypeID,
+			HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		session.removeAttribute("productFilterList");
 		ProductDao productDao = new ProductDao();
@@ -110,17 +113,17 @@ public class ProductController {
 		html += "<img src='" + url + "' alt=\"product\" />";
 		return html;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = { "/DeleteProduct" }, method = RequestMethod.GET)
 	public void DeleteProduct(@RequestParam int proItem) {
 		ProductDao proDao = new ProductDao();
 		ProductDetailDao detailDao = new ProductDetailDao();
 		ImageDao imgDao = new ImageDao();
-		
+
 		imgDao.delete(proItem);
 		detailDao.delete(proItem);
-		proDao.delete(proItem);		
+		proDao.delete(proItem);
 	}
 
 	@RequestMapping(value = { "/admin/product/sport/{sport}" }, method = RequestMethod.GET)
@@ -200,7 +203,7 @@ public class ProductController {
 
 		return mv;
 	}
-	
+
 	@RequestMapping(value = { "/admin/importProduct/{id}" }, method = RequestMethod.GET)
 	public ModelAndView importProduct(Model model, @PathVariable("id") int id) {
 		ProductDao productDao = new ProductDao();
@@ -219,7 +222,7 @@ public class ProductController {
 
 		return mv;
 	}
-	
+
 	@RequestMapping(value = { "/admin/addProduct" }, method = RequestMethod.GET)
 	public ModelAndView addProduct(Model model) {
 		ProductDao proDao = new ProductDao();
@@ -228,25 +231,25 @@ public class ProductController {
 		ImageDao imgDao = new ImageDao();
 		model.addAttribute("staff", new Staff());
 		ModelAndView mv = new ModelAndView("admin/addProduct");
-		
+
 		mv.addObject("SizeList", sizeDao.getAll());
 		mv.addObject("ProductTypeList", cateDao.getAllProductType());
 		mv.addObject("SportTypeList", cateDao.getAllSportType());
 
 		return mv;
 	}
-	
+
 	@Autowired
 	ServletContext context;
-	
+
 	@PostMapping("UploadFile")
 	@ResponseBody
 	public String UploadFile(MultipartHttpServletRequest request) {
 		String path_save_file = context.getRealPath("/assets/user/images/products/");
 		Iterator<String> listNames = request.getFileNames();
-		
+
 		MultipartFile mpf = request.getFile(listNames.next());
-		
+
 		File file_save = new File(path_save_file + mpf.getOriginalFilename());
 		try {
 			mpf.transferTo(file_save);
@@ -259,14 +262,14 @@ public class ProductController {
 		}
 		return "true";
 	}
-	
+
 	@PostMapping("UploadFile1")
 	@ResponseBody
 	public String UploadFile1(MultipartHttpServletRequest request) {
 		String path_save_file = context.getRealPath("/assets/user/images/products/");
 		Iterator<String> listNames = request.getFileNames();
 		MultipartFile mpf = request.getFile(listNames.next());
-		
+
 		File file_save = new File(path_save_file + mpf.getOriginalFilename());
 		try {
 			mpf.transferTo(file_save);
@@ -279,14 +282,14 @@ public class ProductController {
 		}
 		return "true";
 	}
-	
+
 	@PostMapping("UploadFile2")
 	@ResponseBody
 	public String UploadFile2(MultipartHttpServletRequest request) {
 		String path_save_file = context.getRealPath("/assets/user/images/products/");
 		Iterator<String> listNames = request.getFileNames();
 		MultipartFile mpf = request.getFile(listNames.next());
-		
+
 		File file_save = new File(path_save_file + mpf.getOriginalFilename());
 		try {
 			mpf.transferTo(file_save);
@@ -299,26 +302,26 @@ public class ProductController {
 		}
 		return "true";
 	}
-	
+
 	@PostMapping("editProduct")
 	@ResponseBody
 	public void editProduct(@RequestParam String datajson) {
 		ObjectMapper objectMapper = new ObjectMapper();
-		
+
 		JsonNode jsonObject;
 		try {
 			Product product = new Product();
 			ProductDao proDao = new ProductDao();
 			jsonObject = objectMapper.readTree(datajson);
-			
+
 			String name = jsonObject.get("name").asText();
 			String detail = jsonObject.get("details").asText();
 			int discount = jsonObject.get("discount").asInt();
 			int type = jsonObject.get("productType").asInt();
 			int sport = jsonObject.get("sportType").asInt();
 			int id = jsonObject.get("id").asInt();
-			
-			if(sport==-1) {
+
+			if (sport == -1) {
 				SportType Newsport = new SportType();
 				CategoryDao cateDao = new CategoryDao();
 				String sportName = jsonObject.get("other").asText();
@@ -326,8 +329,7 @@ public class ProductController {
 				Newsport = cateDao.getNewSport();
 				int newSport = Newsport.getId();
 				proDao.edit(type, newSport, name, detail, discount, id);
-			}
-			else {
+			} else {
 				proDao.edit(type, sport, name, detail, discount, id);
 			}
 		} catch (IOException e) {
@@ -335,26 +337,26 @@ public class ProductController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@PostMapping("importProduct")
 	@ResponseBody
 	public void importProduct(@RequestParam String datajson) {
 		ObjectMapper objectMapper = new ObjectMapper();
-		
+
 		JsonNode jsonObject;
-		
+
 		ProductDetail productdetail = new ProductDetail();
 		ProductDetailDao productdetailDao = new ProductDetailDao();
-		
+
 		try {
 			jsonObject = objectMapper.readTree(datajson);
-			
+
 			for (JsonNode object : jsonObject) {
 				int id = object.get("id").asInt();
 				int imp = object.get("import").asInt();
-				
-				int inventory = productdetailDao.getById(id).getInventory() +imp;
-				
+
+				int inventory = productdetailDao.getById(id).getInventory() + imp;
+
 				productdetailDao.importProduct(inventory, id);
 			}
 			System.out.println(jsonObject);
@@ -363,25 +365,25 @@ public class ProductController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@PostMapping("addNewProduct")
 	@ResponseBody
 	public void addNewProduct(@RequestParam String datajson) {
 		ObjectMapper objectMapper = new ObjectMapper();
-		
+
 		JsonNode jsonObject;
 		try {
 			Product product = new Product();
 			ProductDao proDao = new ProductDao();
 			jsonObject = objectMapper.readTree(datajson);
-			
+
 			String name = jsonObject.get("name").asText();
 			String detail = jsonObject.get("details").asText();
 			int discount = jsonObject.get("discount").asInt();
 			int type = jsonObject.get("productType").asInt();
 			int sport = jsonObject.get("sportType").asInt();
-			
-			if(sport==-1) {
+
+			if (sport == -1) {
 				SportType Newsport = new SportType();
 				CategoryDao cateDao = new CategoryDao();
 				String sportName = jsonObject.get("other").asText();
@@ -389,15 +391,14 @@ public class ProductController {
 				Newsport = cateDao.getNewSport();
 				int newSport = Newsport.getId();
 				proDao.add(type, newSport, name, detail, discount);
-			}
-			else {
+			} else {
 				proDao.add(type, sport, name, detail, discount);
 			}
-			
+
 			product = proDao.getNewProduct();
-			
+
 			JsonNode jsonDetail = jsonObject.get("ProductDetails");
-			
+
 			for (JsonNode objectDetail : jsonDetail) {
 				ProductDetailDao productDetailDao = new ProductDetailDao();
 				int size = objectDetail.get("size").asInt();
@@ -406,7 +407,7 @@ public class ProductController {
 				int inventory = objectDetail.get("inventory").asInt();
 				productDetailDao.add(size, proId, inventory, price);
 			}
-			
+
 			JsonNode jsonImage = jsonObject.get("Images");
 			for (JsonNode objectImage : jsonImage) {
 				ImageDao imgDao = new ImageDao();
@@ -484,6 +485,22 @@ public class ProductController {
 	@RequestMapping(value = { "/ajax/showProductList" }, method = RequestMethod.GET)
 	public ModelAndView showProductList(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("/user/productList");
+		return mv;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = { "/ajax/quickView/{productID}" }, method = RequestMethod.GET)
+	public ModelAndView showquickView(HttpServletRequest request, @PathVariable("productID") int productID) {
+		ProductDao productDao = new ProductDao();
+
+		ModelAndView mv = new ModelAndView("/user/quick-view");
+		mv.addObject("product", productDao.getByProductID(productID));
+		// Lấy ra các productDetails thuộc về sản phẩm này để hiển thị bên view
+		ArrayList<ProductDetail> listProductDetails = new ArrayList<ProductDetail>();
+		ProductDetailDao productDetailDao = new ProductDetailDao();
+		listProductDetails = productDetailDao.getByIdProduct(productID);
+		mv.addObject("listProductDetails", listProductDetails);
+
 		return mv;
 	}
 }

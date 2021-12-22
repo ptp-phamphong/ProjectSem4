@@ -311,6 +311,24 @@ $(function() {
 						'display': 'block'
 					});
 					$('.product-item').removeClass('hover');
+					
+					$.ajax({
+						url: "/SportShop/ajax/getCartSize",
+						type: "POST",
+						contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+						success: function(data) {
+							console.log(data);
+							jQuery("#headerCart").load("/SportShop/ajax/showHeaderCart");
+							jQuery("#productstack").load("/SportShop/ajax/productStack");
+							$('#productStackSize').html("(" + data + ") items");
+							$('#headerCartBadge').html(data);
+						},
+						error: function(XMLHttpRequest, textStatus, errorThrown) {
+							alert(XMLHttpRequest + '\nSTATUS: ' + textStatus + '\nERROR THROWN: '
+								+ errorThrown);
+
+						}
+					});
 				})
 				$modal.modal('show');
 				e.preventDefault();
@@ -734,9 +752,9 @@ $(function() {
 	$.fn.hideShopBy = function() {
 		var $content = this,
 			$filters = $('.selected-filters', $content);
-		if (!$filters.length || $filters.html().trim() === "") 
-			$content.closest('.sidebar-block-top').hide(); 
-		else 
+		if (!$filters.length || $filters.html().trim() === "")
+			$content.closest('.sidebar-block-top').hide();
+		else
 			$content.closest('.sidebar-block-top').show();
 	}
 

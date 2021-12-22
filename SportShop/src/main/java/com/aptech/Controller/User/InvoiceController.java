@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
+import com.aptech.Dao.CategoryDao;
 import com.aptech.Dao.InvoiceDao;
 import com.aptech.Dao.InvoiceDetailDao;
 import com.aptech.Model.Cart;
@@ -25,7 +28,7 @@ public class InvoiceController {
 
 	// Hàm xử lý check out
 	@RequestMapping(value = { "/checkOutHandelling" }, method = RequestMethod.GET)
-	public ModelAndView checkOutHandelling(Model model, HttpServletRequest request) {
+	public RedirectView checkOutHandelling(Model model, HttpServletRequest request, RedirectAttributes redir) {
 		model.addAttribute("customer", new Customer());
 		HttpSession session = request.getSession();
 		// Lấy khách hiện tại ra
@@ -66,11 +69,15 @@ public class InvoiceController {
 			invoiceDetailDao.addNew(invoiceDetail);
 		}
 		// Xóa session Cart đi
+		
 		session.removeAttribute("curCart");
+		String url = "/account/"+currentCustomer.getId()+"/ShoppingHistory";
+		RedirectView redirectView = new RedirectView("/account/"+currentCustomer.getId()+"/ShoppingHistory", true);
+//		redir.addFlashAttribute("listInvoice", invoiceDao.getAll() );
+//		redir.addFlashAttribute("productTypeList", categoryDao.getAllProductType() );
+//		redir.addFlashAttribute("sportTypeList", categoryDao.getAllSportType() );
 
-		ModelAndView mv = new ModelAndView("/user/ShoppingHistory");
-		mv.addObject("listInvoice", invoiceDao.getAll());
-		return mv;
+		return redirectView;
 	}
 
 	// Hàm đưa người dùng ra lịch sử mua hàng
@@ -78,8 +85,10 @@ public class InvoiceController {
 	public ModelAndView ShoppingHistory(Model model, HttpServletRequest request, @PathVariable int accountID) {
 		ModelAndView mv = new ModelAndView("/user/ShoppingHistory");
 		InvoiceDao invoiceDao = new InvoiceDao();
+		CategoryDao categoryDao = new CategoryDao();
 		mv.addObject("listInvoice", invoiceDao.getAll());
-		
+		mv.addObject("productTypeList", categoryDao.getAllProductType());
+		mv.addObject("sportTypeList", categoryDao.getAllSportType());
 		
 		
 		return mv;

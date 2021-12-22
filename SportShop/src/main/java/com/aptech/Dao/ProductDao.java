@@ -24,7 +24,7 @@ public class ProductDao {
 	public ArrayList<Product> getAll() {
 		ArrayList<Product> list = new ArrayList<Product>();
 
-		String query = "SELECT * FROM Product";
+		String query = "SELECT TOP 25 * FROM Product";
 		Statement stm;
 		try {
 			CategoryDao categoryDao = new CategoryDao();
@@ -249,6 +249,7 @@ public class ProductDao {
 				
             	ImageDao imageDao = new ImageDao();
             	item.setImages(imageDao.getByIdProduct(rs.getInt("id")));
+            	
 
 				return item;
 			}
