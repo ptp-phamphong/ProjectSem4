@@ -173,6 +173,17 @@ public class CartController {
 		return curCart.size();
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = { "/ajax/clearAllCart" }, method = RequestMethod.POST)
+	public int clearAllCart(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.removeAttribute("curCart");
+		
+		ArrayList<Cart> curCart = new ArrayList<Cart>();		
+		session.setAttribute("curCart", curCart);
+		return curCart.size();
+	}
+	
 	// Hết hàm rồi đấy, đmẹ đáng lẽ nên xài cái service
 
 	// Các hàm tự viết

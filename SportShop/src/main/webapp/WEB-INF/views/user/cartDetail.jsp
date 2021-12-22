@@ -143,7 +143,7 @@
 						<div class="text-empty-cart-2">EMPTY</div>
 					</div>
 					<div>
-						<a href="#" class="btn">back to previous page</a>
+						<a href='<c:url value="/all-product"/>'" class="btn">back to previous page</a>
 					</div>
 				</div>
 			</div>

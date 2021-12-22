@@ -70,7 +70,7 @@
 										<!-- Product Actions -->
 										<div class="product-item-actions">
 											<div class="actions-secondary">
-												<a href="" title="Quick View" class="quick-view-link quick-view-btn">
+												<a href='<c:url value="/ajax/quickView/${item.getId() }"/>' title="Quick View" class="quick-view-link quick-view-btn">
 													<i class="icon icon-eye"></i>
 													<span>Quick View</span>
 												</a>
@@ -216,7 +216,7 @@
 										<!-- Product Actions -->
 										<div class="product-item-actions">
 											<div class="actions-secondary">
-												<a href="" title="Quick View" class="quick-view-link quick-view-btn">
+												<a href='<c:url value="/ajax/quickView/${item.getId() }"/>' title="Quick View" class="quick-view-link quick-view-btn">
 													<i class="icon icon-eye"></i>
 													<span>Quick View</span>
 												</a>

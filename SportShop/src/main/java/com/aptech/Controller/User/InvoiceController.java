@@ -71,6 +71,8 @@ public class InvoiceController {
 		// Xóa session Cart đi
 		
 		session.removeAttribute("curCart");
+		curCart = new ArrayList<Cart>();		
+		session.setAttribute("curCart", curCart);
 		String url = "/account/"+currentCustomer.getId()+"/ShoppingHistory";
 		RedirectView redirectView = new RedirectView("/account/"+currentCustomer.getId()+"/ShoppingHistory", true);
 //		redir.addFlashAttribute("listInvoice", invoiceDao.getAll() );
