@@ -41,16 +41,16 @@ public class HomeController {
 
 	@RequestMapping(value = { "/admin/" }, method = RequestMethod.GET)
 	public ModelAndView AdminView(Model model, HttpServletRequest request) {
-		model.getAttribute("staff");
-		ModelAndView mv = new ModelAndView("admin/index");
+		ModelAndView mv;
+		mv = new ModelAndView("admin/index");
 		ProductDao productDao = new ProductDao();
 		CategoryDao cateDao = new CategoryDao();
-		model.addAttribute("customer", new Customer());
+		model.addAttribute("staff", new Staff());
 
 		mv.addObject("ProductTypeList", cateDao.getAllProductType());
 		mv.addObject("SportTypeList", cateDao.getAllSportType());
 		mv.addObject("listProduct", productDao.getAll());
-		
+
 		return mv;
 	}
 }

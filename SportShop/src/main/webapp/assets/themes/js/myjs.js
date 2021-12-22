@@ -1,4 +1,3 @@
-// Ajax đổi hình ảnh ở product detail
 function changeImage(param) {
 	var idImg = param;
 	$.ajax({
@@ -332,3 +331,143 @@ function deleteAccount(param) {
 			}
 		});
 }
+
+function editStatusAdmin(param) {
+	var id = param;
+	swal({
+		title: "Are you sure?",
+		text: "Want to change the status of this account?",
+		icon: "warning",
+		buttons: true,
+		dangerMode: true,
+	})
+		.then((willDelete) => {
+			if (willDelete) {
+				$.ajax({
+					url: "/SportShop/editStatusAdmin",
+					type: 'get',
+					data: {
+						acc: id
+					},
+					success: function(value) {
+						window.location.reload(".customerDetail");
+					},
+					error: function(xhr) {
+
+					}
+				})
+			} else {
+				swal("Cancel success!");
+			}
+		});
+}
+
+function deleteAccountAdmin(param) {
+	var id = param;
+	swal({
+		title: "Are you sure?",
+		text: "Want to change the status of this account?",
+		icon: "warning",
+		buttons: true,
+		dangerMode: true,
+	})
+		.then((willDelete) => {
+			if (willDelete) {
+				$.ajax({
+					url: "/SportShop/deleteAccountAdmin",
+					type: 'get',
+					data: {
+						acc: id
+					},
+					success: function(value) {
+						window.location.reload("#example");
+					},
+					error: function(xhr) {
+						swal("Oops", "Something went wrong!", "error");
+					}
+				})
+			} else {
+				swal("Cancel success!");
+			}
+		});
+}
+
+function process(param, param2) {
+	var id = param;
+	var staffId = param2
+	swal({
+		title: "Are you sure?",
+		text: "Want to process now?",
+		icon: "warning",
+		buttons: true,
+		dangerMode: true,
+	})
+		.then((willDelete) => {
+			if (willDelete) {
+				$.ajax({
+					url: "/SportShop/process",
+					type: 'get',
+					data: {
+						inv: id,
+						staff: staffId
+					},
+					success: function(value) {
+						window.location.reload(".invoiceDetail");
+					},
+					error: function(xhr) {
+
+					}
+				})
+			} else {
+				swal("Cancel success!");
+			}
+		});
+}
+
+$("#editAccount").click(function(event) {
+	event.preventDefault();
+	var formdata = $("#formEditAccountAdmin").serializeArray();
+	json = {};
+	$.each(formdata, function(i, field) {
+		json[field.name] = field.value;
+	});
+
+	$.ajax({
+		url: "/SportShop/editProfileAdmin",
+		type: 'POST',
+		data: {
+			datajson: JSON.stringify(json)
+		},
+		success: function(value) {
+			swal("Success!", "Edit product information successfully!", "success");
+		},
+		error: function(xhr) {
+			swal("Oops", "Something went wrong!", "error");
+		}
+	});
+	console.log(formdata);
+})
+
+$("#changePassword").click(function(event) {
+	event.preventDefault();
+	var formdata = $("#changePasswordAdmin").serializeArray();
+	json = {};
+	$.each(formdata, function(i, field) {
+		json[field.name] = field.value;
+	});
+
+	$.ajax({
+		url: "/SportShop/changePasswordAdmin",
+		type: 'POST',
+		data: {
+			datajson: JSON.stringify(json)
+		},
+		success: function(value) {
+			swal("Success!", "Change password successfully!", "success");
+		},
+		error: function(xhr) {
+			swal("Oops", "Something went wrong!", "error");
+		}
+	});
+	console.log(formdata);
+})

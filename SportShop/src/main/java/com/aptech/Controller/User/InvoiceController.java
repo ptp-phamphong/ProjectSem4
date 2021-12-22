@@ -11,14 +11,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.aptech.Dao.CategoryDao;
+import com.aptech.Dao.CustomerDao;
+import com.aptech.Dao.ImageDao;
 import com.aptech.Dao.InvoiceDao;
 import com.aptech.Dao.InvoiceDetailDao;
+import com.aptech.Dao.ProductDao;
+import com.aptech.Dao.ProductDetailDao;
 import com.aptech.Model.Cart;
 import com.aptech.Model.Customer;
 import com.aptech.Model.Invoice;
 import com.aptech.Model.InvoiceDetail;
+import com.aptech.Model.Staff;
 
 @Controller
 public class InvoiceController {
@@ -83,5 +91,47 @@ public class InvoiceController {
 		
 		
 		return mv;
+	}
+	
+	@RequestMapping(value = { "admin/invoiceList" }, method = RequestMethod.GET)
+	public ModelAndView invoiceList(Model model) {
+		ProductDao productDao = new ProductDao();
+		CategoryDao cateDao = new CategoryDao();
+		model.addAttribute("staff", new Staff());
+		InvoiceDao invoiceDao = new InvoiceDao();
+		model.addAttribute("invoiceList", invoiceDao.getAll());
+		ModelAndView mv = new ModelAndView("admin/invoiceList");
+		
+		mv.addObject("ProductTypeList", cateDao.getAllProductType());
+		mv.addObject("SportTypeList", cateDao.getAllSportType());
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = { "/admin/invoiceDetail/{id}" }, method = RequestMethod.GET)
+	public ModelAndView invoiceDetail(Model model, @PathVariable("id") int id) {
+		InvoiceDao invDao = new InvoiceDao();
+		Invoice inv = invDao.getById(id);
+		InvoiceDetailDao invDetailDao = new InvoiceDetailDao();
+		CategoryDao cateDao = new CategoryDao();
+		
+		model.addAttribute("staff", new Staff());
+		
+		ModelAndView mv = new ModelAndView("admin/invoiceDetail");
+		
+		mv.addObject("InvoiceDetail", invDetailDao.getByInvoiceId(id));
+		mv.addObject("invoice", invDao.getById(id));
+		mv.addObject("ProductTypeList", cateDao.getAllProductType());
+		mv.addObject("SportTypeList", cateDao.getAllSportType());
+
+		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = { "/process" }, method = RequestMethod.GET)
+	public void process(@RequestParam int inv, @RequestParam int staff) {
+		
+		InvoiceDao invDao = new InvoiceDao();
+		invDao.process(inv, staff);
 	}
 }

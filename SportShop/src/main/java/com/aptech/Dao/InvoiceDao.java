@@ -3,6 +3,7 @@ package com.aptech.Dao;
 import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -95,5 +96,46 @@ public class InvoiceDao {
 
 		return null;
 	}
+	
+	public Invoice getById(int id) {
+		String query = "SELECT * FROM Invoice WHERE Id ="+id;
+		Statement stm;
+		try {
+			stm = utilDb.getConnection().createStatement();
+			ResultSet rs = stm.executeQuery(query);
+			if (rs.next()) {
+				Invoice item = new Invoice();
+				item.setId(rs.getInt("Id"));
+				item.setCreateDate(rs.getDate("CreateDate"));
+				item.setTotalPrice(rs.getInt("TotalPrice"));
+				
+				StaffDao staffDao = new StaffDao();
+				item.setStaff(staffDao.getAccount(rs.getInt("StaffId")));
+				CustomerDao customerDao = new CustomerDao();
+				item.setCustomer(customerDao.getAccount(rs.getInt("CustomerId")));
+				return item;
+			}
 
+		} catch (Exception ex) {
+		}
+
+		return null;
+	}
+	
+	public boolean process(int staffId,int id){
+        String sql="update Invoice set StaffId=? where Id=?";
+        try{
+            PreparedStatement pstm=utilDb.getConnection().prepareStatement(sql);
+            pstm.setInt(1, staffId);
+            pstm.setInt(2, id);
+            int rs = pstm.executeUpdate();
+            if(rs!=0){
+                return true;         
+            }  
+        }
+        catch(SQLException ex){
+        	System.out.print("abc");
+        }
+        return false;  
+    }
 }

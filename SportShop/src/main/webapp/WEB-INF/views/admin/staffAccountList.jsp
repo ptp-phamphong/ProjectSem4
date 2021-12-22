@@ -27,9 +27,9 @@
 						<p style="color: red">Negative</p>
 					</c:if></td>
 				<td><a class="btn btn-success"
-					href='<c:url value = "/admin/customerDetail/${item.getId()}"></c:url>'>Detail</a>
+					href='<c:url value = "/admin/staffDetail/${item.getId()}"></c:url>'>Detail</a>
 					<button id="deleteAccount" class="btn btn-danger"
-						onclick="deleteAccount('${item.getId()}')">Delete</button></td>
+						onclick="deleteAccountAdmin('${item.getId()}')">Delete</button></td>
 			</tr>
 		</c:forEach>
 	</tbody>

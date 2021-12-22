@@ -130,7 +130,7 @@ div.dataTables_wrapper {
 				<div class="modal-footer">
 					<button class="btn btn-secondary" type="button"
 						data-dismiss="modal">Cancel</button>
-					<a class="btn btn-primary" href="login.html">Logout</a>
+					<a class="btn btn-primary" href='<c:url value = "/admin/logoutAdminHandelling"></c:url>'>Logout</a>
 				</div>
 			</div>
 		</div>
