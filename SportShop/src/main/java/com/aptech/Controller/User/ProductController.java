@@ -14,6 +14,7 @@ import java.util.Set;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
@@ -56,7 +57,9 @@ import antlr.collections.List;
 public class ProductController {
 
 	@RequestMapping(value = { "/all-product" }, method = RequestMethod.GET)
-	public ModelAndView showProductList(Model model) {
+	public ModelAndView showProductList(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.removeAttribute("productFilterList");
 		ProductDao productDao = new ProductDao();
 		CategoryDao categoryDao = new CategoryDao();
 		model.addAttribute("customer", new Customer());
@@ -70,7 +73,9 @@ public class ProductController {
 
 	@RequestMapping(value = {"/{productType}-{productTypeId:\\d+}/{sportType}-{sportTypeId:\\d+}" }, method = RequestMethod.GET)
 	public ModelAndView showProductbySportType(Model model, @PathVariable(value = "productTypeId") Integer productTypeID,
-			@PathVariable(value = "sportTypeId") Integer sportTypeID) {
+			@PathVariable(value = "sportTypeId") Integer sportTypeID, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.removeAttribute("productFilterList");
 		ProductDao productDao = new ProductDao();
 		CategoryDao categoryDao = new CategoryDao();
 		model.addAttribute("customer", new Customer());
@@ -82,8 +87,9 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = {"/{productType}-{productTypeId:\\d+}" }, method = RequestMethod.GET)
-	public ModelAndView showProductbyType(Model model, @PathVariable(value = "productTypeId") Integer productTypeID) {
-		
+	public ModelAndView showProductbyType(Model model, @PathVariable(value = "productTypeId") Integer productTypeID, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.removeAttribute("productFilterList");
 		ProductDao productDao = new ProductDao();
 		CategoryDao categoryDao = new CategoryDao();
 		model.addAttribute("customer", new Customer());
