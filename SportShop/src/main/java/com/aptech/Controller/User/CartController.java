@@ -46,7 +46,7 @@ public class CartController {
 	// Thêm sản phẩm vào giỏ hàng ở trang danh sách toàn bộ sản phẩm
 	@ResponseBody
 	@RequestMapping(value = { "/ajax/addItemToCart" }, method = RequestMethod.POST)
-	public ModelAndView addItemToCart(HttpServletRequest request) {
+	public int addItemToCart(HttpServletRequest request) {
 		ProductDetailDao productDetailDao = new ProductDetailDao();
 		ProductDetail productToCart = new ProductDetail();
 		int quantity = 1;
@@ -60,25 +60,21 @@ public class CartController {
 			productToCart = productDetailDao.getById(Integer.parseInt(request.getParameter("idProductDetails")));
 		}
 
-		addItemToCartHandelling(productToCart, quantity, request);
-		ModelAndView mv = new ModelAndView("/layouts/user/headerCart");
-		return mv;
+//		ModelAndView mv = new ModelAndView("/layouts/user/headerCart");
+		return addItemToCartHandelling(productToCart, quantity, request);
 	}
 
 	// Thêm sản phẩm vào giỏ hàng ở chi tiết sản phẩm
 	@ResponseBody
 	@RequestMapping(value = { "/ajax/addItemToCartInDetail" }, method = RequestMethod.GET)
-	public ModelAndView addItemToCartInDetail(@ModelAttribute Customer customer, BindingResult bindingResult,
+	public int addItemToCartInDetail(@ModelAttribute Customer customer, BindingResult bindingResult,
 			HttpServletRequest request) {
 		ProductDetailDao productDetailDao = new ProductDetailDao();
 		ProductDetail productToCart = new ProductDetail();
 		int quantity = Integer.parseInt(request.getParameter("quantity").toString());
 		productToCart = productDetailDao.getById(Integer.parseInt(request.getParameter("idProduct")));
 
-		addItemToCartHandelling(productToCart, quantity, request);
-
-		ModelAndView mv = new ModelAndView("/layouts/user/headerCart");
-		return mv;
+		return addItemToCartHandelling(productToCart, quantity, request);
 	}
 
 	// Hàm Ajax tăng số lượng trong giỏ hàng
@@ -127,7 +123,7 @@ public class CartController {
 	// Hàm ajax, xóa 1 phần tử khỏi giỏ hàng
 	@ResponseBody
 	@RequestMapping(value = { "/ajax/removeItemCart" }, method = RequestMethod.POST)
-	public ModelAndView removeItemCart(HttpServletRequest request) {
+	public int removeItemCart(HttpServletRequest request) {
 		int idProductDetail = Integer.parseInt(request.getParameter("idProductDetail"));
 		HttpSession session = request.getSession();
 		ArrayList<Cart> curCart = new ArrayList<Cart>();
@@ -140,8 +136,8 @@ public class CartController {
 			}
 		}
 
-		ModelAndView mv = new ModelAndView("user/cartDetail");
-		return mv;
+		
+		return curCart.size();
 	}
 
 	// Trả về header Cart để in ra.
@@ -158,11 +154,40 @@ public class CartController {
 		ModelAndView mv = new ModelAndView("/user/productStack");
 		return mv;
 	}
-
+	
+	@RequestMapping(value = { "/ajax/showMainCart" }, method = RequestMethod.GET)
+	public ModelAndView showMainCart() {
+		ModelAndView mv = new ModelAndView("user/cartDetail");
+		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = { "/ajax/getCartSize" }, method = RequestMethod.POST)
+	public int getCartSize(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		ArrayList<Cart> curCart = new ArrayList<Cart>();
+		curCart = (ArrayList<Cart>) session.getAttribute("curCart");
+		if (curCart == null) {
+			return 0;
+		}
+		return curCart.size();
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = { "/ajax/clearAllCart" }, method = RequestMethod.POST)
+	public int clearAllCart(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.removeAttribute("curCart");
+		
+		ArrayList<Cart> curCart = new ArrayList<Cart>();		
+		session.setAttribute("curCart", curCart);
+		return curCart.size();
+	}
+	
 	// Hết hàm rồi đấy, đmẹ đáng lẽ nên xài cái service
 
 	// Các hàm tự viết
-	private void addItemToCartHandelling(ProductDetail productToCart, int quantity, HttpServletRequest request) {
+	private int addItemToCartHandelling(ProductDetail productToCart, int quantity, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		ArrayList<Cart> curCart = new ArrayList<Cart>();
 		curCart = (ArrayList<Cart>) session.getAttribute("curCart");
@@ -176,7 +201,7 @@ public class CartController {
 			newItem.setProductDetailsID(productToCart.getId());
 			curCart.add(newItem);
 			session.setAttribute("curCart", curCart);
-			return;
+			return curCart.size();
 		}
 
 		// Nếu trong cart có gì đó rồi, thì phải xét xem món đó đã từng nằm trong cart
@@ -185,7 +210,7 @@ public class CartController {
 			if (productToCart.getId() == curCart.get(i).getProductDetailsID()) {// Nếu từng có rồi
 				curCart.get(i).setQuantity(curCart.get(i).getQuantity() + quantity);
 				session.setAttribute("curCart", curCart);
-				return;
+				return curCart.size();
 			}
 		}
 
@@ -197,6 +222,7 @@ public class CartController {
 		newItem.setProductDetailsID(productToCart.getId());
 		curCart.add(newItem);
 		session.setAttribute("curCart", curCart);
+		return curCart.size();
 	}
 
 }

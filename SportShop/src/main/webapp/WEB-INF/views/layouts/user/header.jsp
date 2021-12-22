@@ -4,10 +4,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <!-- Header Cart -->
-<div id="headerCart">
-	<%@include file="/WEB-INF/views/layouts/user/headerCart.jsp"%>
+<div class="header-link dropdown-link header-cart variant-1">
+	<a href='<c:url value="/cart"></c:url>'>
+		<i class="icon icon-cart"></i>
+		<span id="headerCartBadge" class="badge">${sessionScope.curCart.size() }</span>
+	</a>
+	<!-- minicart wrapper -->
+	<div class="dropdown-container right">
+		<div id="headerCart">
+			<%@include file="/WEB-INF/views/layouts/user/headerCart.jsp"%>
+		</div>
+	</div>
 </div>
-
 <!-- /Header Cart -->
 
 <!-- Header Links -->

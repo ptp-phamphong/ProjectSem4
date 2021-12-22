@@ -16,7 +16,7 @@
 	<ul class="selected-filters">
 		<c:forEach var="filterInputItem" items="${sessionScope.productFilterList }">
 			<li>
-				<a href="#">
+				<a href="#" onclick="return removeFilter(${filterInputItem.getFilterItemId()}, '${filterInputItem.getFilterItemType() }')">
 					<span>${filterInputItem.getFilterItemName() }</span>
 					<span class="remove">
 						<i class="icon icon-close"></i>
