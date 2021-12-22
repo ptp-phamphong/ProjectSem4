@@ -209,7 +209,7 @@ $("#importProduct").click(function(event) {
 	$.each(formdata, function(i, field) {
 		json[field.name] = field.value;
 	});
-	
+
 	$("#details").each(function() {
 		object = {};
 		id = $(this).find("#id").val();
@@ -218,7 +218,7 @@ $("#importProduct").click(function(event) {
 		object['import'] = imp;
 		arrayDetail.push(object);
 	});
-	
+
 	console.log(json);
 	json["listDetail"] = arrayDetail;
 
@@ -245,7 +245,7 @@ $("#exportProduct").click(function(event) {
 	$.each(formdata, function(i, field) {
 		json[field.name] = field.value;
 	});
-	
+
 	$("#details").each(function() {
 		object = {};
 		id = $(this).find("#id").val();
@@ -254,7 +254,7 @@ $("#exportProduct").click(function(event) {
 		object['export'] = imp;
 		arrayDetail.push(object);
 	});
-	
+
 	console.log(arrayDetail);
 	json["listDetail"] = arrayDetail;
 
@@ -277,7 +277,7 @@ function editStatus(param) {
 	var id = param;
 	swal({
 		title: "Are you sure?",
-		text: "Once deleted, you will not be able to recover this product!",
+		text: "Want to change the status of this account?",
 		icon: "warning",
 		buttons: true,
 		dangerMode: true,
@@ -288,17 +288,47 @@ function editStatus(param) {
 					url: "/SportShop/editStatus",
 					type: 'get',
 					data: {
-						proItem: id
+						acc: id
 					},
 					success: function(value) {
-						console.log(param);
+						window.location.reload(".customerDetail");
 					},
 					error: function(xhr) {
 
 					}
 				})
 			} else {
-				swal("Your product is safe!");
+				swal("Cancel success!");
+			}
+		});
+}
+
+function deleteAccount(param) {
+	var id = param;
+	swal({
+		title: "Are you sure?",
+		text: "Want to change the status of this account?",
+		icon: "warning",
+		buttons: true,
+		dangerMode: true,
+	})
+		.then((willDelete) => {
+			if (willDelete) {
+				$.ajax({
+					url: "/SportShop/deleteAccount",
+					type: 'get',
+					data: {
+						acc: id
+					},
+					success: function(value) {
+						window.location.reload("#example");
+					},
+					error: function(xhr) {
+						swal("Oops", "Something went wrong!", "error");
+					}
+				})
+			} else {
+				swal("Cancel success!");
 			}
 		});
 }

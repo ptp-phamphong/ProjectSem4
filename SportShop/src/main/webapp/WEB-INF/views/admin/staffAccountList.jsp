@@ -3,13 +3,13 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-<p>List of customer account</p>
+<p>List of staff account</p>
 <hr>
 <table id="example" class="display" style="width: 100%">
 	<thead>
 		<tr>
 			<th>Full name</th>
-			<th>Email</th>
+			<th>Username</th>
 			<th>Phone number</th>
 			<th>Status</th>
 			<th></th>
@@ -19,7 +19,7 @@
 		<c:forEach items="${accountList}" var="item" varStatus="index">
 			<tr>
 				<td>${item.getFullName() }</td>
-				<td>${item.getEmail() }</td>
+				<td>${item.getUsername() }</td>
 				<td>${item.getPhoneNumber() }</td>
 				<td><c:if test="${item.getStatus()}">
 						<p style="color: #7CFC00">Active</p>
@@ -36,7 +36,7 @@
 	<tfoot>
 		<tr>
 			<th>Full name</th>
-			<th>Email</th>
+			<th>Username</th>
 			<th>Phone number</th>
 			<th>Status</th>
 			<th></th>

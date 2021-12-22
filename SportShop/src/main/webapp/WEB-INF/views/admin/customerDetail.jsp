@@ -38,11 +38,10 @@
 					</p>
 					<hr>
 					<c:if test="${Customer.getStatus()}">
-						<button id="turnOff" class="btn btn-danger" onclick="editStatus('active')" >Turn off</button>
+						<button id="turnOff" class="btn btn-danger" onclick="editStatus('${Customer.getId()}')" >Turn off</button>
 					</c:if>
 					<c:if test="${Customer.getStatus()==false}">
-						<button id="turnOn" class="btn btn-success">Turn on</button>
-						<button id="deleteAccount" class="btn btn-danger">Delete</button>
+						<button id="turnOn" class="btn btn-success" onclick="editStatus('${Customer.getId()}')">Turn on</button>
 					</c:if>
 				</div>
 				<div class="col-4">

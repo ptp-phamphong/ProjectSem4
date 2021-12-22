@@ -102,7 +102,7 @@
 		<div class="bg-white py-2 collapse-inner rounded">
 			<h6 class="collapse-header">See the list:</h6>
 			<a class="collapse-item" href='<c:url value = "/admin/customerList"></c:url>'>Customer</a> <a
-				class="collapse-item" href='<c:url value = "/admin/staffList"></c:url>'>Staff</a>
+				class="collapse-item" href='<c:url value = "/admin/staffAccountList"></c:url>'>Staff</a>
 		</div>
 	</div></li>
 

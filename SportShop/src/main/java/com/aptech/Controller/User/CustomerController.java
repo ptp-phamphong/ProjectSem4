@@ -104,6 +104,21 @@ public class CustomerController {
 		return mv;
 	}
 	
+	@RequestMapping(value = { "admin/staffAccountList" }, method = RequestMethod.GET)
+	public ModelAndView staffAccountList(Model model) {
+		ProductDao productDao = new ProductDao();
+		CategoryDao cateDao = new CategoryDao();
+		model.addAttribute("staff", new Staff());
+		StaffDao staffDao = new StaffDao();
+		model.addAttribute("accountList", staffDao.getAll());
+		ModelAndView mv = new ModelAndView("admin/staffAccountList");
+		
+		mv.addObject("ProductTypeList", cateDao.getAllProductType());
+		mv.addObject("SportTypeList", cateDao.getAllSportType());
+		
+		return mv;
+	}
+	
 	@RequestMapping(value = { "/admin/customerDetail/{id}" }, method = RequestMethod.GET)
 	public ModelAndView exportProduct(Model model, @PathVariable("id") int id) {
 		ProductDao productDao = new ProductDao();
@@ -179,4 +194,24 @@ public class CustomerController {
 		return mv;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = { "/editStatus" }, method = RequestMethod.GET)
+	public void editStatus(@RequestParam int acc) {
+		
+		CustomerDao cusDao = new CustomerDao();
+		Customer cus = cusDao.getAccount(acc);
+		if(cus.getStatus()) {
+			cusDao.turnOff(acc);
+		}
+		else {
+			cusDao.turnOn(acc);
+		}	
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = { "/deleteAccount" }, method = RequestMethod.GET)
+	public void deleteAccount(@RequestParam int acc) {
+		CustomerDao cusDao = new CustomerDao();
+		cusDao.delete(acc);
+	}
 }

@@ -1,6 +1,7 @@
 package com.aptech.Dao;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import com.aptech.Model.*;
 
@@ -10,6 +11,36 @@ public class StaffDao {
 	public StaffDao() {
 		utilDb = new UtilDb();
 		utilDb.connect();
+	}
+	
+	public ArrayList<Staff> getAll() {
+		ArrayList<Staff> list = new ArrayList<Staff>();
+
+		String query = "SELECT * FROM Staff";
+		Statement stm;
+		try {
+			stm = utilDb.getConnection().createStatement();
+			ResultSet rs = stm.executeQuery(query);
+			while (rs.next()) {
+				Staff item = new Staff();
+				item.setId(rs.getInt("Id"));
+				item.setFullName(rs.getString("FullName"));
+				item.setUsername(rs.getString("Username"));
+				item.setEmail(rs.getString("Email"));
+				item.setPassword(rs.getString("Password"));
+				item.setAddress(rs.getString("Address"));
+				item.setPhoneNumber(rs.getString("PhoneNumber"));
+				item.setGender(rs.getBoolean("Gender"));
+				item.setIsAdmin(rs.getBoolean("isAdmin"));
+				item.setStatus(rs.getBoolean("Status"));
+        		
+				list.add(item);
+			}
+			return list;
+		} catch (Exception ex) {
+			System.out.print("abc");
+		}
+		return list;
 	}
 	
 	public Staff getAccountLogin(String username, String password) {
