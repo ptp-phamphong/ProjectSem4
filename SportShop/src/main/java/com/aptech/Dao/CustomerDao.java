@@ -87,6 +87,26 @@ public class CustomerDao {
 		}
 		return false;
 	}
+	
+	public boolean update(Customer customer) {
+		String query = "UPDATE Customer SET FullName = ?, Password = ?, Email = ?, PhoneNumber = ?, Address = ?, Status = 1";
+		
+		try {
+			PreparedStatement pre = utilDb.getConnection().prepareStatement(query);
+			pre.setString(1, customer.getFullName());
+			pre.setString(2, customer.getPassword());
+			pre.setString(3, customer.getEmail());
+			pre.setString(4, customer.getPhoneNumber());
+			pre.setString(5, customer.getAddress());
+			
+			int rs = pre.executeUpdate();
+			if(rs!=0)
+				return true;
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+		return false;
+	}
 
 	public Customer getAccount(int id) {
 		String sql = "SELECT * FROM Customer WHERE Id = " + id;
@@ -156,5 +176,19 @@ public class CustomerDao {
 			e1.printStackTrace();
 		}
 		return false;
+	}
+	
+	public String getPassword(int id) {
+		String sql = "SELECT Password FROM Customer WHERE Id = " +id;
+		try {
+			Statement stm = utilDb.getConnection().createStatement();
+			ResultSet rs = stm.executeQuery(sql);
+			if (rs.next()) {
+				return rs.getString("Password");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return "";
 	}
 }

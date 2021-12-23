@@ -93,11 +93,11 @@ public class InvoiceController {
 
 	// Hàm đưa người dùng ra lịch sử mua hàng
 	@RequestMapping(value = { "/account/{accountID}/ShoppingHistory" }, method = RequestMethod.GET)
-	public ModelAndView ShoppingHistory(Model model, HttpServletRequest request, @PathVariable int accountID) {
+	public ModelAndView ShoppingHistory(Model model, HttpServletRequest request, @PathVariable("accountID") int accountID) {
 		ModelAndView mv = new ModelAndView("/user/ShoppingHistory");
 		InvoiceDao invoiceDao = new InvoiceDao();
 		CategoryDao categoryDao = new CategoryDao();
-		mv.addObject("listInvoice", invoiceDao.getAll());
+		mv.addObject("listInvoice", invoiceDao.getByCustomerId(accountID));
 		mv.addObject("productTypeList", categoryDao.getAllProductType());
 		mv.addObject("sportTypeList", categoryDao.getAllSportType());
 		

@@ -51,8 +51,8 @@
 
 								</div>
 								<div class="price">
-									$
 									<fmt:formatNumber type="number" value="${item.getPrice()}" />
+									<span style="font-size: 50%">VND</span>
 								</div>
 								<div class="qty qty-changer">
 									<fieldset>
@@ -62,8 +62,8 @@
 									</fieldset>
 								</div>
 								<div class="subtotal">
-									$
 									<fmt:formatNumber type="number" value="${item.getPrice() * item.getQuantity() }" />
+									<span style="font-size: 50%">VND</span>
 									<c:set var="subTotal" value="${subTotal + item.getPrice() * item.getQuantity() }"></c:set>
 								</div>
 								<div class="remove">
@@ -85,8 +85,8 @@
 								<tr>
 									<td>Subtotal</td>
 									<td>
-										$
 										<fmt:formatNumber type="number" value="${subTotal }" />
+										<span style="font-size: 50%">VND</span>
 									</td>
 								</tr>
 								<!-- <tr>
@@ -96,8 +96,8 @@
 								<tr class="total">
 									<td>Grand Total</td>
 									<td>
-										$
 										<fmt:formatNumber type="number" value="${subTotal }" />
+										<span style="font-size: 50%">VND</span>
 									</td>
 								</tr>
 							</table>

@@ -84,7 +84,7 @@
 						<span>In stock</span>
 					</div>
 					<div class="product-description">
-						<p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia nonkdni numquam eius modi tempora incidunt ut labore</p>
+						<p>${product.getDetails() }</p>
 					</div>
 					<div class="product-options">
 						<div class="product-size swatches">
@@ -135,20 +135,18 @@
 							<div class="col-md-6">
 								<div class="price">
 									<span class="special-price">
-										VND
+										
 										<span id="priceOfItem">
 											<fmt:formatNumber type="number" value="${listProductDetails[0].getPrice()}" />
 										</span>
+										<span style="font-size: 50%">VND</span>
 									</span>
 								</div>
 								<div class="actions">
-									<button class="btn btn-lg add-to-cart" onclick="addToCartInDetail()">
+									<button class="btn btn-lg add-to-cart" onclick="addToCartInDetail()" data-toggle="modal" data-target="#modal2">
 										<i class="icon icon-cart"></i>
 										<span>Add to Cart</span>
 									</button>
-									<a href="#" class="btn btn-lg product-details">
-										<i class="icon icon-external-link"></i>
-									</a>
 								</div>
 							</div>
 						</div>
@@ -157,7 +155,31 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- Modal Error -->
+	<div class="modal modal-countdown fade zoom info error" data-interval="0" id="modal2">
+		<div class="modal-dialog">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">&#10006;</button>
+			</div>
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="text-center">
+						<div class="icon-info"><i class="icon icon-check-square"></i></div>
+						<p>Added to cart successfully!</p>
+					</div>
+					<div class="modal-countdown">Window will close in <b class="count"></b> sec</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /Modal Error -->
+	
 </body>
+
+
+
+
 <script>
 	function changeSizeinQuickView(id, price){
 		$('#priceOfItem').html(Intl.NumberFormat('de-DE').format(price));

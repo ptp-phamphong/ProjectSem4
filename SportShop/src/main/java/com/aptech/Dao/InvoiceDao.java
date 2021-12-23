@@ -19,7 +19,7 @@ public class InvoiceDao {
 		utilDb.connect();
 	}
 
-	public ArrayList<Invoice> getAll(){
+	public ArrayList<Invoice> getAll() {
 		ArrayList<Invoice> list = new ArrayList<Invoice>();
 		String query = "SELECT * FROM Invoice ";
 		Statement stm;
@@ -31,12 +31,11 @@ public class InvoiceDao {
 				item.setId(rs.getInt("id"));
 				item.setCreateDate(rs.getDate("CreateDate"));
 				item.setTotalPrice(rs.getInt("TotalPrice"));
-				
-				
+
 				item.setStaff(null);
 				CustomerDao customerDao = new CustomerDao();
 				item.setCustomer(customerDao.getAccount(rs.getInt("CustomerId")));
-				
+
 				InvoiceDetailDao invoiceDetailDao = new InvoiceDetailDao();
 				item.setInvoiceDetails(invoiceDetailDao.getByInvoiceId(rs.getInt("id")));
 				list.add(item);
@@ -45,10 +44,39 @@ public class InvoiceDao {
 		} catch (Exception ex) {
 			System.out.print(ex.getMessage());
 		}
-		
+
 		return list;
 	}
-	
+
+	public ArrayList<Invoice> getByCustomerId(int customerId) {
+		ArrayList<Invoice> list = new ArrayList<Invoice>();
+		String query = "SELECT * FROM Invoice WHERE CustomerId = " + customerId;
+		Statement stm;
+		try {
+			stm = utilDb.getConnection().createStatement();
+			ResultSet rs = stm.executeQuery(query);
+			while (rs.next()) {
+				Invoice item = new Invoice();
+				item.setId(rs.getInt("id"));
+				item.setCreateDate(rs.getDate("CreateDate"));
+				item.setTotalPrice(rs.getInt("TotalPrice"));
+
+				item.setStaff(null);
+				CustomerDao customerDao = new CustomerDao();
+				item.setCustomer(customerDao.getAccount(rs.getInt("CustomerId")));
+
+				InvoiceDetailDao invoiceDetailDao = new InvoiceDetailDao();
+				item.setInvoiceDetails(invoiceDetailDao.getByInvoiceId(rs.getInt("id")));
+				list.add(item);
+			}
+
+		} catch (Exception ex) {
+			System.out.print(ex.getMessage());
+		}
+
+		return list;
+	}
+
 	public boolean addNew(Invoice invoice) {
 		String query = "insert into Invoice (CustomerId, StaffId, CreateDate, TotalPrice) values (?,?,?,?)";
 
@@ -56,11 +84,11 @@ public class InvoiceDao {
 			PreparedStatement pre = utilDb.getConnection().prepareStatement(query);
 			pre.setInt(1, invoice.getCustomer().getId());
 			pre.setString(2, null);
-			
+
 			java.util.Date utilDate = invoice.getCreateDate();
 			java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-			
-			pre.setDate(3,  sqlDate);
+
+			pre.setDate(3, sqlDate);
 			pre.setInt(4, invoice.getTotalPrice());
 
 			int rs = pre.executeUpdate();
@@ -83,8 +111,7 @@ public class InvoiceDao {
 				item.setId(rs.getInt("id"));
 				item.setCreateDate(rs.getDate("CreateDate"));
 				item.setTotalPrice(rs.getInt("TotalPrice"));
-				
-				
+
 				item.setStaff(null);
 				CustomerDao customerDao = new CustomerDao();
 				item.setCustomer(customerDao.getAccount(rs.getInt("CustomerId")));
@@ -96,9 +123,9 @@ public class InvoiceDao {
 
 		return null;
 	}
-	
+
 	public Invoice getById(int id) {
-		String query = "SELECT * FROM Invoice WHERE Id ="+id;
+		String query = "SELECT * FROM Invoice WHERE Id =" + id;
 		Statement stm;
 		try {
 			stm = utilDb.getConnection().createStatement();
@@ -108,7 +135,7 @@ public class InvoiceDao {
 				item.setId(rs.getInt("Id"));
 				item.setCreateDate(rs.getDate("CreateDate"));
 				item.setTotalPrice(rs.getInt("TotalPrice"));
-				
+
 				StaffDao staffDao = new StaffDao();
 				item.setStaff(staffDao.getAccount(rs.getInt("StaffId")));
 				CustomerDao customerDao = new CustomerDao();
@@ -121,21 +148,20 @@ public class InvoiceDao {
 
 		return null;
 	}
-	
-	public boolean process(int staffId,int id){
-        String sql="update Invoice set StaffId=? where Id=?";
-        try{
-            PreparedStatement pstm=utilDb.getConnection().prepareStatement(sql);
-            pstm.setInt(1, staffId);
-            pstm.setInt(2, id);
-            int rs = pstm.executeUpdate();
-            if(rs!=0){
-                return true;         
-            }  
-        }
-        catch(SQLException ex){
-        	System.out.print("abc");
-        }
-        return false;  
-    }
+
+	public boolean process(int staffId, int id) {
+		String sql = "update Invoice set StaffId=? where Id=?";
+		try {
+			PreparedStatement pstm = utilDb.getConnection().prepareStatement(sql);
+			pstm.setInt(1, staffId);
+			pstm.setInt(2, id);
+			int rs = pstm.executeUpdate();
+			if (rs != 0) {
+				return true;
+			}
+		} catch (SQLException ex) {
+			System.out.print("abc");
+		}
+		return false;
+	}
 }

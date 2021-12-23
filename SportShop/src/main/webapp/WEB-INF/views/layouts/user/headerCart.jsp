@@ -51,8 +51,8 @@
 													<span class="price-excluding-tax">
 														<span class="minicart-price">
 															<span class="price" style="font-size: 75%">
-																$
 																<fmt:formatNumber type="number" value="${item.getPrice()}" />
+																<!-- <span style="font-size: 50%">VND</span> -->
 															</span>
 														</span>
 													</span>
@@ -89,8 +89,8 @@
 				<div class="amount price-container">
 					<span class="price-wrapper">
 						<span class="price">
-							$
 							<fmt:formatNumber type="number" value="${subTotal }" />
+							<span style="font-size: 50%">VND</span>
 						</span>
 					</span>
 				</div>

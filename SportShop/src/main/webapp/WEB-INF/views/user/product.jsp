@@ -70,7 +70,7 @@
 							<c:when test="${imageName.getName() != '' }">
 								<div class="item">
 									<img src='<c:url value="/assets/user/images/products/${imageName.getName()}.jpg"></c:url>' class="inner-zoom"
-										data-zoom-image='<c:url value = "/assets/user/images/products/large/product-creative-2.jpg"></c:url>' alt="">
+										data-zoom-image='<c:url value="/assets/user/images/products/${imageName.getName()}.jpg"></c:url>' alt="">
 								</div>
 							</c:when>
 							<c:otherwise>
@@ -128,8 +128,7 @@
 
 						</div>
 						<div class="product-description">
-							<p>Quisque sollicitudin nulla felis, vel sollicitudin felis mollis in. Cras mauris ligula, pharetra a consectetur a, interdum sit amet. Nunc dui nulla, efficitur a tempor non, euismod id
-								libero.</p>
+							<p>${item.getDetails() }</p>
 						</div>
 						<!-- remove class more-options if less than three -->
 						<div class="product-options more-options">

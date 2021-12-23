@@ -248,9 +248,9 @@ function addToCart(idProduct) {
 			$('#headerCart').html(data);
 			jQuery("#productstack").load("/SportShop/ajax/productStack");
 			jQuery("#headerCart").load("/SportShop/ajax/showHeaderCart");
-			$('#productStackSize').html("("+data+") items");
+			$('#productStackSize').html("(" + data + ") items");
 			$('#headerCartBadge').html(data);
-			
+
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
 			alert(XMLHttpRequest + '\nSTATUS: ' + textStatus + '\nERROR THROWN: '
@@ -275,7 +275,7 @@ function addToCartInDetail() {
 			console.log(data);
 			jQuery("#productstack").load("/SportShop/ajax/productStack");
 			jQuery("#headerCart").load("/SportShop/ajax/showHeaderCart");
-			$('#productStackSize').html("("+data+") items");
+			$('#productStackSize').html("(" + data + ") items");
 			$('#headerCartBadge').html(data);
 		},
 		error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -341,7 +341,7 @@ function removeItemCart(id) {
 			jQuery("#mainCart").load("/SportShop/ajax/showMainCart");
 			jQuery("#headerCart").load("/SportShop/ajax/showHeaderCart");
 			jQuery("#productstack").load("/SportShop/ajax/productStack");
-			$('#productStackSize').html("("+data+") items");
+			$('#productStackSize').html("(" + data + ") items");
 			$('#headerCartBadge').html(data);
 
 		},
@@ -363,7 +363,7 @@ function clearAllCart() {
 			jQuery("#mainCart").load("/SportShop/ajax/showMainCart");
 			jQuery("#headerCart").load("/SportShop/ajax/showHeaderCart");
 			jQuery("#productstack").load("/SportShop/ajax/productStack");
-			$('#productStackSize').html("("+data+") items");
+			$('#productStackSize').html("(" + data + ") items");
 			$('#headerCartBadge').html(data);
 
 		},
@@ -410,4 +410,91 @@ function removeFilter(id, type) {
 		}
 	});
 	return false;;
+}
+
+function checkOldPassword() {
+	var oldPassword = document.getElementById("oldPassword").value;
+	var customerId = document.getElementById("customerId").value;
+	$.ajax({
+		url: "/SportShop/ajax/checkOldPassword",
+		type: "POST",
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		data: { "oldPassword": oldPassword, "customerId": customerId },
+		success: function(data) {
+			if (data.trim() === "fail") {
+				$("#noti_changePassword").html("Old Password does not match!!!");
+				document.getElementById("oldPassword_status").value = "fail";
+				checkStatus_Password();
+			} else {
+				$("#noti_changePassword").html("");
+				document.getElementById("oldPassword_status").value = "success";
+
+				checkStatus_Password();
+			}
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) {
+			alert(XMLHttpRequest + '\nSTATUS: ' + textStatus + '\nERROR THROWN: '
+				+ errorThrown);
+		}
+	});
+}
+
+function checkNewPassword() {
+	var oldPassword = document.getElementById("oldPassword").value;
+	var newPassword = document.getElementById("newPassword").value;
+	if (oldPassword.trim() === newPassword.trim()) {
+		$("#noti_changePassword").html("New Password must not match old password!!!");
+		document.getElementById("newPassword_status").value = "fail";
+		checkStatus_Password();
+	} else {
+		$("#noti_changePassword").html("");
+		document.getElementById("newPassword_status").value = "success";
+		checkStatus_Password();
+		checkConfirmNewPassword();
+	}
+}
+
+function checkConfirmNewPassword() {
+	var confirmNewPassword = document.getElementById("confirmNewPassword").value;
+	var newPassword = document.getElementById("newPassword").value;
+	if (confirmNewPassword.trim() === newPassword.trim()) {
+		$("#noti_changePassword").html("");
+		document.getElementById("confirmNewPassword_status").value = "success";
+		checkStatus_Password();
+	} else {
+		$("#noti_changePassword").html("Confirm New Password does not match!!!");
+		document.getElementById("confirmNewPassword_status").value = "fail";
+		checkStatus_Password();
+	}
+}
+
+function confirmChangePassword() {
+	var newPassword = document.getElementById("newPassword").value;
+	$.ajax({
+		url: "/SportShop/ajax/getMD5Password",
+		type: "POST",
+		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		data: { "newPassword": newPassword },
+		success: function(data) {
+			document.getElementById("password_input").value = data;
+			$('#changePassword').modal('hide');
+			$('#changePasswordConfirm').modal('show');
+			
+		},
+		error: function(XMLHttpRequest, textStatus, errorThrown) {
+			alert(XMLHttpRequest + '\nSTATUS: ' + textStatus + '\nERROR THROWN: '
+				+ errorThrown);
+		}
+	});
+}
+
+function checkStatus_Password() {
+	var oldPasswordStatus = document.getElementById("oldPassword_status").value;
+	var newPassword_status = document.getElementById("newPassword_status").value;
+	var confirmNewPassword_status = document.getElementById("confirmNewPassword_status").value;
+	if (oldPasswordStatus.trim() === "success" && newPassword_status.trim() === "success" && confirmNewPassword_status.trim() === "success") {
+		document.getElementById("update_Password").disabled = false;
+	} else {
+		document.getElementById("update_Password").disabled = true;
+	}
 }

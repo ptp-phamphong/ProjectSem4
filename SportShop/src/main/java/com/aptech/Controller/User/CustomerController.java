@@ -1,7 +1,11 @@
 package com.aptech.Controller.User;
 
 import java.io.IOException;
+
 import java.net.http.HttpRequest;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.Random;
 
 import javax.mail.Session;
@@ -10,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.codec.Hex;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -280,7 +285,8 @@ public class CustomerController {
 	public ModelAndView showViewAccount(@PathVariable int id) {
 		CustomerDao customerDAO = new CustomerDao();
 		ModelAndView mv = new ModelAndView("user/account");
-		mv.addObject("customer", customerDAO.getAccount(id));
+		Customer customer = customerDAO.getAccount(id);
+		mv.addObject("customer", customer);
 		CategoryDao categoryDao = new CategoryDao();
 		mv.addObject("productTypeList", categoryDao.getAllProductType());
 		mv.addObject("sportTypeList", categoryDao.getAllSportType());
@@ -335,7 +341,7 @@ public class CustomerController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@PostMapping("changePasswordAdmin")
 	@ResponseBody
 	public void changePasswordAdmin(@RequestParam String datajson) {
@@ -350,21 +356,18 @@ public class CustomerController {
 			String newp = jsonObject.get("newp").asText();
 			String confirm = jsonObject.get("confirm").asText();
 			int id = jsonObject.get("id").asInt();
-			
+
 			Staff staff = staffDao.getAccount(id);
-			
-			if(old.equals(staff.getPassword())) {
+
+			if (old.equals(staff.getPassword())) {
 				String error = "fasle";
-			}
-			else if(old.equals(newp)) {
-				if(newp.equals(confirm)) {
+			} else if (old.equals(newp)) {
+				if (newp.equals(confirm)) {
 					staffDao.changePass(confirm, id);
-				}
-				else {
+				} else {
 					String error = "fasle";
 				}
-			}
-			else {
+			} else {
 				String error = "fasle";
 			}
 		} catch (IOException e) {
@@ -385,5 +388,47 @@ public class CustomerController {
 	public void deleteAccountAdmin(@RequestParam int acc) {
 		StaffDao staffDao = new StaffDao();
 		staffDao.delete(acc);
+	}
+
+	@ResponseBody
+	@RequestMapping(value = { "/ajax/checkOldPassword" }, method = RequestMethod.POST)
+	public String checkOldPassword(HttpServletRequest request) {
+		HashPassword hashPassword = new HashPassword();
+		String oldPassword = request.getParameter("oldPassword");
+
+		if (oldPassword.equals("")) {
+			return "fail";
+		}
+
+		int customerId = Integer.parseInt(request.getParameter("customerId"));
+
+		oldPassword = hashPassword.getPassInMD5(oldPassword);
+		CustomerDao customerDao = new CustomerDao();
+		if (oldPassword.equals(customerDao.getPassword(customerId))) {
+			return "success";
+		}
+		return "fail";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = { "/ajax/getMD5Password" }, method = RequestMethod.POST)
+	public String getMD5Password(HttpServletRequest request) {
+		String newPassword = request.getParameter("newPassword");
+		return HashPassword.getPassInMD5(newPassword);
+	}
+
+	
+	@RequestMapping(value = { "/updateAccountHandelling" }, method = RequestMethod.POST)
+	public RedirectView updateAccountHandelling(@ModelAttribute("customer") Customer item, RedirectAttributes redir,
+			HttpServletRequest request) {
+		CustomerDao customerDao = new CustomerDao();
+		
+		customerDao.update(item);
+
+		RedirectView redirectView = new RedirectView("/account/"+item.getId(), true);
+
+		redir.addFlashAttribute("customer", item);
+
+		return redirectView;
 	}
 }

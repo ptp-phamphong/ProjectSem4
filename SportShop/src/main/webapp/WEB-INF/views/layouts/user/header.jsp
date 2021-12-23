@@ -65,10 +65,6 @@
 
 						<div>
 							<button class="btn btn-lg" type="submit">Login</button>
-							<span class="required-text">* Required Fields</span>
-						</div>
-						<div class="back">
-							<a href="#">Forgot Your Password?</a>
 						</div>
 					</form:form>
 

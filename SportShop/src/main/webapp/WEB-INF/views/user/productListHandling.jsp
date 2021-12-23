@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <!-- Filter Row -->
 <div class="filter-row">
@@ -126,8 +127,7 @@
 						<div class="price-box">
 							<span class="price-container">
 								<span class="price-wrapper">
-									<span class="old-price">$300.00</span>
-									<span class="special-price">$249.00</span>
+									<span class="special-price"><fmt:formatNumber type="number" value="${item.getProductDetails()[0].getPrice() }" /> <span style="font-size: 50%">VND</span></span>
 								</span>
 							</span>
 						</div>

@@ -97,7 +97,7 @@ public class ProductController {
 		CategoryDao categoryDao = new CategoryDao();
 		model.addAttribute("customer", new Customer());
 		ModelAndView mv = new ModelAndView("user/productList");
-		mv.addObject("listProduct", productDao.getByType(productTypeID));
+		mv.addObject("listProduct", productDao.getByProductType(productTypeID));
 		mv.addObject("productTypeList", categoryDao.getAllProductType());
 		mv.addObject("sportTypeList", categoryDao.getAllSportType());
 		return mv;

@@ -48,7 +48,8 @@
 	<div class="subtotal">
 		Subtotal
 		<span class="price">
-			VND <fmt:formatNumber type="number" value="${subTotal}" />
+			<fmt:formatNumber type="number" value="${subTotal}" />
+			<span style="font-size: 50%">VND</span>
 		</span>
 	</div>
 </div>
