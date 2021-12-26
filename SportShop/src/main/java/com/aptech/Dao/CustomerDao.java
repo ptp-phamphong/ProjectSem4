@@ -89,7 +89,7 @@ public class CustomerDao {
 	}
 	
 	public boolean update(Customer customer) {
-		String query = "UPDATE Customer SET FullName = ?, Password = ?, Email = ?, PhoneNumber = ?, Address = ?, Status = 1";
+		String query = "UPDATE Customer SET FullName = ?, Password = ?, Email = ?, PhoneNumber = ?, Address = ?, Status = 1 WHERE Id = ?";
 		
 		try {
 			PreparedStatement pre = utilDb.getConnection().prepareStatement(query);
@@ -98,7 +98,7 @@ public class CustomerDao {
 			pre.setString(3, customer.getEmail());
 			pre.setString(4, customer.getPhoneNumber());
 			pre.setString(5, customer.getAddress());
-			
+			pre.setInt(6, customer.getId());
 			int rs = pre.executeUpdate();
 			if(rs!=0)
 				return true;
