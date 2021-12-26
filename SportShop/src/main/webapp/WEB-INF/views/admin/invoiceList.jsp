@@ -21,13 +21,12 @@
 				<td>${item.getCustomer().getEmail() }</td>
 				<td>${item.getCreateDate() }</td>
 				<td>${item.getTotalPrice() }</td>
-				<c:if test="${item.getStaff().getUsername()==null}">
-					<td style="color: #D6DBDF">New</td>
-				</c:if>
 				<c:if test="${item.getStaff().getUsername()!=null}">
 					<td style="color: red">Processed</td>
 				</c:if>
-
+				<c:if test="${item.getStaff().getUsername()==null}">
+					<td style="color: #D6DBDF">${item.getStaff().getUsername()}</td>
+				</c:if>
 				<td><a class="btn btn-success"
 					href='<c:url value = "/admin/invoiceDetail/${item.getId()}"></c:url>'>Detail</a>
 					<button id="deleteAccount" class="btn btn-danger"

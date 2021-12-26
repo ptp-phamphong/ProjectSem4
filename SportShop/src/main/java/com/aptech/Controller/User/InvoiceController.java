@@ -144,6 +144,6 @@ public class InvoiceController {
 	public void process(@RequestParam int inv, @RequestParam int staff) {
 		
 		InvoiceDao invDao = new InvoiceDao();
-		invDao.process(inv, staff);
+		invDao.process(staff, inv);
 	}
 }

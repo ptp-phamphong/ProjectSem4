@@ -32,7 +32,8 @@ public class InvoiceDao {
 				item.setCreateDate(rs.getDate("CreateDate"));
 				item.setTotalPrice(rs.getInt("TotalPrice"));
 
-				item.setStaff(null);
+				StaffDao staffDao = new StaffDao();
+				item.setStaff(staffDao.getAccount(rs.getInt("StaffId")));
 				CustomerDao customerDao = new CustomerDao();
 				item.setCustomer(customerDao.getAccount(rs.getInt("CustomerId")));
 
