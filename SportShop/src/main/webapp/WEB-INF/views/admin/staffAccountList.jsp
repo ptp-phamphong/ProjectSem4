@@ -28,8 +28,12 @@
 					</c:if></td>
 				<td><a class="btn btn-success"
 					href='<c:url value = "/admin/staffDetail/${item.getId()}"></c:url>'>Detail</a>
-					<button id="deleteAccount" class="btn btn-danger"
-						onclick="deleteAccountAdmin('${item.getId()}')">Delete</button></td>
+					<c:if test="${item.getStatus()}">
+						<button class="btn btn-secondary">Delete</button>
+					</c:if> <c:if test="${item.getStatus()==false}">
+						<button id="deleteAccount" class="btn btn-danger"
+							onclick="deleteAccountAdmin('${item.getId()}')">Delete</button>
+					</c:if></td>
 			</tr>
 		</c:forEach>
 	</tbody>

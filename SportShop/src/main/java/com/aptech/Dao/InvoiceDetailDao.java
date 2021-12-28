@@ -3,6 +3,7 @@ package com.aptech.Dao;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -67,4 +68,18 @@ public class InvoiceDetailDao {
 		return list;
 	}
 	
+	public boolean deleteByInvoiceId(int id) {
+		String sql1 = "delete from InvoiceDetails where InvoiceId=?";
+		try {
+			PreparedStatement pstm = utilDb.getConnection().prepareStatement(sql1);
+			pstm.setInt(1, id);
+			int rs1 = pstm.executeUpdate();
+			if (rs1 != 0)
+				return true;
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return false;
+	}
 }

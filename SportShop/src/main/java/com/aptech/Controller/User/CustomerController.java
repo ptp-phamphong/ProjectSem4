@@ -252,7 +252,7 @@ public class CustomerController {
 			return redirectView;
 		}
 
-		RedirectView redirectView = new RedirectView("/admin/", true);
+		RedirectView redirectView = new RedirectView("/admin/index", true);
 		request.getSession().setAttribute("currentStaff", staff);
 
 		// redir.addFlashAttribute("currentCustomer", customer);
@@ -344,7 +344,7 @@ public class CustomerController {
 
 	@PostMapping("changePasswordAdmin")
 	@ResponseBody
-	public void changePasswordAdmin(@RequestParam String datajson) {
+	public boolean changePasswordAdmin(@RequestParam String datajson) {
 		ObjectMapper objectMapper = new ObjectMapper();
 
 		JsonNode jsonObject;
@@ -359,21 +359,42 @@ public class CustomerController {
 
 			Staff staff = staffDao.getAccount(id);
 
-			if (old.equals(staff.getPassword())) {
-				String error = "fasle";
-			} else if (old.equals(newp)) {
+			if (old.equals(staff.getPassword())==false) {
+				return false;
+			} else if (old.equals(newp)==false) {
 				if (newp.equals(confirm)) {
 					staffDao.changePass(confirm, id);
+					return true;
 				} else {
-					String error = "fasle";
+					return false;
 				}
 			} else {
-				String error = "fasle";
+				return false;
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return false;
+	}
+	
+	@RequestMapping(value = { "/admin/changePasswordAdmin" })
+	public RedirectView changePasswordAdmin(@RequestParam int id, @RequestParam String old, @RequestParam String newp, @RequestParam String confirm, RedirectAttributes redir, HttpServletRequest request) {
+		StaffDao dao = new StaffDao();
+		Staff staff = dao.getAccount(id);
+		if(old.equals(staff.getPassword())==false) {
+			redir.addFlashAttribute("Error", "Wrong old password!!!");
+		}
+		else if(newp.equals(old)) {
+			redir.addFlashAttribute("Error", "Your new pass and old pass is same!!!");
+		}
+		else if(confirm.equals(newp)==false) {
+			redir.addFlashAttribute("Error", "Your confirm new pass is wrong!!!");
+		}
+		RedirectView redirectView = new RedirectView("/admin/changePasswordAdmin", true);
+
+		// redir.addFlashAttribute("currentCustomer", customer);
+		return redirectView;
 	}
 
 	@ResponseBody

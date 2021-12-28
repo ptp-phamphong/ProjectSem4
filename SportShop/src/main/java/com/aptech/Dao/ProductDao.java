@@ -499,4 +499,19 @@ public class ProductDao {
 		}
 		return false;
 	}
+	
+	public boolean deleteBySport(int id) {
+		String sql1 = "delete from Product where SportTypeId=?";
+		try {
+			PreparedStatement pstm = utilDb.getConnection().prepareStatement(sql1);
+			pstm.setInt(1, id);
+			int rs1 = pstm.executeUpdate();
+			if (rs1 != 0)
+				return true;
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return false;
+	}
 }

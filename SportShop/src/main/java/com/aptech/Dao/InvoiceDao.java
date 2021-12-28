@@ -165,4 +165,19 @@ public class InvoiceDao {
 		}
 		return false;
 	}
+	
+	public boolean delete(int id) {
+		String sql1 = "delete from Invoice where Id=?";
+		try {
+			PreparedStatement pstm = utilDb.getConnection().prepareStatement(sql1);
+			pstm.setInt(1, id);
+			int rs1 = pstm.executeUpdate();
+			if (rs1 != 0)
+				return true;
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		return false;
+	}
 }

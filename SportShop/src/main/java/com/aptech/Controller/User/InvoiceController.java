@@ -146,4 +146,15 @@ public class InvoiceController {
 		InvoiceDao invDao = new InvoiceDao();
 		invDao.process(staff, inv);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = { "/deleteInvoice" }, method = RequestMethod.GET)
+	public void deleteInvoice(@RequestParam int id) {
+		
+		InvoiceDao invDao = new InvoiceDao();
+		InvoiceDetailDao detailDao = new InvoiceDetailDao();
+		detailDao.deleteByInvoiceId(id);
+		invDao.delete(id);
+		
+	}
 }

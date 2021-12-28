@@ -60,22 +60,24 @@
 						</div>
 
 						<div id="containerDetail">
-							<h3>
-								<strong>Details:</strong>
-							</h3>
-							<hr>
-							<label for="size"><strong>Size:</strong></label> <select
-								name="size" id="size" class="form-control">
-								<c:forEach items="${SizeList}" var="item">
-									<option value="${item.getId() }">${item.getName() }</option>
-								</c:forEach>
-							</select> <br> <label for="price"><strong>Price:</strong></label> <input
-								type="number" min="1000" value="1000" name="price" id="price"
-								class="form-control" placeholder="Price..." /> <br> <label
-								for="inventory"><strong>Inventory:</strong></label> <input
-								type="number" min="1" value="1" name="inventory" id="inventory"
-								class="form-control" placeholder="Inventory..." /> <br>
-							<button class="btn btn-primary more">More detail</button>
+							<div class="ProductDetails">
+								<h3>
+									<strong>Details:</strong>
+								</h3>
+								<hr>
+								<label for="size"><strong>Size:</strong></label> <select
+									name="size" id="size" class="form-control">
+									<c:forEach items="${SizeList}" var="item">
+										<option value="${item.getId() }">${item.getName() }</option>
+									</c:forEach>
+								</select> <br> <label for="price"><strong>Price:</strong></label> <input
+									type="number" min="1000" value="1000" name="price" id="price"
+									class="form-control" placeholder="Price..." /> <br> <label
+									for="inventory"><strong>Inventory:</strong></label> <input
+									type="number" min="1" value="1" name="inventory" id="inventory"
+									class="form-control" placeholder="Inventory..." /> <br>
+								<button class="btn btn-primary more">More detail</button>
+							</div>
 						</div>
 
 						<div id="ProductDetails" class="ProductDetails">

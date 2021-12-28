@@ -66,7 +66,10 @@ $("#addProduct").click(function(event) {
 			datajson: JSON.stringify(json)
 		},
 		success: function(value) {
-			swal("Success!", "Added new products!", "success");
+			swal("Added new products!")
+				.then((value) => {
+					window.location.reload();
+				});
 		},
 		error: function(xhr) {
 			swal("Oops", "Something went wrong!", "error");
@@ -161,7 +164,10 @@ $("#editProduct").click(function(event) {
 			datajson: JSON.stringify(json)
 		},
 		success: function(value) {
-			swal("Success!", "Edit product information successfully!", "success");
+			swal("Edit product information successfully!!!")
+				.then((value) => {
+					window.location.reload("#example");
+				});
 		},
 		error: function(xhr) {
 			swal("Oops", "Something went wrong!", "error");
@@ -188,7 +194,10 @@ function deleteThis(param) {
 						proItem: id
 					},
 					success: function(value) {
-						window.location.reload("#example");
+						swal("Product has been deleted")
+							.then((value) => {
+								window.location.reload("#example");
+							});
 					},
 					error: function(xhr) {
 
@@ -218,8 +227,9 @@ $("#importProduct").click(function(event) {
 		arrayDetail.push(object);
 	});
 
-	console.log(json);
 	json["listDetail"] = arrayDetail;
+
+	console.log(json);
 
 	$.ajax({
 		url: "/SportShop/importProduct",
@@ -228,7 +238,10 @@ $("#importProduct").click(function(event) {
 			datajson: JSON.stringify(arrayDetail)
 		},
 		success: function(value) {
-			swal("Success!", "Import product successfully!", "success");
+			swal("Import product successfully!")
+				.then((value) => {
+					window.location.reload("#example");
+				});
 		},
 		error: function(xhr) {
 			swal("Oops", "Something went wrong!", "error");
@@ -264,7 +277,10 @@ $("#exportProduct").click(function(event) {
 			datajson: JSON.stringify(arrayDetail)
 		},
 		success: function(value) {
-			swal("Success!", "Import product successfully!", "success");
+			swal("Export product successfully!")
+				.then((value) => {
+					window.location.reload("#example");
+				});
 		},
 		error: function(xhr) {
 			swal("Oops", "Something went wrong!", "error");
@@ -306,7 +322,7 @@ function deleteAccount(param) {
 	var id = param;
 	swal({
 		title: "Are you sure?",
-		text: "Want to change the status of this account?",
+		text: "Want to delete this account?",
 		icon: "warning",
 		buttons: true,
 		dangerMode: true,
@@ -320,7 +336,10 @@ function deleteAccount(param) {
 						acc: id
 					},
 					success: function(value) {
-						window.location.reload("#example");
+						swal("Delete account successfully!!!")
+							.then((value) => {
+								window.location.reload("#example");
+							});
 					},
 					error: function(xhr) {
 						swal("Oops", "Something went wrong!", "error");
@@ -366,7 +385,7 @@ function deleteAccountAdmin(param) {
 	var id = param;
 	swal({
 		title: "Are you sure?",
-		text: "Want to change the status of this account?",
+		text: "Want to delete this account?",
 		icon: "warning",
 		buttons: true,
 		dangerMode: true,
@@ -380,7 +399,10 @@ function deleteAccountAdmin(param) {
 						acc: id
 					},
 					success: function(value) {
-						window.location.reload("#example");
+						swal("Delete account successfully!")
+							.then((value) => {
+								window.location.reload("#example");
+							});
 					},
 					error: function(xhr) {
 						swal("Oops", "Something went wrong!", "error");
@@ -424,6 +446,39 @@ function process(param, param2) {
 		});
 }
 
+function deleteInvoice(param) {
+	var id = param;
+	swal({
+		title: "Are you sure?",
+		text: "Want to delete this invoice now?",
+		icon: "warning",
+		buttons: true,
+		dangerMode: true,
+	})
+		.then((willDelete) => {
+			if (willDelete) {
+				$.ajax({
+					url: "/SportShop/deleteInvoice",
+					type: 'get',
+					data: {
+						id: id
+					},
+					success: function(value) {
+						swal("Delete invoice successfully!")
+							.then((value) => {
+								window.location.reload();
+							});
+					},
+					error: function(xhr) {
+
+					}
+				})
+			} else {
+				swal("Cancel success!");
+			}
+		});
+}
+
 $("#editAccount").click(function(event) {
 	event.preventDefault();
 	var formdata = $("#formEditAccountAdmin").serializeArray();
@@ -439,7 +494,10 @@ $("#editAccount").click(function(event) {
 			datajson: JSON.stringify(json)
 		},
 		success: function(value) {
-			swal("Success!", "Edit product information successfully!", "success");
+			swal("Edit product information successfully!!!")
+				.then((value) => {
+					window.location.reload();
+				});
 		},
 		error: function(xhr) {
 			swal("Oops", "Something went wrong!", "error");
@@ -463,7 +521,10 @@ $("#changePassword").click(function(event) {
 			datajson: JSON.stringify(json)
 		},
 		success: function(value) {
-			swal("Success!", "Change password successfully!", "success");
+			swal("Change password successfully!")
+				.then((value) => {
+					window.location.reload();
+				});
 		},
 		error: function(xhr) {
 			swal("Oops", "Something went wrong!", "error");

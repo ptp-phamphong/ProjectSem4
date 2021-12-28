@@ -16,10 +16,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.aptech.Dao.CategoryDao;
+import com.aptech.Dao.CustomerDao;
 import com.aptech.Dao.ProductDao;
 import com.aptech.Dao.StaffDao;
 import com.aptech.Model.Customer;
 import com.aptech.Model.Staff;
+import com.aptech.MyClass.HashPassword;
 
 @Controller
 public class HomeController {
@@ -38,19 +40,31 @@ public class HomeController {
 		mv.addObject("sportTypeList", categoryDao.getAllSportType());
 		return mv;
 	}
-
+	
 	@RequestMapping(value = { "/admin/" }, method = RequestMethod.GET)
-	public ModelAndView AdminView(Model model, HttpServletRequest request) {
-		ModelAndView mv;
-		mv = new ModelAndView("admin/index");
+	public RedirectView AdminView(Model model, HttpServletRequest request, RedirectAttributes re) {
+		if(request.getSession().getAttribute("currentStaff")==null) {
+			RedirectView redirectView = new RedirectView("/admin/loginAdmin", true);
+			return redirectView;
+		}
+		else {
+			RedirectView redirectView = new RedirectView("/admin/index", true);
+			return redirectView;
+		}
+	}
+	
+	@RequestMapping(value = { "/admin/index" }, method = RequestMethod.GET)
+	public ModelAndView AdminViewIndex(Model model, HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("admin/index");
 		ProductDao productDao = new ProductDao();
 		CategoryDao cateDao = new CategoryDao();
 		model.addAttribute("staff", new Staff());
-
+		
 		mv.addObject("ProductTypeList", cateDao.getAllProductType());
 		mv.addObject("SportTypeList", cateDao.getAllSportType());
 		mv.addObject("listProduct", productDao.getAll());
 
 		return mv;
 	}
+	
 }
